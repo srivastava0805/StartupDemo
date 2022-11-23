@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="640dp"
+    android:height="640dp"
+    android:viewportWidth="640"
+    android:viewportHeight="640">
+
+    <group
+        android:name="rotationGroup"
+        android:pivotX="320"
+        android:pivotY="320"
+        android:scaleX="-1"
+        android:scaleY="-1">
+        <path
+            android:fillAlpha="0"
+            android:fillColor="@color/color_orange_btn_enabled"
+            android:pathData=""
+            android:strokeWidth="1"
+            android:strokeColor="@color/color_orange_btn_enabled" />
+        <path
+            android:fillAlpha="0"
+            android:fillColor="@color/color_orange_btn_enabled"
+            android:pathData=""
+            android:strokeWidth="1"
+            android:strokeColor="@color/color_orange_btn_enabled" />
+        <path
+            android:fillColor="@color/color_orange_btn_enabled"
+            android:pathData="M0 00L637.5 00L637.5 519.0C528.33 483.94 424.58 482.69 326.25 516.02C227.91 549.35 119.17 545.6 0 504.77L0 00Z"
+            android:strokeWidth="1" />
+        <path
+            android:fillAlpha="0"
+            android:fillColor="@color/color_orange_btn_enabled"
+            android:pathData="M0 00L637.5 00L637.5 519.0C528.33 483.94 424.58 482.69 326.25 516.02C227.91 549.35 119.17 545.6 0 504.77L0 00Z"
+            android:strokeWidth="1"
+            android:strokeColor="@color/color_orange_btn_enabled" />
+        <path
+            android:fillAlpha="0"
+            android:fillColor="@color/color_orange_btn_enabled"
+            android:pathData="M0 00L637.5 00L637.5 519.0C528.33 483.94 424.58 482.69 326.25 516.02C227.91 549.35 119.17 545.6 0 504.77L0 00Z"
+            android:strokeWidth="1"
+            android:strokeColor="@color/color_orange_btn_enabled" />
+    </group>
+</vector>

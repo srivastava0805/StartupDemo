@@ -1,0 +1,101 @@
+<resources>
+    <string name="splash_text_note">Take off your career to new \n heights with the best \n start-ups to join</string>
+    <string name="splash_go_text">Let\'s Go!</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="email">Email</string>
+    <string name="create_account">Create account</string>
+    <string name="first_time_on_startupjob_nwelcome_onboard">First time on StartupJob?\nWelcome onboard!</string>
+    <string name="or_sign_up_with">Or sign up with</string>
+
+    <!-- Project level resources -->
+    <string name="app_name">Start-up Jobs</string>
+
+    <!-- Resources for Bank2LogInActivity -->
+    <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign Up</string>
+    <string name="welcome_msg">Welcome to AI-Powered Automated Hiring Platform for Start-up </string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="string_action_signup">Sign up</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="action_str_upload_resume">Upload Resume</string>
+    <string name="string_hint_email_id">Email ID</string>
+    <string name="string_hint_password">Password</string>
+    <string name="string_info_remember_me">Remember me</string>
+    <string name="string_action_forgot_password">Forgot password?</string>
+    <string name="string_action_login">Login</string>
+    <string name="string_action_signup_redirect">Register</string>
+    <string name="string_info_social_signin">Or Continue With</string>
+    <string name="string_action_fb_signin">Sign in with Facebook</string>
+    <string name="string_action_google_signin">Sign in with Google</string>
+    <string name="string_action_linkedin_signin">Sign in with LinkedIn</string>
+    <string name="string_candidate_sign_up">Candidate Sign up</string>
+    <string name="string_hint_first_name">First Name</string>
+    <string name="string_hint_last_name">Last Name</string>
+    <string name="string_hint_reenter_password">Re-enter Password</string>
+    <string name="string_hint_enter_otp">Enter OTP</string>
+    <string name="string_action_send_otp">Send OTP</string>
+    <string name="string_action_find_jobs">Find Jobs</string>
+    <string name="string_action_myprofile">My Profile</string>
+    <string name="string_action_resend_otp">Resend OTP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <?ignore
+        in\startupjobs\Activities\SearchNApplyJob.java?>
+    <string name="string_hint_skills">eg. Nodejs, java, etc.</string>
+    <string name="string_hint_location">eg. Noida, Delhi, etc.</string>
+    <string name="string_label_skills">Skills</string>
+    <string name="string_label_job_type">Job Type</string>
+    <string name="string_label_location">Location</string>
+    <string name="string_action_search_jobs">Search</string>
+    <string name="string_label_postedjobs">Posted Jobs</string>
+    <string name="string_placeholder_text">Not available</string>
+    <string name="string_action_apply">Apply</string>
+    <string name="string_action_apply_now">Apply Now</string>
+    <string name="string_label_salary">Salary:\u0020</string>
+    <string name="string_label_experience">Experience:\u0020</string>
+    <string name="string_label_requirements">Requirements:\u0020</string>
+    <string name="string_label_job_title">Job Title:\u0020</string>
+    <string name="string_label_job_desc">Job Description:\u0020</string>
+    <string name="string_label_address">Address:\u0020</string>
+    <string name="string_label_date">Date:\u0020</string>
+    <string name="string_label_job_type_colon">Job Type:\u0020</string>
+    <string name="string_label_key_responsibilities">Key Responsibilities</string>
+    <string name="string_value_years">\u0020-\u0020 years</string>
+    <string name="string_value_year">\u0020-\u0020 year</string>
+    <string name="string_label_apply_job">Apply Job</string>
+    <string name="string_label_about_candidate">About Candidate:</string>
+    <string name="string_hint_candidate_summary_optional">Candidate Summary (optional)</string>
+    <string name="string_action_upload_cv_resume">Upload CV/Resume</string>
+    <string name="string_hint_candidate_current_background">Candidate Current Background</string>
+    <string name="string_hint_full_name">Full Name</string>
+    <string name="string_hint_email_address">Email Address</string>
+    <string name="string_hint_mobile_no">Mobile No.</string>
+    <string name="string_hint_full_address">Full Address</string>
+    <string name="string_placeholder_no_results_found">No relevant jobs found</string>
+    <string name="string_error_msg_please_upload_resume">Please upload resume!</string>
+    <string name="string_label_resume_uploaded">Resume Uploaded..</string>
+    <string name="string_label_employers_list">Employers</string>
+
+    <?ignore
+        in\startupjobs\Activities\EmployersListActivity.java?>
+    <string name="string_placeholder_no_emp_found">No employers found</string>
+    <string name="string_label_emp_email">Email:\u0020</string>
+    <string name="string_label_emp_url">Website:\u0020</string>
+    <string name="string_label_emp_desc">Employer Description:\u0020</string>
+    <string name="label_find_startups">Find Startups</string>
+    <string name="success">Success</string>
+    <string name="cntinue">Continue</string>
+    <string name="save_and_continue">Save and Continue</string>
+
+</resources>

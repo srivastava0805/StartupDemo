@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg_vector"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:id="@+id/iv_onboarding_startuptitle"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_startuplogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/startupjob_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_onboarding_startuptitle"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_welcometitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/first_time_on_startupjob_nwelcome_onboard"
+        android:textAlignment="textStart"
+        android:textColor="#242f6f"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/iv_startuplogo" />
+
+    <TextView
+        android:id="@+id/tv_createaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/create_account"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/tv_welcometitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcometitle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_email"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/email"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="25dp"
+        app:icon="@drawable/ic_mail"
+        app:iconGravity="start"
+        app:iconPadding="2dp"
+        app:iconSize="25dp"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createaccount"
+        app:strokeColor="#242f6f"
+        app:strokeWidth="1dp" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/color_gray_line"
+        app:layout_constraintEnd_toStartOf="@+id/tv_divider_text"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/btn_email" />
+
+    <TextView
+        android:id="@+id/tv_divider_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/or_sign_up_with"
+        android:textColor="@color/color_gray_line"
+        app:layout_constraintEnd_toStartOf="@+id/line2"
+        app:layout_constraintStart_toEndOf="@+id/line1"
+        app:layout_constraintTop_toBottomOf="@id/btn_email" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/color_gray_line"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@+id/tv_divider_text"
+        app:layout_constraintTop_toBottomOf="@id/btn_email" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_facebook"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="10dp"
+        app:elevation="5dp"
+        app:icon="@drawable/ic_facebook"
+        app:iconSize="35dp"
+        app:iconTintMode="multiply"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/tv_divider_text"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_google"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="10dp"
+        app:elevation="5dp"
+        app:icon="@drawable/ic_google"
+        app:iconSize="35dp"
+        app:iconTint="#ffffff"
+        app:iconTintMode="multiply"
+        app:layout_constraintStart_toEndOf="@id/btn_facebook"
+        app:layout_constraintTop_toBottomOf="@id/tv_divider_text"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_linkedin"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="10dp"
+        app:elevation="5dp"
+        app:icon="@drawable/ic_linkedin"
+        app:iconSize="35dp"
+        app:iconTint="#ffffff"
+        app:iconTintMode="multiply"
+        app:layout_constraintStart_toEndOf="@id/btn_google"
+        app:layout_constraintTop_toBottomOf="@id/tv_divider_text"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

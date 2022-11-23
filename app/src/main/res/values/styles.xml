@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="error" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">@color/color_red</item> <!--apply the color you wat here -->
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="EditTextThemeOverlay" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@android:color/holo_blue_light</item>
+    </style>
+
+    <?ignore
+        <style>your app branding color for the app bar<item name="colorPrimary">@color/white</item>
+
+        darker variant for the status bar and contextual app bars<item name="colorPrimaryDark">@color/colorPrimary_New</item>
+
+        theme UI controls like checkboxes and text fields also known as secondary color<item name="colorAccent">@color/a465661</item></style>
+
+        ?>
+
+    <style name="CustomMaterialThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_blue_btn_enabled</item>
+        <item name="colorPrimaryDark">@color/color_light_gray_icon</item>
+        <item name="colorAccent">@color/color_orange_btn_enabled</item>
+
+        <item name="android:statusBarColor">@color/color_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+    </style>
+
+    <style name="contentInputLayoutStyleOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/color_box_stroke</item>
+        <item name="android:textColor">@color/color_black_text</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColorHint">@color/color_light_gray_icon</item>
+        <item name="errorTextColor">@color/color_red</item>
+        <item name="boxStrokeErrorColor">@color/color_red</item>
+        <item name="errorIconTint">@color/color_red</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/activity_vertical_margin_15dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/activity_vertical_margin_15dp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/activity_vertical_margin_15dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/activity_vertical_margin_15dp</item>
+        <!--        <item name="errorTextAppearance">@style/error_label</item>-->
+        <!--        <item name="hintTextAppearance">@style/text_label</item>-->
+    </style>
+
+    <style name="contentInputLayoutStyleDefault" parent="Widget.Design.TextInputLayout">
+        <item name="boxStrokeColor">@color/color_blue_btn_enabled</item>
+        <item name="android:textColor">@color/color_black_text</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColorHint">@color/color_blue_btn_enabled</item>
+        <item name="errorTextColor">@color/color_red</item>
+        <item name="boxStrokeErrorColor">@color/color_red</item>
+        <item name="theme">@style/EditTextThemeOverlayDefault</item>
+        <item name="errorIconTint">@color/color_red</item>
+        <!--        <item name="errorTextAppearance">@style/error_label</item>-->
+        <item name="hintTextAppearance">@style/HelperTextAppearanceDefault</item>
+    </style>
+
+
+
+    <style name="EditTextThemeOverlayDefault" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/color_blue_btn_enabled</item>
+    </style>
+
+    <style name="HelperTextAppearanceDefault" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/color_blue_btn_enabled</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">top</item>
+
+    </style>
+
+
+    <style name="OrangeMaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/color_states_materialbutton_orange</item>
+    </style>
+
+    <style name="BlueMaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/color_states_materialbutton_blue</item>
+    </style>
+
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="roundCornerImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">5%</item>
+    </style>
+
+
+    <style name="HelperTextAppearanceDefault2" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/color_blue_btn_enabled</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">top</item>
+        <item name="paddingStart">3dp</item>
+    </style>
+
+
+</resources>
