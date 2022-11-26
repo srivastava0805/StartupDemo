@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class LoginData {
+public class LoginDataForMobile {
 
     @SerializedName("candidateLogin")
     @Expose
     private List<CandidateLogin> candidateLogin = null;
-    @SerializedName("token")
+    @SerializedName("mobile")
     @Expose
     private String token;
 

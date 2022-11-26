@@ -10,8 +10,12 @@
     <dimen name="activity_vertical_margin_10dp">10dp</dimen>
     <dimen name="activity_vertical_margin_15dp">15dp</dimen>
     <dimen name="activity_vertical_margin_5dp">5dp</dimen>
+    <dimen name="activity_vertical_margin_8dp">8dp</dimen>
     <dimen name="title_heading_14sp">14sp</dimen>
     <dimen name="material_icon_size">36dp</dimen>
     <dimen name="margin_35dp">35dp</dimen>
+    <dimen name="margin_45dp">45dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

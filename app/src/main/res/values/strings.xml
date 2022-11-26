@@ -7,11 +7,9 @@
     <string name="create_account">Create account</string>
     <string name="first_time_on_startupjob_nwelcome_onboard">First time on StartupJob?\nWelcome onboard!</string>
     <string name="or_sign_up_with">Or sign up with</string>
-
-    <!-- Project level resources -->
+    <!--  Project level resources  -->
     <string name="app_name">Start-up Jobs</string>
-
-    <!-- Resources for Bank2LogInActivity -->
+    <!--  Resources for Bank2LogInActivity  -->
     <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign Up</string>
     <string name="welcome_msg">Welcome to AI-Powered Automated Hiring Platform for Start-up </string>
     <string name="title_activity_login">LoginActivity</string>
@@ -44,14 +42,11 @@
     <string name="string_action_find_jobs">Find Jobs</string>
     <string name="string_action_myprofile">My Profile</string>
     <string name="string_action_resend_otp">Resend OTP</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--  TODO: Remove or change this placeholder text  -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-
-    <?ignore
-        in\startupjobs\Activities\SearchNApplyJob.java?>
+    <?ignore in\startupjobs\Activities\SearchNApplyJob.java?>
     <string name="string_hint_skills">eg. Nodejs, java, etc.</string>
     <string name="string_hint_location">eg. Noida, Delhi, etc.</string>
     <string name="string_label_skills">Skills</string>
@@ -86,9 +81,7 @@
     <string name="string_error_msg_please_upload_resume">Please upload resume!</string>
     <string name="string_label_resume_uploaded">Resume Uploaded..</string>
     <string name="string_label_employers_list">Employers</string>
-
-    <?ignore
-        in\startupjobs\Activities\EmployersListActivity.java?>
+    <?ignore in\startupjobs\Activities\EmployersListActivity.java?>
     <string name="string_placeholder_no_emp_found">No employers found</string>
     <string name="string_label_emp_email">Email:\u0020</string>
     <string name="string_label_emp_url">Website:\u0020</string>
@@ -97,5 +90,27 @@
     <string name="success">Success</string>
     <string name="cntinue">Continue</string>
     <string name="save_and_continue">Save and Continue</string>
+    <string name="hi_welcome_back">Hi, Welcome back!</string>
+    <string name="entered_registered_email">Entered registered email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="resend_otp">Resend Otp</string>
+    <string name="send_otp">Send Otp</string>
+    <string name="enter_email_otp">Enter Email OTP</string>
+    <string name="enter_mobile_otp">Enter Mobile OTP</string>
+    <string name="upload_resume_cv">Upload Resume/CV</string>
+    <string name="docs_pdf_max_2_mb">Docs,pdf|| max 2 MB</string>
+    <string name="i_accept_all_the_terms_amp_conditions"><![CDATA[I accept all the terms & conditions]]></string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="use_mobile">Use Mobile</string>
+    <string name="enter_10digit_mobileno">Enter 10 digit mobile no.</string>
+    <string name="verify_and_continue">Verify and Continue</string>
+    <string name="complete_registration">Complete Registration</string>
 </resources>

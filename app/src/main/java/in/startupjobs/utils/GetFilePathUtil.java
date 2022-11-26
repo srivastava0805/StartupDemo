@@ -21,6 +21,12 @@ public class GetFilePathUtil {
 
     private static Uri contentUri;
 
+    public static String getFileName() {
+        return fileName;
+    }
+
+    private static String fileName;
+
     @SuppressLint("NewApi")
     public static String getPath(Context context, final Uri uri) {
         // check here to KITKAT or new version
@@ -55,7 +61,7 @@ public class GetFilePathUtil {
                     try {
                         cursor = context.getContentResolver().query(uri, new String[]{MediaStore.MediaColumns.DISPLAY_NAME}, null, null, null);
                         if (cursor != null && cursor.moveToFirst()) {
-                            String fileName = cursor.getString(0);
+                             fileName = cursor.getString(0);
                             String path = Environment.getExternalStorageDirectory().toString() + "/Download/" + fileName;
                             if (!TextUtils.isEmpty(path)) {
                                 return path;

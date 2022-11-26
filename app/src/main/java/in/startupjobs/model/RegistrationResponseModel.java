@@ -52,6 +52,18 @@ public class RegistrationResponseModel {
         @Expose
         private String otp;
 
+        @SerializedName("termsAccepted")
+        @Expose
+        private boolean termsAccepted;
+
+        public boolean isTermsAccepted() {
+            return termsAccepted;
+        }
+
+        public void setTermsAccepted(boolean termsAccepted) {
+            this.termsAccepted = termsAccepted;
+        }
+
         public String getId() {
             return id;
         }

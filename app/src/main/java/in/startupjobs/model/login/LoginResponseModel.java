@@ -11,7 +11,7 @@ public class LoginResponseModel {
     private Boolean status;
     @SerializedName("data")
     @Expose
-    private LoginData data;
+    private LoginDataForMobile data;
     @SerializedName("message")
     @Expose
     private String message;
@@ -28,11 +28,11 @@ public class LoginResponseModel {
         this.status = status;
     }
 
-    public LoginData getData() {
+    public LoginDataForMobile getData() {
         return data;
     }
 
-    public void setData(LoginData data) {
+    public void setData(LoginDataForMobile data) {
         this.data = data;
     }
 
@@ -54,96 +54,19 @@ public class LoginResponseModel {
 
     public static class LoginDataToSend {
 
-        @SerializedName("CANDIDATEEMAILID")
+        @SerializedName("email")
         @Expose
         private String candidateEmail;
-        @SerializedName("candidatepassword")
+        @SerializedName("password")
         @Expose
         private String passwords;
-        @SerializedName("candidateAuthToken")
-        @Expose
-        private String candidateAuthToken = "";
-        @SerializedName("candidateImageUrl")
-        @Expose
-        private String candidateImageUrl = "";
-        @SerializedName("candidateName")
-        @Expose
-        private String candidateName = "";
-        @SerializedName("canddateLoginId")
-        @Expose
-        private String canddateLoginId = "";
-        @SerializedName("candidateLoginProvider")
-        @Expose
-        private String candidateLoginProvider = "CUSTOM";
-
-        @SerializedName("candidateEmail")
-        @Expose
-        private String candidateEmailWithProvider;
-
-
-        public String getCandidateEmailWithProvider() {
-            return candidateEmailWithProvider;
-        }
-
-        public void setCandidateEmailWithProvider(String candidateEmailWithProvider) {
-            this.candidateEmailWithProvider = candidateEmailWithProvider;
-        }
-
-        public String getCandidateEmail() {
-            return candidateEmail;
-        }
 
         public void setCandidateEmail(String candidateEmail) {
             this.candidateEmail = candidateEmail;
         }
 
-        public String getPasswords() {
-            return passwords;
-        }
-
         public void setPasswords(String passwords) {
             this.passwords = passwords;
         }
-
-        public String getCandidateAuthToken() {
-            return candidateAuthToken;
-        }
-
-        public void setCandidateAuthToken(String candidateAuthToken) {
-            this.candidateAuthToken = candidateAuthToken;
-        }
-
-        public String getCandidateImageUrl() {
-            return candidateImageUrl;
-        }
-
-        public void setCandidateImageUrl(String candidateImageUrl) {
-            this.candidateImageUrl = candidateImageUrl;
-        }
-
-        public String getCandidateName() {
-            return candidateName;
-        }
-
-        public void setCandidateName(String candidateName) {
-            this.candidateName = candidateName;
-        }
-
-        public String getCanddateLoginId() {
-            return canddateLoginId;
-        }
-
-        public void setCanddateLoginId(String canddateLoginId) {
-            this.canddateLoginId = canddateLoginId;
-        }
-
-        public String getCandidateLoginProvider() {
-            return candidateLoginProvider;
-        }
-
-        public void setCandidateLoginProvider(String candidateLoginProvider) {
-            this.candidateLoginProvider = candidateLoginProvider;
-        }
-
     }
 }

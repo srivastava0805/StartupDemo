@@ -50,12 +50,16 @@ public class OtpResponseModel {
     }
 
 
-    public static class OtpDataToSend
-    {
-        public String ID = "";
-        public String CANDIDATEEMAILID;
+    public static class OtpDataToSend {
+        public String type = "";
+        public String value = "";
     }
 
+    public static class VerifyOtpData {
+        public String type = "";
+        public String value = "";
+        public int code;
+    }
 }
 
 

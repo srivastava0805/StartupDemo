@@ -1,4 +1,4 @@
-package in.startupjobs;
+package in.startupjobs.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
+
+import in.startupjobs.R;
 
 
 public class SignUpActivityDemo extends AppCompatActivity {
