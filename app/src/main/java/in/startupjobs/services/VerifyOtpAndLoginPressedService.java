@@ -38,7 +38,7 @@ public class VerifyOtpAndLoginPressedService {
                     onResponseVerifyMobileOtpCallback.sendMobileOtpResponse(response.body());
                     progressDialog.dismiss();
 
-                    if (response.body().getMessage().equalsIgnoreCase("Otp Already Exists.")) {
+                    if (response.body().getEmail().equalsIgnoreCase("Otp Already Exists.")) {
                         Snackbar.make(context.findViewById(android.R.id.content), "OTP already sent to the provided email. Please check", Snackbar.LENGTH_SHORT).show();
                     } else {
                         Snackbar.make(context.findViewById(android.R.id.content), "OTP sent successfully", Snackbar.LENGTH_SHORT).show();

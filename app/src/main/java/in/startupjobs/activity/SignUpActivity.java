@@ -16,6 +16,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -210,7 +211,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnFocusCha
                 new ComleteRegistrationService.onResponseCompleteRegistration() {
                     @Override
                     public void senCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
-
+                        Toast.makeText(SignUpActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

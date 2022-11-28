@@ -20,6 +20,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface ApiInterface {
+    @GET("csrf/token")
+    Call<Object> getCsrfToken();
+
     @POST("verifications/send")
     Call<OtpResponseModel> getOtp(
             @Body OtpResponseModel.OtpDataToSend OtpData);

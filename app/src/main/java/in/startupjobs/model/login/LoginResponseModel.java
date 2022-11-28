@@ -6,26 +6,34 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponseModel {
 
-    @SerializedName("status")
+    @SerializedName("userId")
     @Expose
-    private Boolean status;
+    private String userId;
     @SerializedName("data")
     @Expose
     private LoginDataForMobile data;
-    @SerializedName("message")
+    @SerializedName("email")
     @Expose
-    private String message;
+    private String email;
 
-    @SerializedName("token")
+    @SerializedName("fullName")
+    @Expose
+    private String fullName;
+
+    @SerializedName("userType")
+    @Expose
+    private String userType;
+
+    @SerializedName("accessToken")
     @Expose
     private String token;
 
-    public Boolean getStatus() {
-        return status;
+    public String  getUserId() {
+        return userId;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public LoginDataForMobile getData() {
@@ -36,12 +44,12 @@ public class LoginResponseModel {
         this.data = data;
     }
 
-    public String getMessage() {
-        return message;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getToken() {

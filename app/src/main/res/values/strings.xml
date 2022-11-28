@@ -113,4 +113,9 @@
     <string name="enter_10digit_mobileno">Enter 10 digit mobile no.</string>
     <string name="verify_and_continue">Verify and Continue</string>
     <string name="complete_registration">Complete Registration</string>
+
+
+    <string name="facebook_app_id">554977906467254</string>
+    <string name="fb_login_protocol_scheme">fb554977906467254</string>
+    <string name="facebook_client_token">b3b856fe17a6b1cb9435ca1d48fe5d33</string>
 </resources>
