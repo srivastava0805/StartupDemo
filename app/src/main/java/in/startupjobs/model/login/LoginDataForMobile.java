@@ -3,30 +3,22 @@ package in.startupjobs.model.login;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class LoginDataForMobile {
 
-    @SerializedName("candidateLogin")
+    @SerializedName("code")
     @Expose
-    private List<CandidateLogin> candidateLogin = null;
-    @SerializedName("mobile")
+    private long code;
+    @SerializedName("mobileNumber")
     @Expose
-    private String token;
+    private long mobileNumber;
 
-    public List<CandidateLogin> getCandidateLogin() {
-        return candidateLogin;
+
+    public void setCode(long code) {
+        this.code = code;
     }
 
-    public void setCandidateLogin(List<CandidateLogin> candidateLogin) {
-        this.candidateLogin = candidateLogin;
-    }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    public void setMobileNumber(long mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 }

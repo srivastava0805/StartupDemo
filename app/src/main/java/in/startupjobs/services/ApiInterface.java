@@ -39,7 +39,7 @@ public interface ApiInterface {
     Call<JobListingResponseModel> getAllJobs(
             @Body JobListingResponseModel.JobListingDataToSend jobListingData);
 
-    @POST("auth/login/mobile")
+    @POST("auth/login/mobile/verify")
     Call<LoginResponseModel> loginViaMobile(
             @Body LoginDataForMobile loginDataForMobile);
 

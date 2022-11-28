@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import in.startupjobs.model.OtpResponseModel;
+import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
+import in.startupjobs.utils.ErrorUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +41,7 @@ public class SendOtpPressedService {
 
             @Override
             public void onResponse(Call<OtpResponseModel> call, Response<OtpResponseModel> response) {
+                progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     if (type.equalsIgnoreCase("email")) {
@@ -47,7 +50,6 @@ public class SendOtpPressedService {
                         onResponseSendEmailOtpCallback.sendEmailOtpResponse(response.body());
                     } else {
                         onResponseSendMobileOtpCallback.sendMobileOtpResponse(response.body());
-                        progressDialog.dismiss();
                     }
                     if (response.body().getMessage().equalsIgnoreCase("Otp Already Exists.")) {
                         Snackbar.make(context.findViewById(android.R.id.content), "OTP already sent to the provided email. Please check", Snackbar.LENGTH_SHORT).show();
@@ -56,9 +58,9 @@ public class SendOtpPressedService {
                     }
 
                 } else {
-                    onResponseSendMobileOtpCallback.sendMobileOtpResponse(null);
-                    progressDialog.dismiss();
-                    Snackbar.make(context.findViewById(android.R.id.content), "Call error with HTTP status code " + response.code() + "!", Snackbar.LENGTH_SHORT).show();
+                    APIError error = ErrorUtils.parseError(response);
+
+                    Snackbar.make(context.findViewById(android.R.id.content), error.messages.get(0).toString(), Snackbar.LENGTH_SHORT).show();
                 }
 
             }

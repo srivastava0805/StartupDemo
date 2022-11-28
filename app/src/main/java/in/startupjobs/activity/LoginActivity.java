@@ -19,6 +19,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.kevinschildhorn.otpview.OTPView;
 
+import java.util.Objects;
+
 import in.startupjobs.R;
 import in.startupjobs.model.OtpResponseModel;
 import in.startupjobs.model.login.LoginResponseModel;
@@ -86,16 +88,19 @@ public class LoginActivity extends AppCompatActivity {
         mActivityLoginBtnChangelogintype.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mActivityLoginEdtEmail.requestFocus();
                 if (mActivityLoginBtnChangelogintype.getText().equals(AppConstants.USE_MOBILE)) {
                     mActivityLoginBtnChangelogintype.setText(AppConstants.USE_EMAIL);
                     mActivityLoginEdtPassword.setVisibility(View.INVISIBLE);
                     setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 10, R.string.enter_10digit_mobileno);
                     mActivityLoginBtnLogin.setText(R.string.send_otp);
+                    Objects.requireNonNull(mActivityLoginEdtEmail.getText()).clear();
                 } else {
                     mActivityLoginBtnChangelogintype.setText(AppConstants.USE_MOBILE);
                     mActivityLoginEdtPassword.setVisibility(View.VISIBLE);
                     setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 50, R.string.entered_registered_email);
                     mActivityLoginBtnLogin.setText(R.string.log_in);
+                    Objects.requireNonNull(mActivityLoginEdtEmail.getText()).clear();
                 }
             }
         });
@@ -130,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onOtpVerifyPressed() {
-        new VerifyOtpAndLoginPressedService(this, mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
+        new VerifyOtpAndLoginPressedService(this, mActivityLoginEdtEmail.getText().toString().trim(),mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
                 new VerifyOtpAndLoginPressedService.onResponseVerifyMobileOtp() {
                     @Override
                     public void sendMobileOtpResponse(LoginResponseModel otpResponseModel) {
