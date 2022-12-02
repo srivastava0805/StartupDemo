@@ -57,8 +57,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mActivityForgotpasswordEdtMobileno.getVisibility() == View.VISIBLE)
-                    makeOtpPageVisible();
-//                    doGetDesiredOtpProcess();
+                    doGetDesiredOtpProcess();
                 else doGetChangePasswordProcess();
             }
         });
@@ -127,7 +126,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void setFieldToPasswordType(TextInputEditText edtField) {
-        edtField.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        edtField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         InputFilter[] FilterArray = new InputFilter[1];
         FilterArray[0] = new InputFilter.LengthFilter(15);
         edtField.setFilters(FilterArray);
