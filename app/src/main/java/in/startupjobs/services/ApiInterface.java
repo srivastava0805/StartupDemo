@@ -5,6 +5,7 @@ import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
 import in.startupjobs.model.applyJob.CandidateAppliedJobsResponse;
 import in.startupjobs.model.employersList.EmployersListResponse;
+import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.model.jobListing.JobListingResponseModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
@@ -30,6 +31,9 @@ public interface ApiInterface {
     @POST("verifications/verify")
     Call<OtpResponseModel> verifyOtp(
             @Body OtpResponseModel.VerifyOtpData OtpData);
+
+    @POST("auth/password/reset")
+    Call<Object> postChangePassword(@Body ChangePasswordModel.OtpDataToSend otpData);
 
     @POST("auth/register/candidate")
     Call<RegistrationResponseModel> registerCandidate(
@@ -68,4 +72,6 @@ public interface ApiInterface {
     @POST("getAppliedJobByCandidateEmail")
     Call<CandidateAppliedJobsResponse> getAppliedJobs(
             @Field("candidateEmail") String candidateEmail);
+
+
 }

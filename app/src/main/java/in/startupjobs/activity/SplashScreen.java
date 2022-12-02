@@ -34,7 +34,6 @@ public class SplashScreen extends AppCompatActivity {
                 new GetCsrfTokenService(SplashScreen.this, new GetCsrfTokenService.onResponseCsrfTokenRequest() {
                     @Override
                     public void sendCsrfTokenResponse(String response) {
-                        Log.e("Token", response);
                         if (response != null && response.equalsIgnoreCase(getString(R.string.success)))
                             sendToNextActivity();
                     }

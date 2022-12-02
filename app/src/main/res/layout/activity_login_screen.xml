@@ -156,7 +156,8 @@
                     app:otp_marginBetween="8dp"
                     app:otp_showCursor="false"
                     app:otp_textSize="24sp"
-                    app:otp_underscoreCursor="true" />
+                    app:otp_underscoreCursor="true"
+                    />
 
                 <TextView
                     android:id="@+id/activity_login_textview_resendmobileotp"

@@ -157,9 +157,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnFocusCha
         edtPassword.setOnFocusChangeListener(this);
 
         mActivitySignupAlldataLayout = findViewById(R.id.activity_signup_alldata_layout);
-        mActivitySignupAlldataLayout.setVisibility(View.VISIBLE);
-        mActivitySignupAlldataLayoutotp.setVisibility(View.GONE);
-        mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
+//        mActivitySignupAlldataLayout.setVisibility(View.VISIBLE);
+//        mActivitySignupAlldataLayoutotp.setVisibility(View.GONE);
+//        mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
 
         setOnClicks();
     }

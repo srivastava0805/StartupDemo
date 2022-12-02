@@ -28,7 +28,8 @@ public class SendOtpPressedService {
     }
 
     public SendOtpPressedService(Activity context, String type, String value,
-                                 onResponseSendEmailOtp onResponseSendEmailOtpCallback, onResponseSendMobileOtp onResponseSendMobileOtpCallback) {
+                                 onResponseSendEmailOtp onResponseSendEmailOtpCallback,
+                                 onResponseSendMobileOtp onResponseSendMobileOtpCallback) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
@@ -45,8 +46,6 @@ public class SendOtpPressedService {
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     if (type.equalsIgnoreCase("email")) {
-                        new SendOtpPressedService(context, "mobile", value
-                                , onResponseSendEmailOtpCallback, onResponseSendMobileOtpCallback);
                         onResponseSendEmailOtpCallback.sendEmailOtpResponse(response.body());
                     } else {
                         onResponseSendMobileOtpCallback.sendMobileOtpResponse(response.body());

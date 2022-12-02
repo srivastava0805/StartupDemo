@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import in.startupjobs.R;
+import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
 import in.startupjobs.utils.AppConstants;
@@ -17,22 +17,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetCsrfTokenService {
+public class ChangePasswordService {
     private final ProgressDialog progressDialog;
-    onResponseCsrfTokenRequest onResponseCsrfTokenRequest;
+    onResponseFromChangePassword onResponseFromChangePassword;
 
+    public interface onResponseFromChangePassword {
 
-    public interface onResponseCsrfTokenRequest {
-        void sendCsrfTokenResponse(String response);
+        void sendEmailOtpResponse(Object otpResponseModel);
     }
 
-    public GetCsrfTokenService(Activity context,
-                               onResponseCsrfTokenRequest onResponseCsrfTokenRequestCallback) {
+
+    public ChangePasswordService(Activity context, String type, String value, String pass, long code,
+                                 onResponseFromChangePassword onResponseFromChangePasswordCallback) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
         ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
-        Call<Object> call = service.getCsrfToken();
+        ChangePasswordModel.OtpDataToSend otpData = new ChangePasswordModel.OtpDataToSend();
+        if (type.equalsIgnoreCase("email"))
+            otpData.setEmail(value);
+        else
+            otpData.setMobileNumber(Long.valueOf(value));
+        otpData.setCode(code);
+        otpData.setPassword(pass);
+        Call<Object> call = service.postChangePassword(otpData);
         call.enqueue(new Callback<Object>() {
 
             @Override
@@ -41,20 +49,20 @@ public class GetCsrfTokenService {
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     try {
-                        JSONObject tokenObj = new JSONObject(response.body().toString());
-                        if (tokenObj.has("token")) {
-                            AppConstants.XCSRF_TOKEN = tokenObj.getString("token");
-                            onResponseCsrfTokenRequestCallback.sendCsrfTokenResponse(context.getString(R.string.success));
-                        }
+                        JSONObject jsonObject = new JSONObject(response.body().toString());
+                        if (jsonObject.has("message"))
+                            if (jsonObject.getString("message").equalsIgnoreCase(AppConstants.PASSWORD_RESET_SUCCESSFUL)) {
+                                onResponseFromChangePasswordCallback.sendEmailOtpResponse(AppConstants.PASSWORD_RESET_SUCCESSFUL);
+                            }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
+                    onResponseFromChangePasswordCallback.sendEmailOtpResponse(response.body());
+
                 } else {
-                    if (response.errorBody() != null) {
-                        onResponseCsrfTokenRequestCallback.sendCsrfTokenResponse(context.getString(R.string.success));
-                        APIError error = ErrorUtils.parseError(response);
-                        Snackbar.make(context.findViewById(android.R.id.content), "" + error.messages.get(0), Snackbar.LENGTH_SHORT).show();
-                    }
+                    APIError error = ErrorUtils.parseError(response);
+
+                    Snackbar.make(context.findViewById(android.R.id.content), error.messages.get(0).toString(), Snackbar.LENGTH_SHORT).show();
                 }
 
             }

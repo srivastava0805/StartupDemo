@@ -1,5 +1,6 @@
 package in.startupjobs.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -29,6 +30,9 @@ import in.startupjobs.services.LoginViaEmailService;
 import in.startupjobs.services.SendOtpPressedService;
 import in.startupjobs.services.VerifyOtpAndLoginPressedService;
 import in.startupjobs.utils.AppConstants;
+import in.startupjobs.utils.GlobalVariablesNMethods;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -56,8 +60,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_screen);
+        setContentView(R.layout.activity_login_screen);
         initView();
+
     }
 
     private void initView() {
@@ -132,10 +137,30 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+
+        mTvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+        setActionOnViews();
+    }
+
+    private void setActionOnViews() {
+        mActivityLoginOtpviewEntermobileotp.setOnFinishListener(new Function1<String, Unit>() {
+            @Override
+            public Unit invoke(String s) {
+                mActivityLoginOtpviewEntermobileotp.clearFocus();
+                GlobalVariablesNMethods.closeKeyboard(LoginActivity.this);
+                return null;
+            }
+        });
     }
 
     private void onOtpVerifyPressed() {
-        new VerifyOtpAndLoginPressedService(this, mActivityLoginEdtEmail.getText().toString().trim(),mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
+        new VerifyOtpAndLoginPressedService(this, mActivityLoginEdtEmail.getText().toString().trim(), mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
                 new VerifyOtpAndLoginPressedService.onResponseVerifyMobileOtp() {
                     @Override
                     public void sendMobileOtpResponse(LoginResponseModel otpResponseModel) {
