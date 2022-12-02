@@ -40,7 +40,7 @@ import java.io.OutputStream;
 import in.startupjobs.R;
 import in.startupjobs.model.OtpResponseModel;
 import in.startupjobs.model.RegistrationResponseModel;
-import in.startupjobs.services.ComleteRegistrationService;
+import in.startupjobs.services.CompleteRegistrationService;
 import in.startupjobs.services.SendOtpPressedService;
 import in.startupjobs.services.VerifyOtpPressedService;
 import in.startupjobs.utils.CredentialsValidation;
@@ -207,8 +207,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnFocusCha
     }
 
     private void doRegistrationProcess() {
-        new ComleteRegistrationService(this, getDataReadyForSignUp(),
-                new ComleteRegistrationService.onResponseCompleteRegistration() {
+        new CompleteRegistrationService(this, getDataReadyForSignUp(),
+                new CompleteRegistrationService.onResponseCompleteRegistration() {
                     @Override
                     public void senCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
                         Toast.makeText(SignUpActivity.this, "Login Success", Toast.LENGTH_SHORT).show();

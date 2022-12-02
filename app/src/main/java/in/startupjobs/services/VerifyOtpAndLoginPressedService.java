@@ -3,6 +3,8 @@ package in.startupjobs.services;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import in.startupjobs.model.login.LoginDataForMobile;
@@ -16,7 +18,6 @@ import retrofit2.Response;
 
 public class VerifyOtpAndLoginPressedService {
     private final ProgressDialog progressDialog;
-    onResponseVerifyMobileOtp onResponseVerifyMobileOtp;
 
     public interface onResponseVerifyMobileOtp {
         void sendMobileOtpResponse(LoginResponseModel otpResponseModel);
@@ -35,7 +36,7 @@ public class VerifyOtpAndLoginPressedService {
         call.enqueue(new Callback<LoginResponseModel>() {
 
             @Override
-            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+            public void onResponse(@NonNull Call<LoginResponseModel> call,@NonNull Response<LoginResponseModel> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
@@ -49,7 +50,7 @@ public class VerifyOtpAndLoginPressedService {
             }
 
             @Override
-            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<LoginResponseModel> call,@NonNull Throwable t) {
                 progressDialog.dismiss();
                 Snackbar.make(context.findViewById(android.R.id.content),
                         // Throwable will let us find the error if the call failed.

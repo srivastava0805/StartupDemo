@@ -3,6 +3,8 @@ package in.startupjobs.services;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -19,7 +21,6 @@ import retrofit2.Response;
 
 public class ChangePasswordService {
     private final ProgressDialog progressDialog;
-    onResponseFromChangePassword onResponseFromChangePassword;
 
     public interface onResponseFromChangePassword {
 
@@ -44,7 +45,7 @@ public class ChangePasswordService {
         call.enqueue(new Callback<Object>() {
 
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
+            public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
@@ -68,7 +69,7 @@ public class ChangePasswordService {
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Snackbar.make(context.findViewById(android.R.id.content),
                         // Throwable will let us find the error if the call failed.

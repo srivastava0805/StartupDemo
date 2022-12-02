@@ -3,6 +3,8 @@ package in.startupjobs.services;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import in.startupjobs.model.login.LoginResponseModel;
@@ -15,7 +17,6 @@ import retrofit2.Response;
 
 public class LoginViaEmailService {
     private final ProgressDialog progressDialog;
-    onResponseLoginViaEmail onResponseLoginViaEmail;
 
 
     public interface onResponseLoginViaEmail {
@@ -35,7 +36,7 @@ public class LoginViaEmailService {
         call.enqueue(new Callback<LoginResponseModel>() {
 
             @Override
-            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+            public void onResponse(@NonNull Call<LoginResponseModel> call,@NonNull Response<LoginResponseModel> response) {
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     onResponseLoginViaEmailCallback.sendMobileOtpResponse(response.body());
@@ -53,7 +54,7 @@ public class LoginViaEmailService {
             }
 
             @Override
-            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<LoginResponseModel> call,@NonNull Throwable t) {
                 progressDialog.dismiss();
                 Snackbar.make(context.findViewById(android.R.id.content),
                         // Throwable will let us find the error if the call failed.
