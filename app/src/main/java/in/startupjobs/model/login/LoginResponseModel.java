@@ -60,6 +60,22 @@ public class LoginResponseModel {
         this.token = token;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
     public static class LoginDataToSend {
 
         @SerializedName("email")

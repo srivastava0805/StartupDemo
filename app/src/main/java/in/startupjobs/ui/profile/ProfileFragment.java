@@ -66,23 +66,24 @@ public class ProfileFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         initView(root);
         getDataForPublicProfileById();
-//        getDataWorkExperience();
+        getDataWorkExperience();
         return root;
     }
 
     private void getDataForPublicProfileById() {
-      new GetProfileDetailsByIdService(getActivity(), new GetProfileDetailsByIdService.onResponseGetPublicProfileDetailsById() {
-          @Override
-          public void sendProfileDetailsByIdResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
-              setProfessionalDetailsFromResponse(publicProfileDetailsByIDResponse);
-          }
-      });
+        new GetProfileDetailsByIdService(getActivity(), new GetProfileDetailsByIdService.onResponseGetPublicProfileDetailsById() {
+            @Override
+            public void sendProfileDetailsByIdResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
+                setProfessionalDetailsFromResponse(publicProfileDetailsByIDResponse);
+            }
+        });
     }
 
     private void setProfessionalDetailsFromResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
         mProfileTextviewName.setText(publicProfileDetailsByIDResponse.getAccount().getName());
-        if(publicProfileDetailsByIDResponse.getAccount().getAvatar() !=null
-        && !publicProfileDetailsByIDResponse.getAccount().getAvatar().isEmpty() )
+//        mProfileTextviewDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
+        if (publicProfileDetailsByIDResponse.getAccount().getAvatar() != null
+                && !publicProfileDetailsByIDResponse.getAccount().getAvatar().isEmpty())
             Glide.with(getActivity())
                     .load(publicProfileDetailsByIDResponse.getAccount().getAvatar())
                     .into(mProfileShapeivProfile);

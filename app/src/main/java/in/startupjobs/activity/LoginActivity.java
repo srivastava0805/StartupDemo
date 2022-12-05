@@ -29,6 +29,7 @@ import in.startupjobs.services.SendOtpPressedService;
 import in.startupjobs.services.VerifyOtpAndLoginPressedService;
 import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.GlobalVariablesNMethods;
+import in.startupjobs.utils.Preferences;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -140,8 +141,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendToActivity(LoginResponseModel responseModel) {
         AppConstants.mLoginData = responseModel;
+        SaveDataToPrefs(responseModel);
         startActivity(new Intent(this, MainActivity.class));
         finishAffinity();
+    }
+
+    private void SaveDataToPrefs(LoginResponseModel responseModel) {
+        Preferences.writeString(this,Preferences.TOKEN,responseModel.getToken());
+        Preferences.writeString(this,Preferences.EMAIL,responseModel.getEmail());
+        Preferences.writeString(this,Preferences.NAME,responseModel.getFullName());
+        Preferences.writeString(this,Preferences.USER_ID,responseModel.getUserId());
+        Preferences.writeString(this,Preferences.USER_TYPE,responseModel.getUserType());
     }
 
     private void onSendOtpPressed() {

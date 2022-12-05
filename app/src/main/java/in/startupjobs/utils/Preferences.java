@@ -20,6 +20,7 @@ public class Preferences {
     public static final String TOKEN = "token";
     public static final String JOBDETAILS = "JOBDETAILS";
     public static final String PROFILEIMAGE = "PROFILEIMAGE";
+    public static final String USER_TYPE = "user_type";
 
     public static void writeBoolean(Context context, String key, boolean value) {
         getEditor(context).putBoolean(key, value).commit();
