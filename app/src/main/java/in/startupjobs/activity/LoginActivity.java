@@ -22,6 +22,7 @@ import com.kevinschildhorn.otpview.OTPView;
 import java.util.Objects;
 
 import in.startupjobs.R;
+import in.startupjobs.model.login.LoginResponseModel;
 import in.startupjobs.services.FacebookLogin;
 import in.startupjobs.services.LoginViaEmailService;
 import in.startupjobs.services.SendOtpPressedService;
@@ -124,17 +125,23 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onOtpVerifyPressed() {
         new VerifyOtpAndLoginPressedService(this, Objects.requireNonNull(mActivityLoginEdtEmail.getText()).toString().trim(), mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
-                otpResponseModel -> Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show());
+                otpResponseModel ->   sendToActivity(otpResponseModel));
     }
 
     private void onLoginPressed() {
         new LoginViaEmailService(this, Objects.requireNonNull(mActivityLoginEdtEmail.getText()).toString().trim(),
                 Objects.requireNonNull(mActivityLoginEdtPassword.getText()).toString().trim(), responseModel -> {
-                    if (responseModel != null) {
-                        AppConstants.mLoginData = responseModel;
-                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            if (responseModel != null) {
+                sendToActivity(responseModel);
+
+            }
+        });
+    }
+
+    private void sendToActivity(LoginResponseModel responseModel) {
+        AppConstants.mLoginData = responseModel;
+        startActivity(new Intent(this, MainActivity.class));
+        finishAffinity();
     }
 
     private void onSendOtpPressed() {

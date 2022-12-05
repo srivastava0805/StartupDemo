@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -62,30 +63,21 @@ public class GlobalVariablesNMethods {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public static String convertDate(String rawFormat,String newFormat){
-        String formattedDate="";
-        DateTimeFormatter inputFormatter = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+    public static String convertDate(Context ctx,String givenDate,String inputFormat,String outputFormat){
 
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern(newFormat, Locale.ENGLISH);
-            LocalDate date = LocalDate.parse(rawFormat, inputFormatter);
-           formattedDate = outputFormatter.format(date);
-            System.out.println(formattedDate);
+        SimpleDateFormat spf=new SimpleDateFormat(inputFormat);
+        Date newDate= null;
+        try {
+            newDate = spf.parse(givenDate);
+            spf= new SimpleDateFormat(outputFormat);
+            String date = spf.format(newDate);
+            Toast.makeText(ctx, date, Toast.LENGTH_SHORT).show();
+            return date;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
-        else {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            SimpleDateFormat outputFormat = new SimpleDateFormat(newFormat);
-            Date date = null;
-            try {
-                date = inputFormat.parse(rawFormat);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-             formattedDate = outputFormat.format(date);
-            System.out.println(formattedDate);
-        }
-        return formattedDate;
+
+
     }
 
     public static boolean isStringValid(String value){

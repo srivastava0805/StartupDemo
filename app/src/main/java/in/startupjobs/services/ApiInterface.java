@@ -8,11 +8,13 @@ import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
 import in.startupjobs.model.appliedJobsListing.JobListingResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
 import in.startupjobs.model.applyJob.CandidateAppliedJobsResponse;
+import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
 import in.startupjobs.model.employersList.EmployersListResponse;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
+import in.startupjobs.model.workExperience.WorkExperienceResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -23,6 +25,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
     @GET("csrf/token")
@@ -77,6 +80,13 @@ public interface ApiInterface {
 
     @GET("auth/dashboard/candidate")
     Call<DashBoardJobsData> getDashBoardJobsData();
+
+    @GET("resume/work_experience")
+    Call<List<WorkExperienceResponse>> getWorkExperience();
+
+    @GET("resume/public/{id}")
+    Call<PublicProfileDetailsByIDResponse>
+    getBasicPublicProfileDetailsById(@Path("id") String userId);
 
     @FormUrlEncoded
     @POST("getAppliedJobByCandidateEmail")

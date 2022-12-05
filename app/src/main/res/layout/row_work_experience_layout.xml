@@ -21,15 +21,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_edit_profile"
-        android:padding="@dimen/activity_vertical_margin_8dp"
-        app:layout_constraintEnd_toStartOf="@+id/rowworkexp_iv_workexperience"
+        android:padding="@dimen/activity_vertical_margin_5dp"
+        app:layout_constraintEnd_toStartOf="@+id/rowworkexp_iv_delete"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/rowworkexp_iv_workexperience"
+        android:id="@+id/rowworkexp_iv_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_vertical_margin_8dp"
+        android:padding="@dimen/activity_vertical_margin_5dp"
         android:src="@drawable/icon_delete_work_experience_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

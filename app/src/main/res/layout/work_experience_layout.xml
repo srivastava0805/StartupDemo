@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/activity_vertical_margin_8dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/workexp_textview_workexpplaceholder"
@@ -16,15 +17,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/workexp_iv_edit"
+    <TextView
+        android:id="@+id/workexp_textview_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_edit_profile"
+        android:text="@string/add"
+        android:padding="@dimen/activity_vertical_margin_8dp"
+        android:background="@drawable/background_usemobile_useemail_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workexp_recylerview_workexp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin20"

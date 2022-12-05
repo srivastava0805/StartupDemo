@@ -26,6 +26,12 @@
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/CustomMaterialThemeLight.NoActionBar" />
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/CustomMaterialThemeLight.NoActionBar" />
         <activity
             android:name=".activity.SignUpActivityDemo"
             android:exported="false">
@@ -41,7 +47,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

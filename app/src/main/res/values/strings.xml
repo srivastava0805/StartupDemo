@@ -166,5 +166,6 @@
     <string name="team_handled">Team handled</string>
     <string name="notice_period">Notice period</string>
     <string name="work_experience">Work Experience</string>
+    <string name="add">Add</string>
 
 </resources>

@@ -19,12 +19,15 @@ public class ApiClient {
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Interceptor.Chain chain) throws IOException {
+                Request request;
                 Request original = chain.request();
-
-                Request request = original.newBuilder()
-                        .header("XSRF-TOKEN", "zIRRnHqW-qK-6U1bMfCLbmRuYPaoaj8WsU0w")
-                        .header("Cookie", "_csrf=TDSWggY7u7uYhu27Psxkk1m-")
-                        .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwNiwiZW1haWwiOiJzYW5kZWVwQHN0YXJ0dXBqb2IuaW4iLCJtb2JpbGVOdW1iZXIiOiI4MjI5MDM5OTQ2IiwibmFtZSI6IlNhbmRlZXAgS3VtYXIgWWFkYXYiLCJ1c2VyVHlwZSI6ImNhbmRpZGF0ZSIsImVtcGxveWVyVHlwZSI6bnVsbCwiZXh0cmFzIjp7fSwiaWF0IjoxNjcwMTQ3NTM5LCJleHAiOjE2Nzc5MjM1MzksImF1ZCI6InN0YXJ0dXBqb2IuaW4iLCJpc3MiOiJhY2NvdW50cy5zdGFydHVwam9iLmluIn0.X72FNcrQB-Q6zxufKuppaU0La6-MSZA7qjRXP2WJsHM")
+                if (AppConstants.mLoginData != null &&
+                        AppConstants.mLoginData.getToken() != null) {
+                    request = original.newBuilder()
+                            .header("Authorization","Bearer "+ AppConstants.mLoginData.getToken())
+                            .method(original.method(), original.body())
+                            .build();
+                } else request = original.newBuilder()
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);
