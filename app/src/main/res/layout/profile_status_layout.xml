@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/profile_textview_placeholderprofiletext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_5dp"
+        android:text="@string/profile_score"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/profile_textview_profilecompletionpercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_5dp"
+        android:text="@string/title_profile"
+        android:textColor="@color/color_btn_navy_blue"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/profile_progressindicator_profilecompletionpercentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_5dp"
+        android:elevation="4dp"
+        app:indicatorColor="@color/color_blue_btn_enabled"
+        app:layout_constraintTop_toBottomOf="@+id/profile_textview_profilecompletionpercentage"
+        app:trackColor="@color/color_lightest_gray_btn_disabled"
+        app:trackCornerRadius="@dimen/activity_vertical_margin_5dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/profile_textview_lastupdated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_5dp"
+        android:text="@string/title_profile"
+        android:textColor="@color/color_btn_navy_blue"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_progressindicator_profilecompletionpercentage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

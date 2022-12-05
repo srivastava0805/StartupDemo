@@ -46,13 +46,13 @@ import in.startupjobs.services.VerifyOtpPressedService;
 import in.startupjobs.utils.CredentialsValidation;
 import in.startupjobs.utils.GetFilePathUtil;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnFocusChangeListener {
+public class SignUpActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     CredentialsValidation validator;
     private ProgressDialog progressDialog;
     private OtpResponseModel otpResponse;
-    private boolean firstNameFilled = false, lastNameFilled = false, emailFilled = false, passwordFilled = false, confirmPasswordFilled = false;
+    private boolean fullNameFilled = false, lastNameFilled = false, emailFilled = false, passwordFilled = false, mobileFilled = false;
 
     TextInputLayout fullNameLayout;
     TextInputLayout emailLayout;
@@ -144,22 +144,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnFocusCha
         validator = new CredentialsValidation();
 
         edtFullName.addTextChangedListener(new ValidationTextWatcher(edtFullName));
-        edtFullName.setOnFocusChangeListener(this);
-
-
         edtEmail.addTextChangedListener(new ValidationTextWatcher(edtEmail));
-        edtEmail.setOnFocusChangeListener(this);
-
         edtMobile.addTextChangedListener(new ValidationTextWatcher(edtMobile));
-        edtMobile.setOnFocusChangeListener(this);
-
         edtPassword.addTextChangedListener(new ValidationTextWatcher(edtPassword));
-        edtPassword.setOnFocusChangeListener(this);
 
         mActivitySignupAlldataLayout = findViewById(R.id.activity_signup_alldata_layout);
-//        mActivitySignupAlldataLayout.setVisibility(View.VISIBLE);
-//        mActivitySignupAlldataLayoutotp.setVisibility(View.GONE);
-//        mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
+        mActivitySignupAlldataLayout.setVisibility(View.VISIBLE);
+        mActivitySignupAlldataLayoutotp.setVisibility(View.GONE);
+        mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
 
         setOnClicks();
     }
@@ -207,10 +199,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnFocusCha
     }
 
     private void doRegistrationProcess() {
-        new CompleteRegistrationService(this, getDataReadyForSignUp(),
+       new CompleteRegistrationService(this, getDataReadyForSignUp(),
                 new CompleteRegistrationService.onResponseCompleteRegistration() {
                     @Override
-                    public void senCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
+                    public void sendCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
                         Toast.makeText(SignUpActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -274,70 +266,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnFocusCha
 
         @SuppressLint("NonConstantResourceId")
         public void afterTextChanged(Editable editable) {
-//                switch (view.getId()) {
-//                    case R.id.activity_signup_edt_fullname:
-//                        firstNameFilled = validator.validateName(firstNameLayout);
-//                        break;
-//                    case R.id.activity_signup_edt_lastname:
-//                        lastNameFilled = validator.validateName(lastNameLayout);
-//                        break;
-//                    case R.id.activity_signup_edt_email:
-//                        emailFilled = validator.validateEmail(emailLayout, SignUpActivity.this);
-//                        break;
-//                    case R.id.activity_signup_edt_password:
-//                        passwordFilled = validator.validatePassword(passwordLayout, SignUpActivity.this);
-//                        break;
-//                    case R.id.activity_signup_edt_confirm_password:
-//                        confirmPasswordFilled = validator.confirmPassword(passwordLayout, confirmPasswordLayout);
-//                        break;
-//                    case R.id.activity_signup_edt_otp:
-//                        btnSignUp.setEnabled(validator.validateOTP(otpLayout));
-//                        break;
-//                }
-//                setOTPButtonState();
+            switch (view.getId()) {
+                case R.id.activity_signup_edt_fullname:
+                    fullNameFilled = validator.validateName(fullNameLayout);
+                    break;
+                case R.id.activity_signup_edt_email:
+                    emailFilled = validator.validateEmail(emailLayout);
+                    break;
+                case R.id.activity_signup_edt_mobile:
+                    mobileFilled =validator.validatePhoneNo(mobileLayout);
+                    break;
+                case R.id.activity_signup_edt_password:
+                    passwordFilled = validator.validatePassword(passwordLayout, SignUpActivity.this);
+                    break;
+
+            }
+            setOTPButtonState();
 
         }
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        switch (v.getId()) {
-//                case R.id.activity_signup_edt_fullname:
-//                    if (!hasFocus)
-//                        validator.validateName(firstNameLayout);
-//                    break;
-//                case R.id.activity_signup_edt_lastname:
-//                    if (!hasFocus)
-//                        validator.validateName(lastNameLayout);
-//                    break;
-//                case R.id.activity_signup_edt_email:
-//                    if (!hasFocus)
-//                        validator.validateEmail(emailLayout);
-//                    break;
-//                case R.id.activity_signup_edt_password:
-//                    if (!hasFocus)
-//                        validator.validatePassword(passwordLayout);
-//                    break;
-//                case R.id.activity_signup_edt_confirm_password:
-//                    if (!hasFocus)
-//                        validator.confirmPassword(passwordLayout, confirmPasswordLayout);
-//                    break;
-        }
-    }
-
-//        public void setOTPButtonState() {
-//            btnSendOTP.setEnabled(firstNameFilled && lastNameFilled && emailFilled && passwordFilled && confirmPasswordFilled);
-//        }
-
-    public void setResendOTPButtonState() {
-//            if (otpLayout.getVisibility() == View.VISIBLE) {
-//                btnSendOTP.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.color_white));
-//                btnSendOTP.setStrokeColor(ContextCompat.getColorStateList(this, R.color.color_orange_btn_enabled));
-//                btnSendOTP.setStrokeWidth(4);
-//                btnSendOTP.setTextColor(ContextCompat.getColorStateList(this, R.color.color_orange_btn_enabled));
-//                btnSendOTP.setText(R.string.string_action_resend_otp);
-//            }
+    public void setOTPButtonState() {
+        btnSignUp.setEnabled(fullNameFilled && emailFilled  && mobileFilled && passwordFilled);
     }
 
     @Override

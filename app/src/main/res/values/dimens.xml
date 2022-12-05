@@ -3,10 +3,10 @@
     <!-- Resources for Bank2LogInActivity -->
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">20dp</dimen>
+    <dimen name="activity_horizontal_margin20">20dp</dimen>
     <dimen name="activity_horizontal_margin_25dp">25dp</dimen>
     <dimen name="activity_vertical_margin_25dp">25dp</dimen>
-    <dimen name="activity_vertical_margin">20dp</dimen>
+    <dimen name="activity_vertical_margin20">20dp</dimen>
     <dimen name="activity_vertical_margin_10dp">10dp</dimen>
     <dimen name="activity_vertical_margin_15dp">15dp</dimen>
     <dimen name="activity_vertical_margin_5dp">5dp</dimen>
@@ -16,6 +16,17 @@
     <dimen name="margin_35dp">35dp</dimen>
     <dimen name="margin_45dp">45dp</dimen>
     <dimen name="margin_50dp">50dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
+
+<!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin16">16dp</dimen>
+    <dimen name="activity_vertical_margin16">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin16">16dp</dimen>
+    <dimen name="fab_bottom_margin">72dp</dimen>
+    <dimen name="activity_vertical_margin_12dp">12dp</dimen>
+    <dimen name="margin_65dp">65dp</dimen>
+
 
 </resources>

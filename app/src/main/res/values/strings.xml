@@ -114,6 +114,25 @@
     <string name="verify_and_continue">Verify and Continue</string>
     <string name="complete_registration">Complete Registration</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!-- Bottom Navigation -->
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_blog">Blog</string>
+    <string name="title_notifications">Notifications</string>
 
     <string name="facebook_app_id">554977906467254</string>
     <string name="fb_login_protocol_scheme">fb554977906467254</string>
@@ -123,4 +142,29 @@
     <string name="submit">Submit</string>
     <string name="enter_registered_mobile_no">Enter registered mobile no.</string>
     <string name="enter_new_password_here">Enter new password here</string>
+    <string name="title_profile">Profile</string>
+    <string name="string_searchbar_hint">Jobs Titles, keywords, Company</string>
+    <string name="string_account_created">Account Created</string>
+    <string name="string_cv_resume_upload">CV/ Resume Upload</string>
+    <string name="string_complete_candidate_profile">Complete Candidate Profile</string>
+    <string name="string_set_job_preferences">Set Job preferences</string>
+    <string name="string_dummy_name">Xyz Abc</string>
+    <string name="string_dummy_date_time">(Last Updated on: )</string>
+    <string name="string_dummy_percentage">20%</string>
+    <string name="string_profile_completed">Profile Completed</string>
+    <string name="profile_score">Profile Score</string>
+    <string name="resume">Resume</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="current_location">Current Location</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="gender">Gender</string>
+    <string name="professional_summary">Professional Summary</string>
+    <string name="profile_title">Profile title</string>
+    <string name="annual_salary">Annual salary</string>
+    <string name="total_experience">Total Experience</string>
+    <string name="team_handled">Team handled</string>
+    <string name="notice_period">Notice period</string>
+    <string name="work_experience">Work Experience</string>
+
 </resources>

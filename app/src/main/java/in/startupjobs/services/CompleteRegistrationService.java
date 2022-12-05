@@ -17,7 +17,7 @@ public class CompleteRegistrationService {
     private final ProgressDialog progressDialog;
 
     public interface onResponseCompleteRegistration {
-        void senCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel);
+        void sendCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel);
     }
 
     public CompleteRegistrationService(Activity context, RegistrationResponseModel.RegistrationDataToSend dataReadyForSignUp,
@@ -35,11 +35,11 @@ public class CompleteRegistrationService {
                     progressDialog.dismiss();
                     if (response.body() != null) {
                         Snackbar.make(context.findViewById(android.R.id.content), "" + response.body().getMessage(), Snackbar.LENGTH_SHORT).show();
-                        onResponseCompleteRegistrationCallback.senCompleteRegistrationResponse(response.body());
+                        onResponseCompleteRegistrationCallback.sendCompleteRegistrationResponse(response.body());
                     }
                 } else {
 //                    Todo remove the lne below, only for testing
-                    onResponseCompleteRegistrationCallback.senCompleteRegistrationResponse(null);
+                    onResponseCompleteRegistrationCallback.sendCompleteRegistrationResponse(null);
                     progressDialog.dismiss();
                     Snackbar.make(context.findViewById(android.R.id.content), "Call error with HTTP status code " + response.code() + "!", Snackbar.LENGTH_SHORT).show();
                 }

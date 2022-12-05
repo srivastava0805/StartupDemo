@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_professionalsummaryplaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_5dp"
+        android:text="@string/professional_summary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/professionalsummary_iv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_profiletitleplaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin20"
+        android:text="@string/profile_title"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_professionalsummaryplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_profiletitlevalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin20"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_professionalsummaryplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_annualsalaryplaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:text="@string/annual_salary"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_profiletitleplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_annualsalaryvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_profiletitleplaceholder" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_totalexpplaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:text="@string/total_experience"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_annualsalaryplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_totalexpvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_annualsalaryplaceholder" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_teamhplaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:text="@string/team_handled"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_totalexpplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_teamhvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_totalexpplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_noticeperiodplaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:text="@string/notice_period"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_teamhplaceholder" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/professionalsummary_textview_noticeperiodvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_teamhplaceholder" />
+</androidx.constraintlayout.widget.ConstraintLayout>

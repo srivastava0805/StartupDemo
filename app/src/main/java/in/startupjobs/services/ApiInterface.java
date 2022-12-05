@@ -1,12 +1,16 @@
 package in.startupjobs.services;
 
+import java.util.List;
+
 import in.startupjobs.model.OtpResponseModel;
 import in.startupjobs.model.RegistrationResponseModel;
+import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
+import in.startupjobs.model.appliedJobsListing.JobListingResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
 import in.startupjobs.model.applyJob.CandidateAppliedJobsResponse;
+import in.startupjobs.model.dashBoardData.DashBoardJobsData;
 import in.startupjobs.model.employersList.EmployersListResponse;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
-import in.startupjobs.model.jobListing.JobListingResponseModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
 import okhttp3.MultipartBody;
@@ -67,6 +71,12 @@ public interface ApiInterface {
 
     @GET("getAllEmployerDetailsList")
     Call<EmployersListResponse> getEmployersList();
+
+    @GET("jobs/candidate/appliedJobs")
+    Call<List<AppliedJobsResponse>> getAppliedJobs();
+
+    @GET("auth/dashboard/candidate")
+    Call<DashBoardJobsData> getDashBoardJobsData();
 
     @FormUrlEncoded
     @POST("getAppliedJobByCandidateEmail")

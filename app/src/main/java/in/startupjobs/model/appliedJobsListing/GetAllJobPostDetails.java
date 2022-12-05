@@ -1,5 +1,5 @@
 
-package in.startupjobs.model.jobListing;
+package in.startupjobs.model.appliedJobsListing;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
