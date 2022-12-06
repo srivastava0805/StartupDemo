@@ -81,7 +81,7 @@ public class ProfileFragment extends Fragment {
 
     private void setProfessionalDetailsFromResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
         mProfileTextviewName.setText(publicProfileDetailsByIDResponse.getAccount().getName());
-//        mProfileTextviewDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
+        mProfileTextviewDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
         if (publicProfileDetailsByIDResponse.getAccount().getAvatar() != null
                 && !publicProfileDetailsByIDResponse.getAccount().getAvatar().isEmpty())
             Glide.with(getActivity())

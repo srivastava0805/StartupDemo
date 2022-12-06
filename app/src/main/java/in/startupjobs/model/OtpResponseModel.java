@@ -58,7 +58,7 @@ public class OtpResponseModel {
     public static class VerifyOtpData {
         public String type = "";
         public String value = "";
-        public int code;
+        public long code;
     }
 }
 

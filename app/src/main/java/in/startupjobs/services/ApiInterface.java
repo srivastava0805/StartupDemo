@@ -14,6 +14,7 @@ import in.startupjobs.model.employersList.EmployersListResponse;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
+import in.startupjobs.model.serachedJobs.SearchedJobsResponse;
 import in.startupjobs.model.workExperience.WorkExperienceResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -26,6 +27,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("csrf/token")
@@ -87,6 +89,10 @@ public interface ApiInterface {
     @GET("resume/public/{id}")
     Call<PublicProfileDetailsByIDResponse>
     getBasicPublicProfileDetailsById(@Path("id") String userId);
+
+    @GET("https://api.startupjob.in/v1/jobs/search?limit=10&")
+    Call<SearchedJobsResponse>
+    getSearchedJobsByKeyword(@Query("keyword") String tag);
 
     @FormUrlEncoded
     @POST("getAppliedJobByCandidateEmail")

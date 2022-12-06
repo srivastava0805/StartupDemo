@@ -24,7 +24,7 @@ public class VerifyOtpPressedService {
         void sendMobileOtpResponse(OtpResponseModel otpResponseModel);
     }
 
-    public VerifyOtpPressedService(Activity context, String type, String value,
+    public VerifyOtpPressedService(Activity context, String type, String code, String value,
                                    onResponseVerifyEmailOtp onResponseVerifyEmailOtpCallback, onResponseVerifyMobileOtp onResponseVerifyMobileOtpCallback) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
@@ -33,20 +33,20 @@ public class VerifyOtpPressedService {
         OtpResponseModel.VerifyOtpData otpData = new OtpResponseModel.VerifyOtpData();
         otpData.type = type;
         otpData.value = value;
+        otpData.code = Long.parseLong(code);
         Call<OtpResponseModel> call = service.verifyOtp(otpData);
         call.enqueue(new Callback<OtpResponseModel>() {
 
             @Override
-            public void onResponse(@NonNull Call<OtpResponseModel> call,@NonNull Response<OtpResponseModel> response) {
+            public void onResponse(@NonNull Call<OtpResponseModel> call, @NonNull Response<OtpResponseModel> response) {
+                progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     if (type.equalsIgnoreCase("email")) {
-                        new VerifyOtpPressedService(context, "mobile", value
-                                , onResponseVerifyEmailOtpCallback, onResponseVerifyMobileOtpCallback);
                         onResponseVerifyEmailOtpCallback.sendEmailOtpResponse(response.body());
                     } else {
                         onResponseVerifyMobileOtpCallback.sendMobileOtpResponse(response.body());
-                        progressDialog.dismiss();
+
                     }
                     if (response.body().getMessage().equalsIgnoreCase("Otp Already Exists.")) {
                         Snackbar.make(context.findViewById(android.R.id.content), "OTP already sent to the provided email. Please check", Snackbar.LENGTH_SHORT).show();
@@ -55,7 +55,6 @@ public class VerifyOtpPressedService {
                     }
 
                 } else {
-                    onResponseVerifyMobileOtpCallback.sendMobileOtpResponse(null);
                     progressDialog.dismiss();
                     Snackbar.make(context.findViewById(android.R.id.content), "Call error with HTTP status code " + response.code() + "!", Snackbar.LENGTH_SHORT).show();
                 }
@@ -63,7 +62,7 @@ public class VerifyOtpPressedService {
             }
 
             @Override
-            public void onFailure(@NonNull Call<OtpResponseModel> call,@NonNull Throwable t) {
+            public void onFailure(@NonNull Call<OtpResponseModel> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Snackbar.make(context.findViewById(android.R.id.content),
                         // Throwable will let us find the error if the call failed.

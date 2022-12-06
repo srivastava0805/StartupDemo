@@ -12,7 +12,7 @@
 
 
     <!-- Project level resources -->
-    <color name="color_click_overlay">#555555</color>
+    <color name="color_click_overlay">#7A7979</color>
     <color name="color_primary_dark">#000000</color>
     <color name="color_primary">#000000</color>
     <color name="color_accent">#000000</color>

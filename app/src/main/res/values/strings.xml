@@ -143,15 +143,6 @@
     <string name="enter_registered_mobile_no">Enter registered mobile no.</string>
     <string name="enter_new_password_here">Enter new password here</string>
     <string name="title_profile">Profile</string>
-    <string name="string_searchbar_hint">Jobs Titles, keywords, Company</string>
-    <string name="string_account_created">Account Created</string>
-    <string name="string_cv_resume_upload">CV/ Resume Upload</string>
-    <string name="string_complete_candidate_profile">Complete Candidate Profile</string>
-    <string name="string_set_job_preferences">Set Job preferences</string>
-    <string name="string_dummy_name">Xyz Abc</string>
-    <string name="string_dummy_date_time">(Last Updated on: )</string>
-    <string name="string_dummy_percentage">20%</string>
-    <string name="string_profile_completed">Profile Completed</string>
     <string name="profile_score">Profile Score</string>
     <string name="resume">Resume</string>
     <string name="personal_details">Personal Details</string>
@@ -167,5 +158,21 @@
     <string name="notice_period">Notice period</string>
     <string name="work_experience">Work Experience</string>
     <string name="add">Add</string>
+
+    <string name="string_searchbar_hint">Jobs Titles, keywords, Company</string>
+    <string name="string_account_created">Account Created</string>
+    <string name="string_cv_resume_upload">CV/ Resume Upload</string>
+    <string name="string_complete_candidate_profile">Complete Candidate Profile</string>
+    <string name="string_set_job_preferences">Set Job preferences</string>
+    <string name="string_dummy_name">Xyz Abc</string>
+    <string name="string_dummy_date_time">(Last Updated on: )</string>
+    <string name="string_dummy_percentage">20%</string>
+    <string name="string_profile_completed">Profile Completed</string>
+    <string name="string_jobs_for_you">Jobs for you</string>
+    <string name="total_jobs_applied">Total Jobs Applied</string>
+    <string name="interviewed">Interviewed</string>
+    <string name="offer_letters">Offer Letters</string>
+    <string name="withdrawn">Withdrawn</string>
+    <string name="apply">Apply</string>
 
 </resources>

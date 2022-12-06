@@ -199,7 +199,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void doRegistrationProcess() {
-       new CompleteRegistrationService(this, getDataReadyForSignUp(),
+        new CompleteRegistrationService(this, getDataReadyForSignUp(),
                 new CompleteRegistrationService.onResponseCompleteRegistration() {
                     @Override
                     public void sendCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
@@ -211,35 +211,49 @@ public class SignUpActivity extends AppCompatActivity {
     private void doVerifyOtpProcess() {
         new VerifyOtpPressedService(this, "email",
                 mActivitySignupOtpviewEnteremailotp.getStringFromFields(),
+                edtEmail.getText().toString(),
                 new VerifyOtpPressedService.onResponseVerifyEmailOtp() {
                     @Override
                     public void sendEmailOtpResponse(OtpResponseModel otpResponseModel) {
-
+                        sendVerifyOtpRequestForMobile();
                     }
-                }, new VerifyOtpPressedService.onResponseVerifyMobileOtp() {
+                }, null);
+
+    }
+
+    private void sendVerifyOtpRequestForMobile() {
+        new VerifyOtpPressedService(this, "email",
+                mActivitySignupOtpviewEntermobileotp.getStringFromFields(),
+                edtMobile.getText().toString(),
+                null, new VerifyOtpPressedService.onResponseVerifyMobileOtp() {
             @Override
             public void sendMobileOtpResponse(OtpResponseModel otpResponseModel) {
                 makeUploadResumePageVisible();
             }
         });
-
     }
 
     private void doSendOtpProcess() {
         new SendOtpPressedService(this, "email",
-                mActivitySignupOtpviewEnteremailotp.getStringFromFields(),
+                edtEmail.getText().toString().trim(),
                 new SendOtpPressedService.onResponseSendEmailOtp() {
                     @Override
                     public void sendEmailOtpResponse(OtpResponseModel otpResponseModel) {
-
+                        sendOtpRequestForMobile();
                     }
-                }, new SendOtpPressedService.onResponseSendMobileOtp() {
+                }, null);
+
+    }
+
+    private void sendOtpRequestForMobile() {
+        new SendOtpPressedService(this, "mobile",
+                edtMobile.getText().toString().trim(),
+                null, new SendOtpPressedService.onResponseSendMobileOtp() {
             @Override
             public void sendMobileOtpResponse(OtpResponseModel otpResponseModel) {
                 makeFillOtpPageVisible();
             }
         });
-
     }
 
     private void makeUploadResumePageVisible() {
@@ -274,7 +288,7 @@ public class SignUpActivity extends AppCompatActivity {
                     emailFilled = validator.validateEmail(emailLayout);
                     break;
                 case R.id.activity_signup_edt_mobile:
-                    mobileFilled =validator.validatePhoneNo(mobileLayout);
+                    mobileFilled = validator.validatePhoneNo(mobileLayout);
                     break;
                 case R.id.activity_signup_edt_password:
                     passwordFilled = validator.validatePassword(passwordLayout, SignUpActivity.this);
@@ -287,7 +301,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void setOTPButtonState() {
-        btnSignUp.setEnabled(fullNameFilled && emailFilled  && mobileFilled && passwordFilled);
+        btnSignUp.setEnabled(fullNameFilled && emailFilled && mobileFilled && passwordFilled);
     }
 
     @Override
