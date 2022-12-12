@@ -28,7 +28,7 @@
 
     <color name="color_blue_btn_enabled">@color/color_save_btn</color>
     <color name="color_lightest_gray_btn_disabled">#efefef</color>
-    <color name="color_orange_btn_enabled">#f08421</color>
+    <color name="color_orange_btn_enabled">#FC5F36</color>
     <color name="color_light_orange_edt_bg">#fffaf6</color>
     <color name="color_light_gray_icon">#b6b9c2</color>
     <color name="color_black_text">#000000</color>
@@ -36,6 +36,7 @@
     <color name="color_text_light_black">#555555</color>
     <color name="color_box_stroke">#242f6f</color>
     <color name="color_icon_gray_dark">#696969</color>
+    <color name="color_icon_menu_gray">#7B7B7B</color>
 
 
 
@@ -48,6 +49,7 @@
     <color name="circular_indicator_green_light">#E7F9E4</color>
     <color name="checkbox_active_color">#34A853</color>
     <color name="background_color_profile">#f4f4f4</color>
+    <color name="light_skin_color_toolbar">#FFF1E9</color>
 
     <!--	<color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/transparent</color>-->
 </resources>

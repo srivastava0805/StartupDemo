@@ -174,5 +174,7 @@
     <string name="offer_letters">Offer Letters</string>
     <string name="withdrawn">Withdrawn</string>
     <string name="apply">Apply</string>
+    <string name="string_job_details">Job details \n\u25CF</string>
+    <string name="string_save">Save</string>
 
 </resources>

@@ -4,7 +4,9 @@ package in.startupjobs.model.serachedJobs;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
 
     @SerializedName("id")
     @Expose

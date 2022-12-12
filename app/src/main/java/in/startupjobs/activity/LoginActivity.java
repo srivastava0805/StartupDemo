@@ -80,13 +80,13 @@ public class LoginActivity extends AppCompatActivity {
             if (mActivityLoginBtnChangelogintype.getText().equals(AppConstants.USE_MOBILE)) {
                 mActivityLoginBtnChangelogintype.setText(AppConstants.USE_EMAIL);
                 mActivityLoginEdtPassword.setVisibility(View.INVISIBLE);
-                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 10, R.string.enter_10digit_mobileno);
+                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 10, R.string.enter_10digit_mobileno,InputType.TYPE_CLASS_NUMBER);
                 mActivityLoginBtnLogin.setText(R.string.send_otp);
                 Objects.requireNonNull(mActivityLoginEdtEmail.getText()).clear();
             } else {
                 mActivityLoginBtnChangelogintype.setText(AppConstants.USE_MOBILE);
                 mActivityLoginEdtPassword.setVisibility(View.VISIBLE);
-                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 50, R.string.entered_registered_email);
+                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 50, R.string.entered_registered_email,InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 mActivityLoginBtnLogin.setText(R.string.log_in);
                 Objects.requireNonNull(mActivityLoginEdtEmail.getText()).clear();
             }
@@ -165,8 +165,8 @@ public class LoginActivity extends AppCompatActivity {
         mActivityLoginBtnLogin.setText(R.string.verify_and_continue);
     }
 
-    private void setMobileFieldConstraintsForEditText(TextInputEditText mActivityLoginEdtEmail, int maxLength, int hintText) {
-        mActivityLoginEdtEmail.setInputType(InputType.TYPE_CLASS_NUMBER);
+    private void setMobileFieldConstraintsForEditText(TextInputEditText mActivityLoginEdtEmail, int maxLength, int hintText,int inputType) {
+        mActivityLoginEdtEmail.setInputType(inputType );
         InputFilter[] FilterArray = new InputFilter[1];
         FilterArray[0] = new InputFilter.LengthFilter(maxLength);
         mActivityLoginEdtEmail.setFilters(FilterArray);

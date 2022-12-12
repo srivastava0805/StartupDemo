@@ -14,12 +14,7 @@ import androidx.annotation.NonNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
-
-import in.startupjobs.model.applyJob.AddUpdateCandidateDetail;
 
 public class GlobalVariablesNMethods {
 
@@ -38,8 +33,7 @@ public class GlobalVariablesNMethods {
         else progressDialog.dismiss();
     }
 
-    public static void closeKeyboard(@NonNull Activity activity)
-    {
+    public static void closeKeyboard(@NonNull Activity activity) {
         // this will give us the view
         // which is currently focus
         // in this layout
@@ -63,13 +57,17 @@ public class GlobalVariablesNMethods {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public static String convertDate(Context ctx,String givenDate,String inputFormat,String outputFormat){
-
-        SimpleDateFormat spf=new SimpleDateFormat(inputFormat);
-        Date newDate= null;
+    public static String convertDate(Context ctx, String givenDate, String inputFormat, String outputFormat) {
+        if (inputFormat == null)
+            inputFormat = "yyyy-MM-dd";
+        else if (inputFormat.isEmpty()) {
+            inputFormat = "yyyy-MM-dd";
+        }
+        SimpleDateFormat spf = new SimpleDateFormat(inputFormat);
+        Date newDate = null;
         try {
             newDate = spf.parse(givenDate);
-            spf= new SimpleDateFormat(outputFormat);
+            spf = new SimpleDateFormat(outputFormat);
             String date = spf.format(newDate);
             Toast.makeText(ctx, date, Toast.LENGTH_SHORT).show();
             return date;
@@ -80,7 +78,7 @@ public class GlobalVariablesNMethods {
 
     }
 
-    public static boolean isStringValid(String value){
+    public static boolean isStringValid(String value) {
         return value != null && !value.isEmpty();
     }
 }
