@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/activity_login_textview_entermobileotp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_mobile_otp"
+        android:textAlignment="textStart"
+        android:textColor="@color/color_text_light_black"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <requestFocus />
+    </TextView>
+
+    <com.kevinschildhorn.otpview.OTPView
+        android:id="@+id/activity_login_otpview_entermobileotp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:descendantFocusability="afterDescendants"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_textview_entermobileotp"
+        app:otp_backgroundImage="@drawable/background"
+        app:otp_filledBackgroundImage="@drawable/background_box_filled"
+        app:otp_filledTextSize="24sp"
+        app:otp_highlightedBackgroundImage="@drawable/background_highlighted"
+        app:otp_highlightedTextSize="24sp"
+        app:otp_itemCount="4"
+        app:otp_itemHeight="56sp"
+        app:otp_itemWidth="48sp"
+        app:otp_marginBetween="8dp"
+        app:otp_showCursor="false"
+        app:otp_textSize="24sp"
+        app:otp_underscoreCursor="true" />
+
+    <TextView
+        android:id="@+id/activity_login_textview_resendmobileotp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_35dp"
+        android:text="@string/resend_otp"
+        android:textAlignment="textStart"
+        android:textColor="@color/color_text_light_black"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_login_otpview_entermobileotp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

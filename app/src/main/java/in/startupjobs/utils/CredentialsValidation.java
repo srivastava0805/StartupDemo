@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
@@ -53,7 +54,7 @@ public class CredentialsValidation {
     public Boolean validateEmail(TextInputLayout regEmail) {
 
         String val = regEmail.getEditText().getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9+._-]+@[a-z]+\\.+[a-z]+";
 
         if (val.isEmpty()) {
             regEmail.setError("Field cannot be empty");
@@ -68,16 +69,33 @@ public class CredentialsValidation {
         }
     }
 
+    public Boolean validateEmail(TextInputEditText regEmail) {
+
+        String val = regEmail.getText().toString();
+        String emailPattern = "[a-zA-Z0-9+._-]+@[a-z]+\\.+[a-z]+";
+
+        if (val.isEmpty()) {
+            regEmail.setError("Field cannot be empty");
+            return false;
+        } else if (!val.matches(emailPattern)) {
+            regEmail.setError("Invalid email address");
+            return false;
+        } else {
+            regEmail.setError(null);
+            return true;
+        }
+    }
+
     public Boolean validatePassword(TextInputLayout regPassword, Activity activity) {
 //        Objects.requireNonNull(regPassword.getEditText()).setOnFocusChangeListener(this);
         String val = Objects.requireNonNull(regPassword.getEditText()).getText().toString();
         String passwordVal = "^" +
-                //"(?=.*[0-9])" +         //at least 1 digit
-                //"(?=.*[a-z])" +         //at least 1 lower case letter
-                //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-//                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
+                "(?=.*[0-9])" +          //at least 1 digit
+                "(?=.*[a-z])" +          //at least 1 lower case letter
+                "(?=.*[A-Z])" +          //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +       //any letter
+                "(?=.*[@#$%^&+=])" +     //at least 1 special character
+                "(?=\\S+$)" +            //no white spaces
                 ".{4,15}" +               //at least 4 characters
                 "$";
 
@@ -100,11 +118,11 @@ public class CredentialsValidation {
     public Boolean validatePassword(TextInputLayout regPassword) {
         String val = Objects.requireNonNull(regPassword.getEditText()).getText().toString();
         String passwordVal = "^" +
-                //"(?=.*[0-9])" +         //at least 1 digit
-                //"(?=.*[a-z])" +         //at least 1 lower case letter
-                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +      //any letter
-//                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white spaces
                 ".{4,15}" +               //at least 4 characters
                 "$";
@@ -118,6 +136,30 @@ public class CredentialsValidation {
         } else {
             regPassword.setError(null);
             regPassword.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    public Boolean validatePassword(TextInputEditText regPassword) {
+        String val = Objects.requireNonNull(regPassword.getText().toString());
+        String passwordVal = "^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{4,15}" +               //at least 4 characters
+                "$";
+
+        if (val.isEmpty()) {
+            regPassword.setError("Field cannot be empty");
+            return false;
+        } else if (!val.matches(passwordVal)) {
+            regPassword.setError("Password is too weak");
+            return false;
+        } else {
+            regPassword.setError(null);
             return true;
         }
     }
@@ -136,6 +178,22 @@ public class CredentialsValidation {
         } else {
             regPhoneNo.setError(null);
             regPhoneNo.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    public Boolean validatePhoneNo(TextInputEditText regPhoneNo) {
+        String val = Objects.requireNonNull(regPhoneNo).getText().toString();
+//        String regex = "(0/91)?[7-9][0-9]{9}";
+        String regex = "\\d{10}";
+        if (val.isEmpty()) {
+            regPhoneNo.setError("Field cannot be empty");
+            return false;
+        } else if (!val.matches(regex)) {
+            regPhoneNo.setError("Please provide a valid phone number");
+            return false;
+        } else {
+            regPhoneNo.setError(null);
             return true;
         }
     }
@@ -244,9 +302,12 @@ public class CredentialsValidation {
         }
     }
 
-    public static Boolean isUserAuthenticated(Context context){
-        String token= Preferences.readString(context, Preferences.TOKEN,
+    public static Boolean isUserAuthenticated(Context context) {
+        String token = Preferences.readString(context, Preferences.TOKEN,
                 "");
         return token != null && !token.isEmpty();
     }
+
+    //Validate password without
+
 }

@@ -41,8 +41,10 @@ import in.startupjobs.R;
 import in.startupjobs.model.OtpResponseModel;
 import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.services.CompleteRegistrationService;
+import in.startupjobs.services.PutUploadResumeRequest;
 import in.startupjobs.services.SendOtpPressedService;
 import in.startupjobs.services.VerifyOtpPressedService;
+import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.CredentialsValidation;
 import in.startupjobs.utils.GetFilePathUtil;
 
@@ -68,13 +70,15 @@ public class SignUpActivity extends AppCompatActivity {
     private OTPView mActivitySignupOtpviewEntermobileotp;
     private OTPView mActivitySignupOtpviewEnteremailotp;
     private ConstraintLayout mActivitySignupAlldataUploadresumelayout;
-    private TextView mActivitySignupTextviewUploadresumeactionbox;
+    private MaterialButton mActivitySignupTextviewUploadresumeactionbox;
     private SwitchCompat mActivitySignupSwitchAgree;
     private ConstraintLayout mActivitySignupAlldataLayout;
     private TextView resendEmailOtp;
     private static final int PICKFILE_RESULT_CODE = 101;
     private File fileResumeForAndroid11;
     private Uri realUri;
+    private int emailVerifiedId = -1;
+    private int mobileVerificationId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +102,26 @@ public class SignUpActivity extends AppCompatActivity {
 
     private RegistrationResponseModel.RegistrationDataToSend getDataReadyForSignUp() {
         RegistrationResponseModel.RegistrationDataToSend data = new RegistrationResponseModel.RegistrationDataToSend();
-        data.setCandidateemailid(edtEmail.getText().toString().trim());
-        data.setCandidatename(edtFullName.getText().toString().trim());
-        data.setCandidatephoneno(edtMobile.getText().toString().trim());
-        data.setCandidatepassword(edtPassword.getText().toString().trim());
+        data.setEmail(edtEmail.getText().toString().trim());
+        data.setName(edtFullName.getText().toString().trim());
+        data.setMobileNumber(Long.valueOf(edtMobile.getText().toString().trim()));
+        data.setPassword(edtPassword.getText().toString().trim());
+        data.setEmployerType("agency");
         data.setTermsAccepted(true);
+        data.setEmailOtp(mActivitySignupOtpviewEnteremailotp.getStringFromFields());
+        data.setMobileOtp(mActivitySignupOtpviewEntermobileotp.getStringFromFields());
+        if (emailVerifiedId != -1)
+            data.setEmailVerificationId(emailVerifiedId);
+        else {
+            Toast.makeText(this, "Please verify email OTP", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if (mobileVerificationId != -1)
+            data.setMobileVerificationId(mobileVerificationId);
+        else {
+            Toast.makeText(this, "Please verify mobile OTP", Toast.LENGTH_SHORT).show();
+            return null;
+        }
         return data;
 
     }
@@ -154,13 +173,13 @@ public class SignUpActivity extends AppCompatActivity {
         mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
 
         setOnClicks();
+        makeUploadResumePageVisible();
     }
 
 
     private void setOnClicks() {
         btnSignUp.setOnClickListener(v -> {
             if (isNetworkAvailable(this)) {
-                RegistrationResponseModel.RegistrationDataToSend dataToSend = getDataReadyForSignUp();
                 String btnText = btnSignUp.getText().toString();
                 String btnTextSave = getResources().getString(R.string.save_and_continue);
                 String btnTextVerify = getResources().getString(R.string.verify_and_continue);
@@ -169,8 +188,9 @@ public class SignUpActivity extends AppCompatActivity {
                     doSendOtpProcess();
                 else if (btnText.equals(btnTextVerify))
                     doVerifyOtpProcess();
-                else if (btnText.equals(btnTextComplete))
-                    doRegistrationProcess();
+                else if (btnText.equals(btnTextComplete)) {
+                    uploadResumeRequest();
+                }
             } else
                 Snackbar.make(findViewById(android.R.id.content), "Internet not available.Please check your internet connection!", Snackbar.LENGTH_SHORT).show();
 
@@ -198,23 +218,43 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    private void uploadResumeRequest() {
+        File resumeFIle;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q)
+            resumeFIle = fileResumeForAndroid11;
+
+        else
+            resumeFIle = new File(String.valueOf(realUri));
+        new PutUploadResumeRequest(this, resumeFIle, new PutUploadResumeRequest.onResponseResumeUpload() {
+            @Override
+            public void sendUploadResumeStatusResponse(RegistrationResponseModel otpResponseModel) {
+
+            }
+        });
+    }
+
     private void doRegistrationProcess() {
-        new CompleteRegistrationService(this, getDataReadyForSignUp(),
-                new CompleteRegistrationService.onResponseCompleteRegistration() {
-                    @Override
-                    public void sendCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
-                        Toast.makeText(SignUpActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        RegistrationResponseModel.RegistrationDataToSend dataToSend = getDataReadyForSignUp();
+        if (dataToSend != null)
+            new CompleteRegistrationService(this, dataToSend,
+                    new CompleteRegistrationService.onResponseCompleteRegistration() {
+                        @Override
+                        public void sendCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel) {
+                            makeUploadResumePageVisible();
+                        }
+                    });
     }
 
     private void doVerifyOtpProcess() {
+        makeUploadResumePageVisible();
         new VerifyOtpPressedService(this, "email",
                 mActivitySignupOtpviewEnteremailotp.getStringFromFields(),
                 edtEmail.getText().toString(),
                 new VerifyOtpPressedService.onResponseVerifyEmailOtp() {
                     @Override
-                    public void sendEmailOtpResponse(OtpResponseModel otpResponseModel) {
+                    public void sendEmailOtpVerifyResponse(OtpResponseModel.VerifyOtpResponseData otpResponseModel) {
+                        if (otpResponseModel.message.equalsIgnoreCase(AppConstants.VERIFIED))
+                            emailVerifiedId = otpResponseModel.verificationId;
                         sendVerifyOtpRequestForMobile();
                     }
                 }, null);
@@ -227,8 +267,11 @@ public class SignUpActivity extends AppCompatActivity {
                 edtMobile.getText().toString(),
                 null, new VerifyOtpPressedService.onResponseVerifyMobileOtp() {
             @Override
-            public void sendMobileOtpResponse(OtpResponseModel otpResponseModel) {
-                makeUploadResumePageVisible();
+            public void sendMobileOtpVerifyResponse(OtpResponseModel.VerifyOtpResponseData otpResponseModel) {
+                if (otpResponseModel.message.equalsIgnoreCase(AppConstants.VERIFIED)) {
+                    mobileVerificationId = otpResponseModel.verificationId;
+                    doRegistrationProcess();
+                }
             }
         });
     }
@@ -257,10 +300,14 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void makeUploadResumePageVisible() {
+        File resumeFIle;
         mActivitySignupAlldataLayout.setVisibility(View.GONE);
         mActivitySignupAlldataLayoutotp.setVisibility(View.GONE);
         mActivitySignupAlldataUploadresumelayout.setVisibility(View.VISIBLE);
         btnSignUp.setText(R.string.complete_registration);
+        btnSignUp.setEnabled(false);
+
+
     }
 
 
@@ -317,8 +364,10 @@ public class SignUpActivity extends AppCompatActivity {
                     realUri = Uri.parse(GetFilePathUtil.getPath(this, data.getData()));
                 }
 
-                if (GetFilePathUtil.getFileName() != null && !GetFilePathUtil.getFileName().isEmpty())
+                if (GetFilePathUtil.getFileName() != null && !GetFilePathUtil.getFileName().isEmpty()) {
                     mActivitySignupTextviewUploadresumeactionbox.setText(GetFilePathUtil.getFileName());
+                    btnSignUp.setEnabled(true);
+                }
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }

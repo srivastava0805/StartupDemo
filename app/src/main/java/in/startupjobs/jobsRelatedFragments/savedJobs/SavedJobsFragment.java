@@ -22,12 +22,10 @@ public class SavedJobsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         savedJobsViewModel =
                 ViewModelProviders.of(this).get(SavedJobsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        View root = inflater.inflate(R.layout.fragment_company, container, false);
         savedJobsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
             }
         });
         return root;

@@ -1,12 +1,17 @@
 package in.startupjobs.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -28,6 +33,7 @@ import in.startupjobs.services.LoginViaEmailService;
 import in.startupjobs.services.SendOtpPressedService;
 import in.startupjobs.services.VerifyOtpAndLoginPressedService;
 import in.startupjobs.utils.AppConstants;
+import in.startupjobs.utils.CredentialsValidation;
 import in.startupjobs.utils.GlobalVariablesNMethods;
 import in.startupjobs.utils.Preferences;
 
@@ -47,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private OTPView mActivityLoginOtpviewEntermobileotp;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
+    private CredentialsValidation validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,22 +78,24 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
+        validator = new CredentialsValidation();
+        mActivityLoginEdtEmail.addTextChangedListener(new ValidationTextWatcher(mActivityLoginEdtEmail));
         setupClicks();
     }
 
+
     private void setupClicks() {
         mActivityLoginBtnChangelogintype.setOnClickListener(view -> {
-            mActivityLoginEdtEmail.requestFocus();
             if (mActivityLoginBtnChangelogintype.getText().equals(AppConstants.USE_MOBILE)) {
                 mActivityLoginBtnChangelogintype.setText(AppConstants.USE_EMAIL);
                 mActivityLoginEdtPassword.setVisibility(View.INVISIBLE);
-                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 10, R.string.enter_10digit_mobileno,InputType.TYPE_CLASS_NUMBER);
+                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 10, R.string.enter_10digit_mobileno, InputType.TYPE_CLASS_NUMBER);
                 mActivityLoginBtnLogin.setText(R.string.send_otp);
                 Objects.requireNonNull(mActivityLoginEdtEmail.getText()).clear();
             } else {
                 mActivityLoginBtnChangelogintype.setText(AppConstants.USE_MOBILE);
                 mActivityLoginEdtPassword.setVisibility(View.VISIBLE);
-                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 50, R.string.entered_registered_email,InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                setMobileFieldConstraintsForEditText(mActivityLoginEdtEmail, 50, R.string.entered_registered_email, InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 mActivityLoginBtnLogin.setText(R.string.log_in);
                 Objects.requireNonNull(mActivityLoginEdtEmail.getText()).clear();
             }
@@ -122,11 +131,20 @@ public class LoginActivity extends AppCompatActivity {
             GlobalVariablesNMethods.closeKeyboard(LoginActivity.this);
             return null;
         });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                GlobalVariablesNMethods.closeKeyboard(LoginActivity.this);
+            }
+        },120);
+
     }
 
     private void onOtpVerifyPressed() {
-        new VerifyOtpAndLoginPressedService(this, Objects.requireNonNull(mActivityLoginEdtEmail.getText()).toString().trim(), mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
-                otpResponseModel ->   sendToActivity(otpResponseModel));
+        new VerifyOtpAndLoginPressedService(this, Objects.requireNonNull(mActivityLoginEdtEmail.getText()).toString().trim(),
+                mActivityLoginOtpviewEntermobileotp.getStringFromFields(),
+                otpResponseModel -> sendToActivity(otpResponseModel));
     }
 
     private void onLoginPressed() {
@@ -147,11 +165,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void SaveDataToPrefs(LoginResponseModel responseModel) {
-        Preferences.writeString(this,Preferences.TOKEN,responseModel.getToken());
-        Preferences.writeString(this,Preferences.EMAIL,responseModel.getEmail());
-        Preferences.writeString(this,Preferences.NAME,responseModel.getFullName());
-        Preferences.writeString(this,Preferences.USER_ID,responseModel.getUserId());
-        Preferences.writeString(this,Preferences.USER_TYPE,responseModel.getUserType());
+        Preferences.writeString(this, Preferences.TOKEN, responseModel.getToken());
+        Preferences.writeString(this, Preferences.EMAIL, responseModel.getEmail());
+        Preferences.writeString(this, Preferences.NAME, responseModel.getFullName());
+        Preferences.writeString(this, Preferences.USER_ID, responseModel.getUserId());
+        Preferences.writeString(this, Preferences.USER_TYPE, responseModel.getUserType());
     }
 
     private void onSendOtpPressed() {
@@ -165,11 +183,34 @@ public class LoginActivity extends AppCompatActivity {
         mActivityLoginBtnLogin.setText(R.string.verify_and_continue);
     }
 
-    private void setMobileFieldConstraintsForEditText(TextInputEditText mActivityLoginEdtEmail, int maxLength, int hintText,int inputType) {
-        mActivityLoginEdtEmail.setInputType(inputType );
+    private void setMobileFieldConstraintsForEditText(TextInputEditText mActivityLoginEdtEmail, int maxLength, int hintText, int inputType) {
+        mActivityLoginEdtEmail.setInputType(inputType);
         InputFilter[] FilterArray = new InputFilter[1];
         FilterArray[0] = new InputFilter.LengthFilter(maxLength);
         mActivityLoginEdtEmail.setFilters(FilterArray);
         mActivityLoginEdtEmail.setHint(hintText);
+    }
+
+    private class ValidationTextWatcher implements TextWatcher {
+        private View view;
+
+        private ValidationTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @SuppressLint("NonConstantResourceId")
+        public void afterTextChanged(Editable editable) {
+            if (mActivityLoginBtnLogin.getText().toString().equalsIgnoreCase(getResources().getString(R.string.log_in)))
+                validator.validateEmail(mActivityLoginEdtEmail);
+            else validator.validatePhoneNo(mActivityLoginEdtEmail);
+
+        }
     }
 }

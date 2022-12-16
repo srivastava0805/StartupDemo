@@ -99,8 +99,10 @@
     <string name="enter_email_otp">Enter Email OTP</string>
     <string name="enter_mobile_otp">Enter Mobile OTP</string>
     <string name="upload_resume_cv">Upload Resume/CV</string>
-    <string name="docs_pdf_max_2_mb">Docs,pdf|| max 2 MB</string>
+    <string name="docs_pdf_max_2_mb">.doc,.docs,.pdf| max 2 mb</string>
     <string name="i_accept_all_the_terms_amp_conditions"><![CDATA[I accept all the terms & conditions]]></string>
+    <string name="t_and_c_link"> By continuing you accept the standard \n<a href="https://www.startupjob.in/terms">Terms &amp; conditions</a> and our <a href="https://www.startupjob.in/privacy">Privacy Policy</a> of StartupJob .in</string>
+    <string name="terms_and_privacy">By signing up you agree to our <a href="terms:">Terms of Service</a> and <a href="privacy:">Privacy Policy.</a></string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -176,5 +178,6 @@
     <string name="apply">Apply</string>
     <string name="string_job_details">Job details \n\u25CF</string>
     <string name="string_save">Save</string>
+    <string name="profile">Profile</string>
 
 </resources>
