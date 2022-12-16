@@ -53,7 +53,7 @@ public class CredentialsValidation {
     public Boolean validateEmail(TextInputLayout regEmail) {
 
         String val = regEmail.getEditText().getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9+._-]+@[a-z]+\\.+[a-z]+";
 
         if (val.isEmpty()) {
             regEmail.setError("Field cannot be empty");
@@ -72,12 +72,12 @@ public class CredentialsValidation {
 //        Objects.requireNonNull(regPassword.getEditText()).setOnFocusChangeListener(this);
         String val = Objects.requireNonNull(regPassword.getEditText()).getText().toString();
         String passwordVal = "^" +
-                //"(?=.*[0-9])" +         //at least 1 digit
-                //"(?=.*[a-z])" +         //at least 1 lower case letter
-                //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-//                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
+                "(?=.*[0-9])" +          //at least 1 digit
+                "(?=.*[a-z])" +          //at least 1 lower case letter
+                "(?=.*[A-Z])" +          //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +       //any letter
+                "(?=.*[@#$%^&+=])" +     //at least 1 special character
+                "(?=\\S+$)" +            //no white spaces
                 ".{4,15}" +               //at least 4 characters
                 "$";
 
@@ -249,4 +249,7 @@ public class CredentialsValidation {
                 "");
         return token != null && !token.isEmpty();
     }
+
+    //Validate password without
+
 }

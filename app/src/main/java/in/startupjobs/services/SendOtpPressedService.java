@@ -52,12 +52,6 @@ public class SendOtpPressedService {
 
                         onResponseSendMobileOtpCallback.sendMobileOtpResponse(response.body());
                     }
-                    if (response.body().getMessage().equalsIgnoreCase("Otp Already Exists.")) {
-                        Snackbar.make(context.findViewById(android.R.id.content), "OTP already sent to the provided email. Please check", Snackbar.LENGTH_SHORT).show();
-                    } else {
-                        Snackbar.make(context.findViewById(android.R.id.content), "OTP sent successfully", Snackbar.LENGTH_SHORT).show();
-                    }
-
                 } else {
                     APIError error = ErrorUtils.parseError(response);
                     Snackbar.make(context.findViewById(android.R.id.content), error.messages.get(0).toString(), Snackbar.LENGTH_SHORT).show();

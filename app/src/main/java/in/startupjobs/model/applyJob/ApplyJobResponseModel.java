@@ -9,9 +9,7 @@ public class ApplyJobResponseModel {
     @SerializedName("status")
     @Expose
     private boolean status;
-    @SerializedName("data")
-    @Expose
-    private Data data;
+
     @SerializedName("type")
     @Expose
     private int type;
@@ -25,14 +23,6 @@ public class ApplyJobResponseModel {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public Data getData() {
-        return data;
-    }
-
-    public void setData(Data data) {
-        this.data = data;
     }
 
     public int getType() {
@@ -53,117 +43,63 @@ public class ApplyJobResponseModel {
 
     public static class ApplyJobDataToSend {
 
-        @SerializedName("ID")
-        @Expose
-        private String id;
-        @SerializedName("fullName")
-        @Expose
-        private String fullName;
-        @SerializedName("Email")
-        @Expose
-        private String email;
-        @SerializedName("mobile")
-        @Expose
-        private String mobile;
-        @SerializedName("address")
-        @Expose
-        private String address;
-        @SerializedName("candidateSummary")
-        @Expose
-        private String candidateSummary;
-        @SerializedName("CandidateCurrentEmp")
-        @Expose
-        private String candidateCurrentEmp;
-        @SerializedName("CandidateEduBackup")
-        @Expose
-        private String candidateEduBackup;
-        @SerializedName("EMPID")
-        @Expose
-        private String empid;
-        @SerializedName("JOBID")
-        @Expose
-        private String jobid;
 
-        public String getId() {
-            return id;
-        }
+            @SerializedName("name")
+            @Expose
+            private String name;
+            @SerializedName("email")
+            @Expose
+            private String email;
+            @SerializedName("resumeFile")
+            @Expose
+            private String resumeFile;
+            @SerializedName("currentDesignation")
+            @Expose
+            private String currentDesignation;
+            @SerializedName("mobileNumber")
+            @Expose
+            private Long mobileNumber;
 
-        public void setId(String id) {
-            this.id = id;
-        }
+            public String getName() {
+                return name;
+            }
 
-        public String getFullName() {
-            return fullName;
-        }
+            public void setName(String name) {
+                this.name = name;
+            }
 
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
-        }
+            public String getEmail() {
+                return email;
+            }
 
-        public String getEmail() {
-            return email;
-        }
+            public void setEmail(String email) {
+                this.email = email;
+            }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+            public String getResumeFile() {
+                return resumeFile;
+            }
 
-        public String getMobile() {
-            return mobile;
-        }
+            public void setResumeFile(String resumeFile) {
+                this.resumeFile = resumeFile;
+            }
 
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
-        }
+            public String getCurrentDesignation() {
+                return currentDesignation;
+            }
 
-        public String getAddress() {
-            return address;
-        }
+            public void setCurrentDesignation(String currentDesignation) {
+                this.currentDesignation = currentDesignation;
+            }
 
-        public void setAddress(String address) {
-            this.address = address;
-        }
+            public Long getMobileNumber() {
+                return mobileNumber;
+            }
 
-        public String getCandidateSummary() {
-            return candidateSummary;
-        }
+            public void setMobileNumber(Long mobileNumber) {
+                this.mobileNumber = mobileNumber;
+            }
 
-        public void setCandidateSummary(String candidateSummary) {
-            this.candidateSummary = candidateSummary;
-        }
-
-        public String getCandidateCurrentEmp() {
-            return candidateCurrentEmp;
-        }
-
-        public void setCandidateCurrentEmp(String candidateCurrentEmp) {
-            this.candidateCurrentEmp = candidateCurrentEmp;
-        }
-
-        public String getCandidateEduBackup() {
-            return candidateEduBackup;
-        }
-
-        public void setCandidateEduBackup(String candidateEduBackup) {
-            this.candidateEduBackup = candidateEduBackup;
-        }
-
-        public String getEmpid() {
-            return empid;
-        }
-
-        public void setEmpid(String empid) {
-            this.empid = empid;
-        }
-
-        public String getJobid() {
-            return jobid;
-        }
-
-        public void setJobid(String jobid) {
-            this.jobid = jobid;
         }
     }
 
-
-}

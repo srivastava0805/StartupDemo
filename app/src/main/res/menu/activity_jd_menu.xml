@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/activity_jd_menu_star"
+        app:showAsAction="always"
+        android:icon="@drawable/icon_share"
+        android:iconTint="@color/color_icon_menu_gray"
+        android:title="" />
+
+    <item
+        android:id="@+id/activity_jd_menu_share"
+        app:showAsAction="always"
+        android:icon="@drawable/icon_star"
+        android:iconTint="@color/color_icon_menu_gray"
+        android:title="" />
+</menu>

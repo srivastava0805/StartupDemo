@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_df_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="@dimen/activity_vertical_margin_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/color_light_gray_icon"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin20">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/fd_cp_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:progress="20"
+                app:indicatorColor="@color/circular_indicator_green"
+                app:indicatorSize="150dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:trackColor="@color/circular_indicator_green_light"
+                app:trackThickness="6dp" />
+
+            <TextView
+                android:id="@+id/tv_fd_profile_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin_10dp"
+                android:text="@string/string_dummy_percentage"
+                android:textColor="@color/color_blue_btn_enabled"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fd_cp_profile"
+                app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fd_cp_profile" />
+
+            <TextView
+                android:id="@+id/tv_fd_profile_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_profile_completed"
+                android:textColor="@color/color_orange_btn_enabled"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_fd_profile_percentage" />
+
+            <TextView
+                android:id="@+id/tv_fd_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin20"
+                android:layout_marginTop="@dimen/activity_horizontal_margin20"
+                android:text="@string/string_dummy_name"
+                android:textColor="#00255E"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_fd_profile_lastupdated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin20"
+                android:layout_marginTop="@dimen/activity_horizontal_margin20"
+                android:ellipsize="end"
+                android:text="@string/string_dummy_date_time"
+                android:textColor="@color/color_gray_line"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fd_profile_name" />
+
+
+            <ImageView
+                android:id="@+id/iv_df_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin20"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/cb_df_complete_profile"
+                app:srcCompat="@drawable/icon_arrow_down"
+                app:tint="@color/color_light_gray_icon" />
+
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_df_account_created"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin20"
+                android:button="@drawable/rounded_checkbox"
+                android:checked="false"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:maxLines="2"
+                android:paddingStart="@dimen/activity_vertical_margin_10dp"
+                android:text="@string/string_account_created"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fd_cp_profile" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_df_cv_upload"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/rounded_checkbox"
+                android:checked="false"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:maxLines="2"
+                android:paddingStart="@dimen/activity_vertical_margin_10dp"
+                android:text="@string/string_cv_resume_upload"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_df_account_created" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_df_complete_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/rounded_checkbox"
+                android:checked="false"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:maxLines="2"
+                android:paddingStart="@dimen/activity_vertical_margin_10dp"
+                android:text="@string/string_complete_candidate_profile"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_df_cv_upload" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_df_set_job_pref"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin16"
+                android:layout_marginTop="@dimen/activity_horizontal_margin20"
+                android:button="@drawable/rounded_checkbox"
+                android:checked="false"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:maxLines="2"
+                android:paddingStart="@dimen/activity_vertical_margin_10dp"
+                android:text="@string/string_set_job_preferences"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/fd_cp_profile" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_df_apply4job"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin16"
+                android:button="@drawable/rounded_checkbox"
+                android:checked="false"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:maxLines="2"
+                android:paddingStart="@dimen/activity_vertical_margin_10dp"
+                android:text="@string/string_complete_candidate_profile"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/cb_df_set_job_pref" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/card_group_df"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="cb_df_account_created,cb_df_cv_upload,cb_df_complete_profile,cb_df_set_job_pref,cb_df_apply4job"
+                tools:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

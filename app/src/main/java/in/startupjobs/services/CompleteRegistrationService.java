@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
 
 import in.startupjobs.model.RegistrationResponseModel;
+import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
+import in.startupjobs.utils.ErrorUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,16 +40,15 @@ public class CompleteRegistrationService {
                         onResponseCompleteRegistrationCallback.sendCompleteRegistrationResponse(response.body());
                     }
                 } else {
-//                    Todo remove the lne below, only for testing
-                    onResponseCompleteRegistrationCallback.sendCompleteRegistrationResponse(null);
+                    APIError error = ErrorUtils.parseError(response);
+                    Snackbar.make(context.findViewById(android.R.id.content), error.messages.get(0).toString(), Snackbar.LENGTH_SHORT).show();
                     progressDialog.dismiss();
-                    Snackbar.make(context.findViewById(android.R.id.content), "Call error with HTTP status code " + response.code() + "!", Snackbar.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
-            public void onFailure(@NonNull Call<RegistrationResponseModel> call,@NonNull Throwable t) {
+            public void onFailure(@NonNull Call<RegistrationResponseModel> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Snackbar.make(context.findViewById(android.R.id.content),
                         // Throwable will let us find the error if the call failed.

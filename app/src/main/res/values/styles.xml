@@ -134,4 +134,10 @@
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="MyCustomSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/checkbox_active_color</item>
+        <item name="colorSwitchThumbNormal">@color/color_icon_gray_dark</item>
+        <item name="android:colorForeground">#124964</item>
+    </style>
 </resources>

@@ -30,96 +30,137 @@ public class RegistrationResponseModel {
 
 
     public static class RegistrationDataToSend {
-        @SerializedName("ID")
+        @SerializedName("socialAccType")
         @Expose
-        private String id = "";
-        @SerializedName("CANDIDATENAME")
+        private Object socialAccType;
+        @SerializedName("socialAccId")
         @Expose
-        private String candidatename;
-        @SerializedName("CANDIDATEEMAILID")
+        private Object socialAccId;
+        @SerializedName("name")
         @Expose
-        private String candidateemailid;
-        @SerializedName("CANDIDATEPHONENO")
+        private String name;
+        @SerializedName("email")
         @Expose
-        private String candidatephoneno = "7838817754";
-        @SerializedName("candidatepassword")
+        private String email;
+        @SerializedName("password")
         @Expose
-        private String candidatepassword;
-        @SerializedName("TOKEN")
+        private String password;
+        @SerializedName("mobileNumber")
         @Expose
-        private String token;
-        @SerializedName("OTP")
+        private Long mobileNumber;
+        @SerializedName("mobileOtp")
         @Expose
-        private String otp;
-
+        private String mobileOtp;
+        @SerializedName("emailOtp")
+        @Expose
+        private String emailOtp;
+        @SerializedName("mobileVerificationId")
+        @Expose
+        private Integer mobileVerificationId;
+        @SerializedName("emailVerificationId")
+        @Expose
+        private Integer emailVerificationId;
         @SerializedName("termsAccepted")
         @Expose
-        private boolean termsAccepted;
+        private Boolean termsAccepted;
+        @SerializedName("employerType")
+        @Expose
+        private String employerType;
 
-        public boolean isTermsAccepted() {
+        public Object getSocialAccType() {
+            return socialAccType;
+        }
+
+        public void setSocialAccType(Object socialAccType) {
+            this.socialAccType = socialAccType;
+        }
+
+        public Object getSocialAccId() {
+            return socialAccId;
+        }
+
+        public void setSocialAccId(Object socialAccId) {
+            this.socialAccId = socialAccId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Long getMobileNumber() {
+            return mobileNumber;
+        }
+
+        public void setMobileNumber(Long mobileNumber) {
+            this.mobileNumber = mobileNumber;
+        }
+
+        public String getMobileOtp() {
+            return mobileOtp;
+        }
+
+        public void setMobileOtp(String mobileOtp) {
+            this.mobileOtp = mobileOtp;
+        }
+
+        public String getEmailOtp() {
+            return emailOtp;
+        }
+
+        public void setEmailOtp(String emailOtp) {
+            this.emailOtp = emailOtp;
+        }
+
+        public Integer getMobileVerificationId() {
+            return mobileVerificationId;
+        }
+
+        public void setMobileVerificationId(Integer mobileVerificationId) {
+            this.mobileVerificationId = mobileVerificationId;
+        }
+
+        public Integer getEmailVerificationId() {
+            return emailVerificationId;
+        }
+
+        public void setEmailVerificationId(Integer emailVerificationId) {
+            this.emailVerificationId = emailVerificationId;
+        }
+
+        public Boolean getTermsAccepted() {
             return termsAccepted;
         }
 
-        public void setTermsAccepted(boolean termsAccepted) {
+        public void setTermsAccepted(Boolean termsAccepted) {
             this.termsAccepted = termsAccepted;
         }
 
-        public String getId() {
-            return id;
+        public String getEmployerType() {
+            return employerType;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setEmployerType(String employerType) {
+            this.employerType = employerType;
         }
-
-        public String getCandidatename() {
-            return candidatename;
-        }
-
-        public void setCandidatename(String candidatename) {
-            this.candidatename = candidatename;
-        }
-
-        public String getCandidateemailid() {
-            return candidateemailid;
-        }
-
-        public void setCandidateemailid(String candidateemailid) {
-            this.candidateemailid = candidateemailid;
-        }
-
-        public String getCandidatephoneno() {
-            return candidatephoneno;
-        }
-
-        public void setCandidatephoneno(String candidatephoneno) {
-            this.candidatephoneno = candidatephoneno;
-        }
-
-        public String getCandidatepassword() {
-            return candidatepassword;
-        }
-
-        public void setCandidatepassword(String candidatepassword) {
-            this.candidatepassword = candidatepassword;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
-
-        public String getOtp() {
-            return otp;
-        }
-
-        public void setOtp(String otp) {
-            this.otp = otp;
-        }
-
-
     }
 }

@@ -39,6 +39,7 @@ public class ChangePasswordService {
             otpData.setEmail(value);
         else
             otpData.setMobileNumber(Long.valueOf(value));
+
         otpData.setCode(code);
         otpData.setPassword(pass);
         Call<Object> call = service.postChangePassword(otpData);
@@ -62,7 +63,6 @@ public class ChangePasswordService {
 
                 } else {
                     APIError error = ErrorUtils.parseError(response);
-
                     Snackbar.make(context.findViewById(android.R.id.content), error.messages.get(0).toString(), Snackbar.LENGTH_SHORT).show();
                 }
 

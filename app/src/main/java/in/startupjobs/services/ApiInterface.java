@@ -7,24 +7,21 @@ import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
 import in.startupjobs.model.appliedJobsListing.JobListingResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
-import in.startupjobs.model.applyJob.CandidateAppliedJobsResponse;
 import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
-import in.startupjobs.model.employersList.EmployersListResponse;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
 import in.startupjobs.model.serachedJobs.SearchedJobsResponse;
+import in.startupjobs.model.uploadResume.UploadResumeResponse;
 import in.startupjobs.model.workExperience.WorkExperienceResponse;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -38,7 +35,7 @@ public interface ApiInterface {
             @Body OtpResponseModel.OtpDataToSend OtpData);
 
     @POST("verifications/verify")
-    Call<OtpResponseModel> verifyOtp(
+    Call<OtpResponseModel.VerifyOtpResponseData> verifyOtp(
             @Body OtpResponseModel.VerifyOtpData OtpData);
 
     @POST("auth/password/reset")
@@ -61,21 +58,8 @@ public interface ApiInterface {
             @Body LoginResponseModel.LoginDataToSend loginData);
 
     @Multipart
-    @POST("addUpdateCandidateDetails")
-    Call<ApplyJobResponseModel> applyForJob(@Part MultipartBody.Part CANDIDATECVFILE,
-                                            @Part("fullName") RequestBody fullName,
-                                            @Part("Email") RequestBody Email,
-                                            @Part("mobile") RequestBody mobile,
-                                            @Part("address") RequestBody address,
-                                            @Part("candidateSummary") RequestBody candidateSummary,
-                                            @Part("CandidateCurrentEmp") RequestBody CandidateCurrentEmp,
-                                            @Part("CandidateEduBackup") RequestBody CandidateEduBackup,
-                                            @Part("ID") RequestBody ID,
-                                            @Part("EMPID") RequestBody EMPID,
-                                            @Part("JOBID") RequestBody JOBID);
-
-    @GET("getAllEmployerDetailsList")
-    Call<EmployersListResponse> getEmployersList();
+    @PUT("resume/upload")
+    Call<UploadResumeResponse> uploadResume(@Part MultipartBody.Part file);
 
     @GET("jobs/candidate/appliedJobs")
     Call<List<AppliedJobsResponse>> getAppliedJobs();
@@ -90,14 +74,12 @@ public interface ApiInterface {
     Call<PublicProfileDetailsByIDResponse>
     getBasicPublicProfileDetailsById(@Path("id") String userId);
 
-    @GET("https://api.startupjob.in/v1/jobs/search?limit=10&")
+    @GET("jobs/search?limit=10&")
     Call<SearchedJobsResponse>
     getSearchedJobsByKeyword(@Query("keyword") String tag);
 
-    @FormUrlEncoded
-    @POST("getAppliedJobByCandidateEmail")
-    Call<CandidateAppliedJobsResponse> getAppliedJobs(
-            @Field("candidateEmail") String candidateEmail);
-
+    @POST("jobs/apply/{id}")
+    Call<ApplyJobResponseModel>
+    applyJob(@Path("id") String userId, @Body ApplyJobResponseModel.ApplyJobDataToSend jobDataToSend);
 
 }
