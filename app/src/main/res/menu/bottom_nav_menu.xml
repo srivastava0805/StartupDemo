@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_blank"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:iconTint="@color/color_icon_gray_dark"
+        android:title=""
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/bottom_companies"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:iconTint="@color/color_icon_gray_dark"
+        android:title="@string/companies" />
+
+    <item
+        android:id="@+id/bottom_jobs"
+        android:icon="@drawable/icon_jobs"
+        android:iconTint="@color/color_icon_gray_dark"
+        android:title="Jobs" />
+
+    <item
+        android:id="@+id/bottom_profile"
+        android:icon="@drawable/icon_user"
+        android:iconTint="@color/color_icon_gray_dark"
+        android:title="@string/profile" />
+
+</menu>

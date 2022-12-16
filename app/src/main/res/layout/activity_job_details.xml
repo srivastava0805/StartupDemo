@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.JobDetails">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_jd_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/light_skin_color_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/activity_jd_menu"
+        app:navigationIcon="@drawable/icon_back"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/activity_jd_toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/activity_jd_apply_button">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity_jd_appbar_content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_skin_color_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/activity_jd_companylogo"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                    android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+                    android:background="@drawable/jd_details_icon_bg"
+                    android:padding="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icon_user" />
+
+                <TextView
+                    android:id="@+id/activity_jd_jobtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                    android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+                    android:ellipsize="end"
+                    android:text="Business Development Manager"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_heading_14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_jd_companylogo" />
+
+                <TextView
+                    android:id="@+id/activity_jd_companytitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                    android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+                    android:ellipsize="end"
+                    android:text="Avery SOlutions private ltd"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_jd_jobtitle" />
+
+                <TextView
+                    android:id="@+id/activity_jd_jobpostedtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                    android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+                    android:ellipsize="end"
+                    android:text="Posted 12 days ago"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_jd_companytitle" />
+
+                <TextView
+                    android:id="@+id/activity_jd_jobapplicants"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                    android:ellipsize="end"
+                    android:text="25 Applicants"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/activity_jd_jobpostedtime" />
+
+                <TextView
+                    android:id="@+id/activity_jd_pagetitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="@dimen/activity_vertical_margin20"
+                    android:ellipsize="end"
+                    android:gravity="center_horizontal"
+                    android:text="@string/string_job_details"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_btn_navy_blue"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toStartOf="@id/activity_jd_about_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_jd_jobapplicants" />
+
+                <TextView
+                    android:id="@+id/activity_jd_about_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="@dimen/activity_vertical_margin20"
+                    android:ellipsize="end"
+                    android:text="About Company"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_gray_line"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toEndOf="@id/activity_jd_pagetitle"
+                    app:layout_constraintTop_toBottomOf="@id/activity_jd_jobapplicants" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview_jd_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                android:layout_marginVertical="@dimen/activity_vertical_margin20"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/activity_vertical_margin_10dp"
+                app:contentPadding="@dimen/activity_vertical_margin_15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_jd_appbar_content_layout"
+                app:strokeColor="@color/color_light_gray_icon"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_jd_exp_icon"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_experience"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/color_icon_menu_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_exp"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="2-4 years"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_jd_exp_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_jd_vacancies_icon"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_vacancies"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_exp"
+                        app:tint="@color/color_icon_menu_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_vacancies"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="4 positions"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_jd_vacancies_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_exp" />
+
+                    <ImageView
+                        android:id="@+id/iv_jd_location_icon"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_location_outlined"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_vacancies"
+                        app:tint="@color/color_icon_menu_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_location"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="Mohali, Chandigarh"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_jd_vacancies_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_vacancies" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_jd_salarypackage_icon"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_salary_package_outlined"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_location"
+                        app:tint="@color/color_icon_menu_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_salarypackage"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="2,00,000 - 4,75,000"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_jd_vacancies_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_location" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_skills_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/activity_vertical_margin_10dp"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="Must have key skills"
+                        android:textColor="@color/color_gray_line"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_salarypackage" />
+
+
+                    <TextView
+                        android:id="@+id/tv_jd_skills_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="Electrical Engineering"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_skills_label" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_otherskills_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/activity_vertical_margin_10dp"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="Other skills"
+                        android:textColor="@color/color_gray_line"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_skills_value" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_otherskills_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="MS-office suite, Engineering"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_otherskills_label" />
+
+                    <TextView
+                        android:id="@+id/tv_jd_emptype_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/activity_vertical_margin_10dp"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="Employment Type"
+                        android:textColor="@color/color_gray_line"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_otherskills_value" />
+
+
+                    <TextView
+                        android:id="@+id/tv_jd_emptype_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:text="Fulltime,Permanent"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_jd_emptype_label" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview_job_role_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+                android:layout_marginVertical="@dimen/activity_vertical_margin20"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/activity_vertical_margin_10dp"
+                app:contentPadding="@dimen/activity_vertical_margin_15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardview_jd_layout"
+                app:strokeColor="@color/color_light_gray_icon"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/webview_jd_job_role_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:scrollbars="none"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/activity_jd_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+        android:layout_marginBottom="@dimen/activity_vertical_margin20"
+        android:text="@string/string_save"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/color_orange_btn_enabled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/activity_jd_apply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin20"
+        android:text="@string/string_action_apply"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/color_blue_btn_enabled"
+        app:layout_constraintBottom_toTopOf="@id/activity_jd_save_button"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

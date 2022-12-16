@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="in.startupjobs.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_blog"
+        android:name="in.startupjobs.ui.blogs.WebBlogFragment"
+        android:label="@string/title_blog"
+        tools:layout="@layout/fragment_web_blog" />
+
+    <fragment
+        android:id="@+id/nav_aboutUs"
+        android:name="in.startupjobs.ui.aboutUs.AboutUsFragment"
+        android:label="@string/menu_about_us"
+        tools:layout="@layout/fragment_web_blog" />
+
+    <fragment
+        android:id="@+id/nav_contactUs"
+        android:name="in.startupjobs.ui.contactUs.ContactUsFragment"
+        android:label="@string/menu_contact_us"
+        tools:layout="@layout/fragment_web_blog" />
+
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="in.startupjobs.ui.logout.LogoutDialogFragment"
+        android:label="@string/logout" />
+
+
+    <fragment
+        android:id="@+id/bottom_jobs"
+        android:name="in.startupjobs.jobsRelatedFragments.jobs.JobsFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/bottom_companies"
+        android:name="in.startupjobs.ui.company.CompaniesFragment"
+        android:label="@string/companies"
+        tools:layout="@layout/fragment_company" />
+
+    <fragment
+        android:id="@+id/bottom_profile"
+        android:name="in.startupjobs.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
