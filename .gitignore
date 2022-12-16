@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/compiler.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/gradle.xml
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/app/src/main/res/drawable/icon_mic.xml
+/app/src/main/res/drawable/icon_search.xml
+/.idea/misc.xml
+/app/src/main/res/drawable/searchbox_bg.xml
+/.idea/vcs.xml
