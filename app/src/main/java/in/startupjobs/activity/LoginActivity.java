@@ -9,8 +9,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -137,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             public void run() {
                 GlobalVariablesNMethods.closeKeyboard(LoginActivity.this);
             }
-        },120);
+        }, 120);
 
     }
 
@@ -207,6 +205,10 @@ public class LoginActivity extends AppCompatActivity {
 
         @SuppressLint("NonConstantResourceId")
         public void afterTextChanged(Editable editable) {
+            if (mActivityLoginEdtEmail.getText().toString().trim().length() > 28)
+                mActivityLoginEdtEmail.setTextSize(13);
+            else
+                mActivityLoginEdtEmail.setTextSize(14);
             if (mActivityLoginBtnLogin.getText().toString().equalsIgnoreCase(getResources().getString(R.string.log_in)))
                 validator.validateEmail(mActivityLoginEdtEmail);
             else validator.validatePhoneNo(mActivityLoginEdtEmail);

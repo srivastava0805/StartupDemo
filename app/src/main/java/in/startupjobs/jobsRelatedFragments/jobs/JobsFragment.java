@@ -45,12 +45,12 @@ public class JobsFragment extends Fragment implements GetSearchedJobs.onResponse
                 ViewModelProviders.of(this).get(JobsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        new GetAppliedJobs(getActivity(), new GetAppliedJobs.onResponseAppliedJobs() {
-            @Override
-            public void sendAppliedJobsResponse(List<AppliedJobsResponse> appliedJobsResponseList) {
-                createTabFragment(appliedJobsResponseList);
-            }
-        });
+//        new GetAppliedJobs(getActivity(), new GetAppliedJobs.onResponseAppliedJobs() {
+//            @Override
+//            public void sendAppliedJobsResponse(List<AppliedJobsResponse> appliedJobsResponseList) {
+//                createTabFragment(appliedJobsResponseList);
+//            }
+//        });
         initView(root);
         return root;
     }

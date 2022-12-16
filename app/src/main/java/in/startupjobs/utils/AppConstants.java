@@ -1,5 +1,6 @@
 package in.startupjobs.utils;
 
+import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.model.login.LoginResponseModel;
 
 public class AppConstants {
@@ -10,4 +11,5 @@ public class AppConstants {
     public static String XCSRF_TOKEN = "";
     public static LoginResponseModel mLoginData;
     public static String JOB_DETAILS="job_details";
+    public static PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse;
 }

@@ -36,7 +36,7 @@ public class AppliedJobsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         appliedJobsViewModel =
                 ViewModelProviders.of(this).get(AppliedJobsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        View root = inflater.inflate(R.layout.fragment_applied_jobs, container, false);
 
         this.context = getContext();
         recyclerView = root.findViewById(R.id.recyclerview_fragment_recommendedjobs);
