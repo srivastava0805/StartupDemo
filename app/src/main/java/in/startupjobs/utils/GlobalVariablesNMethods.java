@@ -69,7 +69,6 @@ public class GlobalVariablesNMethods {
             newDate = spf.parse(givenDate);
             spf = new SimpleDateFormat(outputFormat);
             String date = spf.format(newDate);
-            Toast.makeText(ctx, date, Toast.LENGTH_SHORT).show();
             return date;
         } catch (ParseException e) {
             throw new RuntimeException(e);
