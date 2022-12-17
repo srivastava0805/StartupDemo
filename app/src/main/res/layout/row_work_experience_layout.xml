@@ -10,8 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin_5dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textColor="@color/color_primary"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +42,8 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin20"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:gravity="center"
+        android:drawableStart="@drawable/icon_arrow_right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rowworkexp_textview_designation" />
 
@@ -49,8 +52,9 @@
         android:id="@+id/rowworkexp_textview_workedtimeduration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
         android:textColor="@color/black"
+        android:gravity="center"
+        android:drawableStart="@drawable/icon_arrow_right"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rowworkexp_textview_companyname" />
@@ -60,9 +64,10 @@
         android:id="@+id/rowworkexp_textview_industrytype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:gravity="center"
+        android:drawableStart="@drawable/icon_arrow_right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rowworkexp_textview_workedtimeduration" />
 
@@ -71,9 +76,10 @@
         android:id="@+id/rowworkexp_textview_functinalarea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:gravity="center"
+        android:drawableStart="@drawable/icon_arrow_right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rowworkexp_textview_industrytype" />
 
