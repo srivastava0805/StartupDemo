@@ -1,11 +1,14 @@
 package in.startupjobs.ui.dashboard;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -15,6 +18,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
@@ -22,11 +27,15 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 
 import in.startupjobs.R;
+import in.startupjobs.adapter.SearchedJobsResultsViewAdapter;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
+import in.startupjobs.model.serachedJobs.SearchedJobsResponse;
 import in.startupjobs.services.GetDashBoardJobsRelatedData;
+import in.startupjobs.services.GetSearchedJobs;
+import in.startupjobs.utils.GlobalVariablesNMethods;
 import in.startupjobs.utils.Preferences;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements GetSearchedJobs.onResponseSearchedJobs {
 
     private DashboardViewModel dashboardViewModel;
     CardView cardView;
@@ -49,6 +58,14 @@ public class DashboardFragment extends Fragment {
     private TextView mIntreviewTextviewValue;
     private TextView mOfferlettersTextviewValue;
     private TextView mWithdrawnTextviewValue;
+    private RecyclerView mHomeRecyclerviewFoundjobs;
+    ConstraintLayout mCardProfile;
+    ConstraintLayout mCardTotalJobsApplied;
+    ConstraintLayout mCardInterviewed;
+    ConstraintLayout mCardOfferLetter;
+    ConstraintLayout mCardWithdrawn;
+    private SearchedJobsResultsViewAdapter jobsFragmentViewAdapter;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -81,6 +98,12 @@ public class DashboardFragment extends Fragment {
         mIntreviewTextviewValue = root.findViewById(R.id.intreview_textview_value);
         mOfferlettersTextviewValue = root.findViewById(R.id.offerletters_textview_value);
         mWithdrawnTextviewValue = root.findViewById(R.id.withdrawn_textview_value);
+        mHomeRecyclerviewFoundjobs = root.findViewById(R.id.home_recyclerview_foundjobs);
+        mCardProfile = root.findViewById(R.id.layout_df_profile);
+        mCardTotalJobsApplied = root.findViewById(R.id.layout_df_totlajobsappliedcard);
+        mCardInterviewed = root.findViewById(R.id.layout_df_interviewedcard);
+        mCardOfferLetter = root.findViewById(R.id.layout_df_offerlettercard);
+        mCardWithdrawn = root.findViewById(R.id.layout_df_withdrawncard);
         setNameAndProfileDetails();
         setClicks();
     }
@@ -97,8 +120,47 @@ public class DashboardFragment extends Fragment {
                 mIvDfArrow.setImageResource(R.drawable.icon_arrow_up);
             }
         });
+        mIvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mSearch.getText().toString().trim().isEmpty())
+                    getCommaSeparatedString(mSearch.getText().toString().trim());
+                else
+                    Toast.makeText(getActivity(), "Enter something in search box", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        mSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() < 1)
+                    setDashBoardDataLayoutVisible();
+            }
+        });
 
     }
+
+    private void getCommaSeparatedString(String searchString) {
+        String[] keywordArray = searchString.split(",");
+        if (keywordArray.length == 3) {
+            new GetSearchedJobs(getActivity(), keywordArray[0], keywordArray[1], keywordArray[2], this);
+        } else if (keywordArray.length == 2) {
+            new GetSearchedJobs(getActivity(), keywordArray[0], keywordArray[1], "", this);
+        } else {
+            new GetSearchedJobs(getActivity(), keywordArray[0], "", "", this);
+        }
+    }
+
 
     private void getDashBoardRelatedData() {
 
@@ -121,5 +183,40 @@ public class DashboardFragment extends Fragment {
         mIntreviewTextviewValue.setText(dashBoardJobsData.getCounts().getTotalInterviewed().toString());
         mOfferlettersTextviewValue.setText(dashBoardJobsData.getCounts().getTotalOfferLetterRecieved().toString());
         mWithdrawnTextviewValue.setText(dashBoardJobsData.getCounts().getTotalWithdrawn().toString());
+    }
+
+    @Override
+    public void sendSearchedJobsResponse(SearchedJobsResponse appliedJobsResponseList) {
+
+        mHomeRecyclerviewFoundjobs.setHasFixedSize(true);
+        mHomeRecyclerviewFoundjobs.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (appliedJobsResponseList.getResults().size() > 0) {
+            setRecyclerVewVisible();
+            GlobalVariablesNMethods.closeKeyboard(getActivity());
+            jobsFragmentViewAdapter = new SearchedJobsResultsViewAdapter(getActivity(), appliedJobsResponseList);
+            mHomeRecyclerviewFoundjobs.setAdapter(jobsFragmentViewAdapter);
+        } else {
+            setDashBoardDataLayoutVisible();
+            mHomeRecyclerviewFoundjobs.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "No Results Found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setDashBoardDataLayoutVisible() {
+        mCardProfile.setVisibility(View.VISIBLE);
+        mCardInterviewed.setVisibility(View.VISIBLE);
+        mCardOfferLetter.setVisibility(View.VISIBLE);
+        mCardTotalJobsApplied.setVisibility(View.VISIBLE);
+        mCardWithdrawn.setVisibility(View.VISIBLE);
+        mHomeRecyclerviewFoundjobs.setVisibility(View.GONE);
+    }
+
+    private void setRecyclerVewVisible() {
+        mCardProfile.setVisibility(View.GONE);
+        mCardInterviewed.setVisibility(View.GONE);
+        mCardOfferLetter.setVisibility(View.GONE);
+        mCardTotalJobsApplied.setVisibility(View.GONE);
+        mCardWithdrawn.setVisibility(View.GONE);
+        mHomeRecyclerviewFoundjobs.setVisibility(View.VISIBLE);
     }
 }

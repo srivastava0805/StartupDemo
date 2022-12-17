@@ -45,18 +45,15 @@ public class JobsFragment extends Fragment implements GetSearchedJobs.onResponse
                 ViewModelProviders.of(this).get(JobsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        new GetAppliedJobs(getActivity(), new GetAppliedJobs.onResponseAppliedJobs() {
-//            @Override
-//            public void sendAppliedJobsResponse(List<AppliedJobsResponse> appliedJobsResponseList) {
-//                createTabFragment(appliedJobsResponseList);
-//            }
-//        });
+
         initView(root);
+
+        createTabFragment();
         return root;
     }
 
-    private void createTabFragment(List<AppliedJobsResponse> appliedJobsResponseList) {
-        adapter = new JobsFragmentTabAdapter(getChildFragmentManager(), tabLayout, appliedJobsResponseList);
+    private void createTabFragment() {
+        adapter = new JobsFragmentTabAdapter(getChildFragmentManager(), tabLayout);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -68,6 +65,8 @@ public class JobsFragment extends Fragment implements GetSearchedJobs.onResponse
         mSearchEdtTextSearch = root.findViewById(R.id.search_edtText_search);
         mIvSearch = root.findViewById(R.id.iv_search);
         mHomeRecyclerviewFoundjobs = root.findViewById(R.id.home_recyclerview_foundjobs);
+
+
         setsClick();
 
     }

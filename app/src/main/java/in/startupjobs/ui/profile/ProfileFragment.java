@@ -82,6 +82,11 @@ public class ProfileFragment extends Fragment {
     private void setProfessionalDetailsFromResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
         mProfileTextviewName.setText(publicProfileDetailsByIDResponse.getAccount().getName());
         mProfileTextviewDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
+
+        mPersonaldetailsTextviewEmailidvalue.setText(publicProfileDetailsByIDResponse.getContactDetails().getEmail());
+        mPersonaldetailsTextviewMobilenovalue.setText(publicProfileDetailsByIDResponse.getContactDetails().getPhone());
+        mProfessionalsummaryTextviewProfiletitlevalue.setText(publicProfileDetailsByIDResponse.getAccount().getCurrentDesignation());
+        mPersonaldetailsTextviewClocationvalue.setText(publicProfileDetailsByIDResponse.getAccount().getCurrentLocation().getDistrictName());
         if (publicProfileDetailsByIDResponse.getAccount().getAvatar() != null
                 && !publicProfileDetailsByIDResponse.getAccount().getAvatar().isEmpty())
             Glide.with(getActivity())
