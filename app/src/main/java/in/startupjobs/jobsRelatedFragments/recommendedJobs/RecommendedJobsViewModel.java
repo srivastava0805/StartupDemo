@@ -10,7 +10,7 @@ public class RecommendedJobsViewModel extends ViewModel {
 
     public RecommendedJobsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+        mText.setValue("No data yet");
     }
 
     public LiveData<String> getText() {

@@ -178,5 +178,7 @@
     <string name="apply">Apply</string>
     <string name="string_job_details">Job details \n\u25CF</string>
     <string name="string_save">Save</string>
+    <string name="job_application_successful">Job Application Successful</string>
+    <string name="view">View</string>
 
 </resources>

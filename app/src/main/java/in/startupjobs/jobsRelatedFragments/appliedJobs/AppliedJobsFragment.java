@@ -18,6 +18,7 @@ import in.startupjobs.R;
 import in.startupjobs.adapter.JobsFragmentViewAdapter;
 import in.startupjobs.model.Product;
 import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
+import in.startupjobs.services.GetAppliedJobs;
 
 public class AppliedJobsFragment extends Fragment {
 
@@ -28,9 +29,6 @@ public class AppliedJobsFragment extends Fragment {
     JobsFragmentViewAdapter jobsFragmentViewAdapter;
     private List<AppliedJobsResponse> jobList = new ArrayList<>();
 
-    public AppliedJobsFragment(List<AppliedJobsResponse> appliedJobsResponseList) {
-        jobList = appliedJobsResponseList;
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +38,15 @@ public class AppliedJobsFragment extends Fragment {
 
         this.context = getContext();
         recyclerView = root.findViewById(R.id.recyclerview_fragment_recommendedjobs);
-        jobsFragmentViewAdapter = new JobsFragmentViewAdapter(context, jobList);
-        recyclerView.setAdapter(jobsFragmentViewAdapter);
+
+        new GetAppliedJobs(getActivity(), new GetAppliedJobs.onResponseAppliedJobs() {
+            @Override
+            public void sendAppliedJobsResponse(List<AppliedJobsResponse> appliedJobsResponseList) {
+                jobsFragmentViewAdapter = new JobsFragmentViewAdapter(context, appliedJobsResponseList);
+                recyclerView.setAdapter(jobsFragmentViewAdapter);
+            }
+        });
+
 
         return root;
     }

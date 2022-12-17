@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,9 +75,11 @@ public class JobsFragmentViewAdapter extends RecyclerView.Adapter<JobsFragmentVi
             holder.mRowJobsTextviewLoaction.setVisibility(View.GONE);
             holder.mRowJobsTextviewExpneeded.setVisibility(View.GONE);
             holder.mRowJobsTextviewSalary.setVisibility(View.GONE);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.mRowJobsBtnApply.setText(R.string.view);
+            holder.mRowJobsBtnApply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Toast.makeText(context, "Nothing more to show", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {

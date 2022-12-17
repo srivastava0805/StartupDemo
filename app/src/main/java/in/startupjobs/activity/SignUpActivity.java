@@ -173,7 +173,6 @@ public class SignUpActivity extends AppCompatActivity {
         mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
 
         setOnClicks();
-        makeUploadResumePageVisible();
     }
 
 

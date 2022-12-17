@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import in.startupjobs.R;
 import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
 import in.startupjobs.utils.APIError;
@@ -38,7 +39,7 @@ public class PostApplyJobRequest {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     if (response.body() != null) {
-//                        Snackbar.make(context.findViewById(android.R.id.content), "" + response.body().getResumeFiles().get(0), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(context.findViewById(android.R.id.content), R.string.job_application_successful , Snackbar.LENGTH_SHORT).show();
                         onApplyJobResponseCallback.sendApplyJobResponse(null);
                     }
                 } else {

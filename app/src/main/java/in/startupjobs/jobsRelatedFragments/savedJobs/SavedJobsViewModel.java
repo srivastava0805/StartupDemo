@@ -10,7 +10,7 @@ public class SavedJobsViewModel extends ViewModel {
 
     public SavedJobsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("No Data Yet");
     }
 
     public LiveData<String> getText() {

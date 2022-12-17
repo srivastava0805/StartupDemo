@@ -23,6 +23,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.navigation.NavigationView;
 
 import in.startupjobs.R;
+import in.startupjobs.ui.dashboard.DashboardFragment;
 import in.startupjobs.ui.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -130,7 +131,10 @@ public class MainActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.nav_host_fragment, new DashboardFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
 
     }

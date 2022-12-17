@@ -17,10 +17,9 @@ public class JobsFragmentTabAdapter extends FragmentStatePagerAdapter {
     TabLayout tabLayout;
     FragmentManager fm;
     List<AppliedJobsResponse> appliedJobsResponseList;
-    public JobsFragmentTabAdapter(FragmentManager fm, TabLayout _tabLayout, List<AppliedJobsResponse> appliedJobsResponseList) {
+    public JobsFragmentTabAdapter(FragmentManager fm, TabLayout _tabLayout) {
         super(fm);
         this.tabLayout = _tabLayout;
-        this.appliedJobsResponseList = appliedJobsResponseList;
     }
     @Override
     public Fragment getItem(int position) {
@@ -31,7 +30,7 @@ public class JobsFragmentTabAdapter extends FragmentStatePagerAdapter {
         }
         else if (position == 1)
         {
-            fragment = new AppliedJobsFragment(appliedJobsResponseList);
+            fragment = new AppliedJobsFragment();
 
         }
         else if (position == 2)
