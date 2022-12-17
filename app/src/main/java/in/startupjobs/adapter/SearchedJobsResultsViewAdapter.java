@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import in.startupjobs.R;
+import in.startupjobs.activity.JobDetails;
 import in.startupjobs.model.serachedJobs.Result;
 import in.startupjobs.model.serachedJobs.SearchedJobsResponse;
 import in.startupjobs.model.serachedJobs.SkillName;

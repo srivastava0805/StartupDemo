@@ -7,6 +7,7 @@ import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
 import in.startupjobs.model.appliedJobsListing.JobListingResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
+import in.startupjobs.model.basicDetails.BasicDetailsReponse;
 import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.model.companies.GetCompaniesResponse;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
@@ -70,6 +71,9 @@ public interface ApiInterface {
 
     @GET("resume/work_experience")
     Call<List<WorkExperienceResponse>> getWorkExperience();
+
+    @GET("resume/basic_details")
+    Call<BasicDetailsReponse> getBasicDetails();
 
     @GET("resume/public/{id}")
     Call<PublicProfileDetailsByIDResponse>
