@@ -45,13 +45,10 @@ public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAd
 
     @Override
     public void onBindViewHolder(final WorkExperienceViewHolder viewHolder, final int position) {
-        int index = viewHolder.getAdapterPosition();
         viewHolder.mRowworkexpTextviewDesignation.setText(list.get(position).getDesignation());
         viewHolder.mRowworkexpTextviewCompanyname.setText(list.get(position).getCompanyName());
         viewHolder.mRowworkexpTextviewIndustrytype.setText(list.get(position).getRoleDescription());
-        viewHolder.mRowworkexpTextviewCompanyname.setText(list.get(position).getCompanyName());
         if (list.get(position).getCurrentlyWorking()) {
-            String date = GlobalVariablesNMethods.convertDate(context, list.get(position).getStartDate(), "yyyy-MM", "MMM yyyy");
             viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("Working here");
         } else if (list.get(position).getEndDate() != null) {
 
