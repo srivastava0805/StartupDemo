@@ -55,12 +55,7 @@ public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAd
             viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("From " + list.get(position).getStartDate() + " to " + list.get(position).getEndDate());
         } else
             viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("From " + list.get(position).getStartDate());
-//        viewHolder.view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                listiner.click(index);
-//            }
-//        });
+
     }
 
     @Override

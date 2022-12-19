@@ -41,7 +41,6 @@ public class JobsFragmentViewAdapter extends RecyclerView.Adapter<JobsFragmentVi
             mRowJobsTextviewExpneeded = view.findViewById(R.id.rowJobs_textview_expneeded);
             mRowJobsTextviewSalary = view.findViewById(R.id.rowJobs_textview_salary);
             mRowJobsTextviewSkills = view.findViewById(R.id.rowJobs_textview_skills);
-            mRowJobsIvSave = view.findViewById(R.id.rowJobs_iv_save);
             mRowJobsBtnApply = view.findViewById(R.id.rowJobs_btn_apply);
             this.itemView = view;
         }

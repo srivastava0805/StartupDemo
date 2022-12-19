@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.startupjobs.R;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
@@ -54,6 +55,7 @@ public class ChangePasswordService {
                         JSONObject jsonObject = new JSONObject(response.body().toString());
                         if (jsonObject.has("message"))
                             if (jsonObject.getString("message").equalsIgnoreCase(AppConstants.PASSWORD_RESET_SUCCESSFUL)) {
+                                Snackbar.make(context.findViewById(android.R.id.content), context.getString(R.string.pass_reset_success), Snackbar.LENGTH_SHORT).show();
                                 onResponseFromChangePasswordCallback.sendEmailOtpResponse(AppConstants.PASSWORD_RESET_SUCCESSFUL);
                             }
                     } catch (JSONException e) {

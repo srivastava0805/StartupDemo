@@ -93,7 +93,8 @@ public class ProfileFragment extends Fragment {
         mPersonaldetailsTvEmailidvalue.setText(publicProfileDetailsByIDResponse.getContactDetails().getEmail());
         mPersonaldetailsTvMobilenovalue.setText(publicProfileDetailsByIDResponse.getContactDetails().getPhone());
         mProfessionalsummaryTvProfiletitlevalue.setText(publicProfileDetailsByIDResponse.getAccount().getCurrentDesignation());
-        mPersonaldetailsTvClocationvalue.setText(publicProfileDetailsByIDResponse.getAccount().getCurrentLocation().getDistrictName());
+        if (publicProfileDetailsByIDResponse.getAccount().getCurrentLocation() != null)
+            mPersonaldetailsTvClocationvalue.setText(publicProfileDetailsByIDResponse.getAccount().getCurrentLocation().getDistrictName());
         if (publicProfileDetailsByIDResponse.getAccount().getAvatar() != null
                 && !publicProfileDetailsByIDResponse.getAccount().getAvatar().isEmpty())
             Glide.with(getActivity())

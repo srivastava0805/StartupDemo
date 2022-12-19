@@ -1,5 +1,6 @@
 package in.startupjobs.ui.logout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import in.startupjobs.R;
+import in.startupjobs.activity.LoginActivity;
+import in.startupjobs.activity.OnBoardingLoginSignup;
 import in.startupjobs.utils.Preferences;
 
 public class LogoutDialogFragment extends Fragment {
@@ -24,6 +27,8 @@ public class LogoutDialogFragment extends Fragment {
                 .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                     Preferences.clearPref(getActivity());
                     getActivity().finish();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
                 })
                 .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> {
                     dialogInterface.dismiss();

@@ -46,7 +46,6 @@ public class SearchedJobsResultsViewAdapter extends RecyclerView.Adapter<Searche
             mRowJobsTextviewExpneeded = view.findViewById(R.id.rowJobs_textview_expneeded);
             mRowJobsTextviewSalary = view.findViewById(R.id.rowJobs_textview_salary);
             mRowJobsTextviewSkills = view.findViewById(R.id.rowJobs_textview_skills);
-            mRowJobsIvSave = view.findViewById(R.id.rowJobs_iv_save);
             mRowJobsBtnApply = view.findViewById(R.id.rowJobs_btn_apply);
             mRowjobsShapeivCompanylogo = view.findViewById(R.id.rowjobs_shapeiv_companylogo);
             this.itemView = view;
@@ -116,17 +115,20 @@ public class SearchedJobsResultsViewAdapter extends RecyclerView.Adapter<Searche
     }
 
     private void setSkills(Result jobDetails, TextView mRowJobsTextviewSkills) {
-        StringBuilder skills = new StringBuilder();
-        skills.append("\u25AA");
-        skills.append("   ");
-        for (int i = 0; i < jobDetails.getSkillNames().size(); i++) {
-            SkillName skillName = jobDetails.getSkillNames().get(i);
-            if (i < jobDetails.getSkillNames().size() - 1)
-                skills.append(skillName.getName()).append(",");
-            else skills.append(skillName.getName());
+        if (jobDetails.getSkillNames() != null
+                && jobDetails.getSkillNames().size() > 0) {
+            StringBuilder skills = new StringBuilder();
+            skills.append("\u25AA");
+            skills.append("   ");
+            for (int i = 0; i < jobDetails.getSkillNames().size(); i++) {
+                SkillName skillName = jobDetails.getSkillNames().get(i);
+                if (i < jobDetails.getSkillNames().size() - 1)
+                    skills.append(skillName.getName()).append(",");
+                else skills.append(skillName.getName());
 
+            }
+            mRowJobsTextviewSkills.setText(skills);
         }
-        mRowJobsTextviewSkills.setText(skills);
     }
 
     @Override

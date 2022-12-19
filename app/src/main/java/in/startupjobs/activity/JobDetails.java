@@ -93,7 +93,9 @@ public class JobDetails extends AppCompatActivity {
                 jobDataToSend.setName(AppConstants.mLoginData.getFullName());
                 jobDataToSend.setMobileNumber(Long.valueOf(publicProfileDetailsByIDResponse.getContactDetails().getPhone()));
                 jobDataToSend.setCurrentDesignation(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
-                jobDataToSend.setResumeFile(publicProfileDetailsByIDResponse.getResumes().get(0));
+                if (publicProfileDetailsByIDResponse.getResumes() != null
+                        && publicProfileDetailsByIDResponse.getResumes().size() > 0)
+                    jobDataToSend.setResumeFile(publicProfileDetailsByIDResponse.getResumes().get(0));
                 sendApplyJobRequest(jobDataToSend);
             }
         });
@@ -156,15 +158,18 @@ public class JobDetails extends AppCompatActivity {
     }
 
     private void setSkills(Result jobDetails, TextView mRowJobsTextviewSkills) {
-        StringBuilder skills = new StringBuilder();
-        for (int i = 0; i < jobDetails.getSkillNames().size(); i++) {
-            SkillName skillName = jobDetails.getSkillNames().get(i);
-            if (i < jobDetails.getSkillNames().size() - 1)
-                skills.append(skillName.getName()).append(",");
-            else skills.append(skillName.getName());
+        if (jobDetails.getSkillNames() != null
+                && jobDetails.getSkillNames().size() > 0) {
+            StringBuilder skills = new StringBuilder();
+            for (int i = 0; i < jobDetails.getSkillNames().size(); i++) {
+                SkillName skillName = jobDetails.getSkillNames().get(i);
+                if (i < jobDetails.getSkillNames().size() - 1)
+                    skills.append(skillName.getName()).append(",");
+                else skills.append(skillName.getName());
 
+            }
+            mRowJobsTextviewSkills.setText(skills);
         }
-        mRowJobsTextviewSkills.setText(skills);
     }
 
     public void initToolbar() {

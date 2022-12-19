@@ -75,6 +75,10 @@ public interface ApiInterface {
     @GET("resume/basic_details")
     Call<BasicDetailsReponse> getBasicDetails();
 
+    @GET("jobs/list/recommended?")
+    Call<SearchedJobsResponse>
+    getRecommendedJons(@Query("limit") int count);
+
     @GET("resume/public/{id}")
     Call<PublicProfileDetailsByIDResponse>
     getBasicPublicProfileDetailsById(@Path("id") String userId);
