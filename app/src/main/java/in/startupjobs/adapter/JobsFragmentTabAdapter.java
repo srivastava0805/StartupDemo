@@ -15,8 +15,6 @@ import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
 
 public class JobsFragmentTabAdapter extends FragmentStatePagerAdapter {
     TabLayout tabLayout;
-    FragmentManager fm;
-    List<AppliedJobsResponse> appliedJobsResponseList;
 
     public JobsFragmentTabAdapter(FragmentManager fm, TabLayout _tabLayout) {
         super(fm);
@@ -38,7 +36,7 @@ public class JobsFragmentTabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override

@@ -70,7 +70,6 @@ public class JobsFragmentViewAdapter extends RecyclerView.Adapter<JobsFragmentVi
             holder.mRowJobsTextviewCompanyname.setText(dataModel.get(position).getCompanyName());
             if (dataModel.get(position).getApplicationStatuses().get(0).getInterviewLocation() != null)
                 holder.mRowJobsTextviewLoaction.setText(dataModel.get(position).getApplicationStatuses().get(0).getInterviewLocation().toString());
-            holder.mRowJobsIvSave.setVisibility(View.GONE);
             holder.mRowJobsTextviewLoaction.setVisibility(View.GONE);
             holder.mRowJobsTextviewExpneeded.setVisibility(View.GONE);
             holder.mRowJobsTextviewSalary.setVisibility(View.GONE);
