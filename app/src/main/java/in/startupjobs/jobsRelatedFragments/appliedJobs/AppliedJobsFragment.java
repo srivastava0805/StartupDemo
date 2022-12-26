@@ -39,12 +39,9 @@ public class AppliedJobsFragment extends Fragment {
         this.context = getContext();
         recyclerView = root.findViewById(R.id.recyclerview_fragment_recommendedjobs);
 
-        new GetAppliedJobs(getActivity(), new GetAppliedJobs.onResponseAppliedJobs() {
-            @Override
-            public void sendAppliedJobsResponse(List<AppliedJobsResponse> appliedJobsResponseList) {
-                jobsFragmentViewAdapter = new JobsFragmentViewAdapter(context, appliedJobsResponseList);
-                recyclerView.setAdapter(jobsFragmentViewAdapter);
-            }
+        new GetAppliedJobs(getActivity(), appliedJobsResponseList -> {
+            jobsFragmentViewAdapter = new JobsFragmentViewAdapter(context, appliedJobsResponseList);
+            recyclerView.setAdapter(jobsFragmentViewAdapter);
         });
         return root;
     }

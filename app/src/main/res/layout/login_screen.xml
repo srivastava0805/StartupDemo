@@ -281,7 +281,8 @@
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/tv_divider_text"
                 app:strokeColor="@color/black"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1dp"
+                android:visibility="gone"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_google"
@@ -300,7 +301,8 @@
                 app:layout_constraintStart_toEndOf="@id/btn_facebook"
                 app:layout_constraintTop_toBottomOf="@id/tv_divider_text"
                 app:strokeColor="@color/black"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1dp"
+                android:visibility="gone"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_linkedin"
@@ -319,7 +321,8 @@
                 app:layout_constraintStart_toEndOf="@id/btn_google"
                 app:layout_constraintTop_toBottomOf="@id/tv_divider_text"
                 app:strokeColor="@color/black"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1dp"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/iv_startuptitle"
@@ -332,7 +335,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_linkedin"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

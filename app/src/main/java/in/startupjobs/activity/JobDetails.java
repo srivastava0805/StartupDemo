@@ -129,7 +129,8 @@ public class JobDetails extends AppCompatActivity {
                     .into(companyLogo);
 
         vacanciesAvailableNum.setText(jobDetails.getPositionOpen() + " Positions");
-        empTypeValue.setText(jobDetails.getJobType().getName() + ", " + jobDetails.getWorkType());
+        if (jobDetails.getJobType() != null)
+            empTypeValue.setText(jobDetails.getJobType().getName() + ", " + jobDetails.getWorkType());
         jobPostedTime.setText(GlobalVariablesNMethods.convertDate(this, jobDetails.getCreatedOn(), null, "dd MMM yyyy"));
     }
 
@@ -199,15 +200,9 @@ public class JobDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.activity_jd_menu_star:
-                //add the function to perform here
-                Toast.makeText(this, "fav clicked", Toast.LENGTH_SHORT).show();
-                return (true);
-            case R.id.activity_jd_menu_share:
-                //add the function to perform here
-                Toast.makeText(this, "share clicked", Toast.LENGTH_SHORT).show();
-                return (true);
+        if (item.getItemId() == R.id.activity_jd_menu_share) {//add the function to perform here
+            Toast.makeText(this, "share clicked", Toast.LENGTH_SHORT).show();
+            return (true);
         }
         return (super.onOptionsItemSelected(item));
     }

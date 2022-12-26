@@ -140,4 +140,11 @@
         <item name="colorSwitchThumbNormal">@color/color_icon_gray_dark</item>
         <item name="android:colorForeground">#124964</item>
     </style>
+
+
+    <style name="RadioButtonStyle" parent="com_facebook_activity_theme">
+        <item name="colorControlNormal">@color/color_grey</item>
+        <item name="colorAccent">@color/purple</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
 </resources>

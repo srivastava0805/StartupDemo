@@ -188,5 +188,7 @@
     <string name="no">No\n</string>
     <string name="view">View</string>
     <string name="pass_reset_success">Password Reset Successful</string>
+    <string name="about_company">About Company</string>
+    <string name="discard">Discard</string>
 
 </resources>

@@ -1,11 +1,15 @@
 package in.startupjobs.ui.profile;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -23,6 +27,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import java.util.List;
 
 import in.startupjobs.R;
+import in.startupjobs.activity.EditProfileDetailsActivity;
 import in.startupjobs.adapter.WorkExperienceAdapter;
 import in.startupjobs.model.basicDetails.BasicDetailsReponse;
 import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
@@ -144,5 +149,22 @@ public class ProfileFragment extends Fragment {
         mProfileCardviewWorkexplayout = root.findViewById(R.id.profile_cardview_workexplayout);
         mWorkexpIvEdit = root.findViewById(R.id.workexp_textview_edit);
         mWorkexpRecylerviewWorkexp = root.findViewById(R.id.workexp_recylerview_workexp);
+        setClick();
     }
+
+    private void setClick() {
+        mPersonaldetailsIvEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), EditProfileDetailsActivity.class);
+            someActivityResultLauncher.launch(intent);
+        });
+    }
+
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    // There are no request codes
+                    Intent data = result.getData();
+//                        doSomeOperations();
+                }
+            });
 }
