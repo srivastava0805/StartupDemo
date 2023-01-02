@@ -190,5 +190,16 @@
     <string name="pass_reset_success">Password Reset Successful</string>
     <string name="about_company">About Company</string>
     <string name="discard">Discard</string>
+    <string name="job_title">Job Title</string>
+    <string name="annual_salary_in_lakhs">Annual salary in lakhs</string>
+    <string name="total_experience_in_years">Total experience in years</string>
+    <string name="notice_period_in_days">Notice period in days</string>
+    <string name="company_name">Company Name</string>
+    <string name="job_industry">Job industry</string>
+    <string name="area_of_expertise">Area of expertise</string>
+    <string name="experience">Experience</string>
+    <string name="from_date">From date</string>
+    <string name="to_date">To date</string>
+    <string name="i_currently_work_here">I currently work here</string>
 
 </resources>
