@@ -34,7 +34,7 @@ public class SendOtpPressedService {
         progressDialog.setMessage("Loading....");
         if (!progressDialog.isShowing())
             progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         OtpResponseModel.OtpDataToSend otpData = new OtpResponseModel.OtpDataToSend();
         otpData.type = type;
         otpData.value = value;

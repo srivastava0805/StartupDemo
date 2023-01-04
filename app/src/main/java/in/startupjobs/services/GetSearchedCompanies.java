@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
 
 import in.startupjobs.model.companies.GetCompaniesResponse;
-import in.startupjobs.model.serachedJobs.SearchedJobsResponse;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
 import in.startupjobs.utils.ErrorUtils;
@@ -28,7 +27,7 @@ public class GetSearchedCompanies {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<GetCompaniesResponse> call = service.getSearchedCompaniesByKeyword(limit,keyword);
         call.enqueue(new Callback<GetCompaniesResponse>() {
             @Override

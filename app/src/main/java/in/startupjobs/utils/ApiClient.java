@@ -14,7 +14,7 @@ public class ApiClient {
     public static final String BASE_URL = "https://api.startupjob.in/v1/";
     public static Retrofit retrofit = null;
 
-    public static Retrofit getClient() {
+    public static Retrofit getClient(String url) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -25,6 +25,7 @@ public class ApiClient {
                         AppConstants.mLoginData.getToken() != null) {
                     request = original.newBuilder()
                             .header("Authorization","Bearer "+ AppConstants.mLoginData.getToken())
+                            .header("X-CSCAPI-KEY","VzJjZE82QlNSanVud3daZmExWjBNZlRIU0ZGTzdSd0ZHbnRmeVR1cw==")
                             .method(original.method(), original.body())
                             .build();
                 } else request = original.newBuilder()
@@ -34,9 +35,16 @@ public class ApiClient {
             }
         });
 
-        if (retrofit == null) {
+        if (retrofit == null && url == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .client(httpClient.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        else if (url != null ) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(url)
                     .client(httpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

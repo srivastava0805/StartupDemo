@@ -1,12 +1,10 @@
 
-package in.startupjobs.model.basicPublicProfileDetails;
+package in.startupjobs.model.editProfile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Skill implements Serializable {
+public class CitiesDatum {
 
     @SerializedName("id")
     @Expose

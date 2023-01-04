@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.model.applyJob.ApplyJobResponseModel;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
@@ -29,7 +28,7 @@ public class PostApplyJobRequest {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<ApplyJobResponseModel> call = service.applyJob(id, jobDataToSend);
         call.enqueue(new Callback<ApplyJobResponseModel>() {
 

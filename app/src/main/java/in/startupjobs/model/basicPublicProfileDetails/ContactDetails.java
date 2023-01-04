@@ -4,9 +4,10 @@ package in.startupjobs.model.basicPublicProfileDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ContactDetails {
+public class ContactDetails implements Serializable {
 
     @SerializedName("email")
     @Expose

@@ -28,7 +28,7 @@ public class GetDashBoardJobsRelatedData {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<DashBoardJobsData> call = service.getDashBoardJobsData();
         call.enqueue(new Callback<DashBoardJobsData>() {
 

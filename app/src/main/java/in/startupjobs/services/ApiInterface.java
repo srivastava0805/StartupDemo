@@ -11,6 +11,9 @@ import in.startupjobs.model.basicDetails.BasicDetailsReponse;
 import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.model.companies.GetCompaniesResponse;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
+import in.startupjobs.model.editProfile.CitiesDatum;
+import in.startupjobs.model.editProfile.EditProfileResponseData;
+import in.startupjobs.model.editProfile.ToSendEditProfileData;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
@@ -95,4 +98,9 @@ public interface ApiInterface {
     Call<ApplyJobResponseModel>
     applyJob(@Path("id") String userId, @Body ApplyJobResponseModel.ApplyJobDataToSend jobDataToSend);
 
+    @PUT("auth/profile/edit")
+    Call<EditProfileResponseData> editPersonalDetails( @Body ToSendEditProfileData jobDataToSend);
+
+    @GET("IN/cities")
+    Call<List<CitiesDatum>>  getCities();
 }

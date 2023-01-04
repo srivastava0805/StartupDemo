@@ -35,6 +35,7 @@ import in.startupjobs.model.workExperience.WorkExperienceResponse;
 import in.startupjobs.services.GetBasicDetailsService;
 import in.startupjobs.services.GetProfileDetailsByIdService;
 import in.startupjobs.services.GetWorkExperienceService;
+import in.startupjobs.utils.AppConstants;
 
 public class ProfileFragment extends Fragment {
 
@@ -66,6 +67,7 @@ public class ProfileFragment extends Fragment {
     private MaterialCardView mProfileCardviewWorkexplayout;
     private TextView mWorkexpIvEdit;
     private RecyclerView mWorkexpRecylerviewWorkexp;
+    private PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse;
 
     @Nullable
     @Override
@@ -92,6 +94,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setProfessionalDetailsFromResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
+        this.publicProfileDetailsByIDResponse = publicProfileDetailsByIDResponse;
         mProfileTvName.setText(publicProfileDetailsByIDResponse.getAccount().getName());
         mProfileTvDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
 
@@ -155,6 +158,19 @@ public class ProfileFragment extends Fragment {
     private void setClick() {
         mPersonaldetailsIvEdit.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), EditProfileDetailsActivity.class);
+            intent.putExtra(AppConstants.PROFILE_HEADER, AppConstants.PERSONAL_DETAILS);
+            intent.putExtra(AppConstants.ALLDATA, publicProfileDetailsByIDResponse);
+            someActivityResultLauncher.launch(intent);
+        });
+        mProfessionalsummaryIvEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), EditProfileDetailsActivity.class);
+            intent.putExtra(AppConstants.PROFILE_HEADER, AppConstants.PROFESSIONAL_DETAILS);
+            someActivityResultLauncher.launch(intent);
+        });
+
+        mWorkexpIvEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), EditProfileDetailsActivity.class);
+            intent.putExtra(AppConstants.PROFILE_HEADER, AppConstants.WORK_EXPERIENCE);
             someActivityResultLauncher.launch(intent);
         });
     }
@@ -162,9 +178,8 @@ public class ProfileFragment extends Fragment {
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
-                    // There are no request codes
-                    Intent data = result.getData();
-//                        doSomeOperations();
+                    getDataForProfile();
+                    getDataWorkExperience();
                 }
             });
 }

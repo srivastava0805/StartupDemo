@@ -48,36 +48,36 @@
         app:layout_constraintTop_toBottomOf="@+id/editdetails_cardview_toolbarheader">
 
         <include
-            android:id="@+id/editdetails_layout_personaldetails"
             layout="@layout/edit_personaldetails_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="invisible"/>
+            android:visibility="visible"/>
 
         <include
-            android:id="@+id/editdetails_layout_professionaldetails"
+
             layout="@layout/edit_professionaldetails_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/editdetails_layout_workexperience"
+
             layout="@layout/edit_workexperience_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editdetails_btn_savechanges"
             android:layout_width="150dp"
             android:layout_height="@dimen/margin_45dp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,9 @@ package in.startupjobs.model.basicPublicProfileDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SocalLinks {
+import java.io.Serializable;
+
+public class SocalLinks implements Serializable {
 
     @SerializedName("facebook")
     @Expose

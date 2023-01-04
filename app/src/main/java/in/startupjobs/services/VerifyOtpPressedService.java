@@ -31,7 +31,7 @@ public class VerifyOtpPressedService {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         OtpResponseModel.VerifyOtpData otpData = new OtpResponseModel.VerifyOtpData();
         otpData.type = type;
         otpData.value = value;

@@ -34,7 +34,7 @@ public class ChangePasswordService {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         ChangePasswordModel.OtpDataToSend otpData = new ChangePasswordModel.OtpDataToSend();
         if (type.equalsIgnoreCase("email"))
             otpData.setEmail(value);

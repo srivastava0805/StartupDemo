@@ -28,7 +28,7 @@ public class GetRecommendedJobs {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         call = service.getRecommendedJons(Integer.parseInt(limit));
         call.enqueue(new Callback<SearchedJobsResponse>() {
 

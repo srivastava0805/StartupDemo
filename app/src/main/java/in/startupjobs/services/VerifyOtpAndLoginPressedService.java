@@ -28,7 +28,7 @@ public class VerifyOtpAndLoginPressedService {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         LoginDataForMobile otpData = new LoginDataForMobile();
         otpData.setMobileNumber(Long.parseLong(mobileNO));
         otpData.setCode(Long.parseLong(code));

@@ -28,7 +28,7 @@ public class GetProfileDetailsByIdService {
                                         onResponseGetPublicProfileDetailsById onResponseGetPublicProfileDetailsByIdCallback) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<PublicProfileDetailsByIDResponse> call = service.getBasicPublicProfileDetailsById(AppConstants.mLoginData.getUserId());
         call.enqueue(new Callback<PublicProfileDetailsByIDResponse>() {
 

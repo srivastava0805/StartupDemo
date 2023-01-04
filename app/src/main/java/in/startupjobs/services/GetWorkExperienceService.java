@@ -30,7 +30,7 @@ public class GetWorkExperienceService {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<List<WorkExperienceResponse>> call = service.getWorkExperience();
         call.enqueue(new Callback<List<WorkExperienceResponse>>() {
 

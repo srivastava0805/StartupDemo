@@ -28,7 +28,7 @@ public class GetSearchedJobs {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         if (exp.isEmpty()) {
             if (location.isEmpty())
                 call = service.getSearchedJobsByKeyword(skill);

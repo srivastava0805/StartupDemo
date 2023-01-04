@@ -12,7 +12,6 @@ import java.util.List;
 import in.startupjobs.model.appliedJobsListing.AppliedJobsResponse;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
-import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.ErrorUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +30,7 @@ public class GetAppliedJobs {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<List<AppliedJobsResponse>> call = service.getAppliedJobs();
         call.enqueue(new Callback<List<AppliedJobsResponse>>() {
 

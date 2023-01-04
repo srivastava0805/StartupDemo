@@ -32,7 +32,7 @@ public class GetCsrfTokenService {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<Object> call = service.getCsrfToken();
         call.enqueue(new Callback<Object>() {
 

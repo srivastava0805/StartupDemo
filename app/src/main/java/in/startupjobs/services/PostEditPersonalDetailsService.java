@@ -7,7 +7,8 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import in.startupjobs.model.RegistrationResponseModel;
+import in.startupjobs.model.editProfile.EditProfileResponseData;
+import in.startupjobs.model.editProfile.ToSendEditProfileData;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
 import in.startupjobs.utils.ErrorUtils;
@@ -15,40 +16,38 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompleteRegistrationService {
+public class PostEditPersonalDetailsService {
     private final ProgressDialog progressDialog;
 
-    public interface onResponseCompleteRegistration {
-        void sendCompleteRegistrationResponse(RegistrationResponseModel otpResponseModel);
+    public interface onResponseFromEditProfilePersonal {
+
+        void sendEditProfileResponse(EditProfileResponseData profileResponseData);
     }
 
-    public CompleteRegistrationService(Activity context, RegistrationResponseModel.RegistrationDataToSend dataReadyForSignUp,
-                                       onResponseCompleteRegistration onResponseCompleteRegistrationCallback) {
+
+    public PostEditPersonalDetailsService(Activity context, ToSendEditProfileData toSendEditProfileData,
+                                          onResponseFromEditProfilePersonal onResponseFromEditProfilePersonalCallback) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
         ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
-        Call<RegistrationResponseModel> call = service.registerCandidate(dataReadyForSignUp);
-        call.enqueue(new Callback<RegistrationResponseModel>() {
+        Call<EditProfileResponseData> call = service.editPersonalDetails(toSendEditProfileData);
+        call.enqueue(new Callback<EditProfileResponseData>() {
 
             @Override
-            public void onResponse(@NonNull Call<RegistrationResponseModel> call, @NonNull Response<RegistrationResponseModel> response) {
+            public void onResponse(@NonNull Call<EditProfileResponseData> call, @NonNull Response<EditProfileResponseData> response) {
+                progressDialog.dismiss();
                 if (response.isSuccessful()) {
-                    progressDialog.dismiss();
-                    if (response.body() != null) {
-                        Snackbar.make(context.findViewById(android.R.id.content), "" + response.body().getMessage(), Snackbar.LENGTH_SHORT).show();
-                        onResponseCompleteRegistrationCallback.sendCompleteRegistrationResponse(response.body());
-                    }
+                    onResponseFromEditProfilePersonalCallback.sendEditProfileResponse(response.body());
                 } else {
                     APIError error = ErrorUtils.parseError(response);
                     Snackbar.make(context.findViewById(android.R.id.content), error.messages.get(0).toString(), Snackbar.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                 }
 
             }
 
             @Override
-            public void onFailure(@NonNull Call<RegistrationResponseModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<EditProfileResponseData> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Snackbar.make(context.findViewById(android.R.id.content),
                         // Throwable will let us find the error if the call failed.

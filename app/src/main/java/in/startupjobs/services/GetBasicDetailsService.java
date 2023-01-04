@@ -8,10 +8,8 @@ import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
 
 import in.startupjobs.model.basicDetails.BasicDetailsReponse;
-import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.utils.APIError;
 import in.startupjobs.utils.ApiClient;
-import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.ErrorUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +27,7 @@ public class GetBasicDetailsService {
                                   onResponseGetBasicDetails onResponseGetBasicDetailsCallback) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading....");
-        ApiInterface service = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface service = ApiClient.getClient(null).create(ApiInterface.class);
         Call<BasicDetailsReponse> call = service.getBasicDetails();
         call.enqueue(new Callback<BasicDetailsReponse>() {
 
