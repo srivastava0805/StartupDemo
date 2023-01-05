@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/activity_horizontal_margin_25dp">
@@ -50,11 +49,10 @@
                 android:id="@+id/rowJobs_cnlayout_jobsdata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin20"
                 android:paddingLeft="@dimen/activity_horizontal_margin16"
                 android:paddingTop="@dimen/activity_horizontal_margin20"
                 android:paddingRight="@dimen/activity_horizontal_margin16"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/rowJobs_textview_jobrole">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
@@ -111,9 +109,9 @@
                     android:id="@+id/rowJobs_textview_skills"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="start"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:ellipsize="start"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rowJobs_textview_salary" />
 
