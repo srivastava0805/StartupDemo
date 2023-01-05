@@ -117,7 +117,7 @@ public class ProfileFragment extends Fragment {
         new GetWorkExperienceService(getActivity(), new GetWorkExperienceService.onResponseGetWorkExperience() {
             @Override
             public void sendDashBoardJobsDataResponse(List<WorkExperienceResponse> workExperienceResponse) {
-                WorkExperienceAdapter adapter = new WorkExperienceAdapter(workExperienceResponse, getActivity());
+                WorkExperienceAdapter adapter = new WorkExperienceAdapter(workExperienceResponse, getActivity(),ProfileFragment.this);
                 mWorkexpRecylerviewWorkexp.setHasFixedSize(true);
                 mWorkexpRecylerviewWorkexp.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mWorkexpRecylerviewWorkexp.setAdapter(adapter);
@@ -186,4 +186,12 @@ public class ProfileFragment extends Fragment {
                     getDataWorkExperience();
                 }
             });
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 000 && resultCode == Activity.RESULT_OK) {
+            getDataWorkExperience();
+        }
+    }
 }

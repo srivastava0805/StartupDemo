@@ -28,6 +28,7 @@ import in.startupjobs.model.workExperience.WorkExperienceResponse;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -107,6 +108,11 @@ public interface ApiInterface {
     @POST("jobs/apply/{id}")
     Call<ApplyJobResponseModel>
     applyJob(@Path("id") String userId, @Body ApplyJobResponseModel.ApplyJobDataToSend jobDataToSend);
+    @DELETE("resume/work_experience/{id}")
+    Call<Object>
+    deleteWorkExp(@Path("id") int userId);
+
+
 
     @PUT("auth/profile/edit")
     Call<EditProfileResponseData> editPersonalDetails(@Body ToSendEditProfileData jobDataToSend);
@@ -115,6 +121,10 @@ public interface ApiInterface {
 
     @POST("resume/work_experience")
     Call<AddWorkExpReponse> addWorkExperience(@Body ToSendWorkExpData toSendWorkExpData);
+
+    @PUT("resume/work_experience/{id}")
+    Call<AddWorkExpReponse>
+    editWorkExperience(@Path("id") int userId,@Body ToSendWorkExpData toSendWorkExpData);
     @GET("IN/cities")
     Call<List<CitiesDatum>> getCities();
 }

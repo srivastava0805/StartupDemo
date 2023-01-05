@@ -4,7 +4,9 @@ package in.startupjobs.model.workExperience;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WorkExperienceResponse {
+import java.io.Serializable;
+
+public class WorkExperienceResponse implements Serializable {
 
     @SerializedName("id")
     @Expose

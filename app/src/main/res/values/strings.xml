@@ -204,5 +204,7 @@
     <string name="current_company">Current Company</string>
     <string name="designation">Designation</string>
     <string name="describe_your_role">Describe your role</string>
+    <string name="delete">Delete</string>
+    <string name="error">An error occurred</string>
 
 </resources>

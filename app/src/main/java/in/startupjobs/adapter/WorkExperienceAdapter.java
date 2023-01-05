@@ -1,32 +1,41 @@
 package in.startupjobs.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import in.startupjobs.R;
+import in.startupjobs.activity.EditProfileDetailsActivity;
 import in.startupjobs.model.workExperience.WorkExperienceResponse;
-import in.startupjobs.utils.GlobalVariablesNMethods;
+import in.startupjobs.services.DeleteWorkExpRequest;
+import in.startupjobs.utils.AppConstants;
 
 public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAdapter.WorkExperienceViewHolder> {
 
-    List<WorkExperienceResponse> list = Collections.emptyList();
+    List<WorkExperienceResponse> list = new ArrayList<>();
 
-    Context context;
+    Activity context;
+
+    Fragment resultContext;
 
 
-    public WorkExperienceAdapter(List<WorkExperienceResponse> list, Context context) {
+    public WorkExperienceAdapter(List<WorkExperienceResponse> list, Activity context, Fragment resultContext) {
         this.list = list;
         this.context = context;
+        this.resultContext = resultContext;
     }
 
     @Override
@@ -34,9 +43,6 @@ public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAd
 
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-
-        // Inflate the layout
-
         View photoView = inflater.inflate(R.layout.row_work_experience_layout, parent, false);
 
         WorkExperienceViewHolder viewHolder = new WorkExperienceViewHolder(photoView);
@@ -45,17 +51,60 @@ public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAd
 
     @Override
     public void onBindViewHolder(final WorkExperienceViewHolder viewHolder, final int position) {
-        viewHolder.mRowworkexpTextviewDesignation.setText(list.get(position).getDesignation());
-        viewHolder.mRowworkexpTextviewCompanyname.setText(list.get(position).getCompanyName());
-        viewHolder.mRowworkexpTextviewIndustrytype.setText(list.get(position).getRoleDescription());
-        if (list.get(position).getCurrentlyWorking()) {
+        WorkExperienceResponse data = list.get(position);
+        viewHolder.mRowworkexpTextviewDesignation.setText(data.getDesignation());
+        viewHolder.mRowworkexpTextviewCompanyname.setText(data.getCompanyName());
+        viewHolder.mRowworkexpTextviewIndustrytype.setText(data.getRoleDescription());
+        if (data.getCurrentlyWorking()) {
             viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("Working here");
-        } else if (list.get(position).getEndDate() != null) {
+        } else if (data.getEndDate() != null) {
 
-            viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("From " + list.get(position).getStartDate() + " to " + list.get(position).getEndDate());
+            viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("From " + data.getStartDate() + " to " + data.getEndDate());
         } else
-            viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("From " + list.get(position).getStartDate());
+            viewHolder.mRowworkexpTextviewWorkedtimeduration.setText("From " + data.getStartDate());
+        viewHolder.mRowworkexpIvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDeleteConfirmationDialog(data, position, data.getId());
+            }
+        });
 
+        viewHolder.mRowworkexpIvEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditProfileDetailsActivity.class);
+                intent.putExtra(AppConstants.PROFILE_HEADER, AppConstants.WORK_EXPERIENCE);
+                intent.putExtra(AppConstants.ALLDATA, list.get(position));
+                resultContext.startActivityForResult(intent, 000);
+            }
+        });
+
+        if (data.getCurrentCtcLakhs() != null)
+            viewHolder.mRowworkexpTextviewFunctinalarea.setText(data.getCurrentCtcLakhs() + " Lakhs ");
+        if (data.getCurrentCtcThousands() != null)
+            viewHolder.mRowworkexpTextviewFunctinalarea.setText(viewHolder.mRowworkexpTextviewFunctinalarea.getText() + "and " + data.getCurrentCtcThousands() + " Thousands");
+    }
+
+    private void showDeleteConfirmationDialog(WorkExperienceResponse workExperienceResponse, Integer position, Integer id) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.delete))
+                .setMessage(context.getString(R.string.are_you_sure))
+                .setPositiveButton(context.getString(R.string.yes), (dialog, which) -> {
+                    List<WorkExperienceResponse> tempList = new ArrayList<>();
+                    tempList.addAll(list);
+                    list.remove(workExperienceResponse);
+                    notifyItemRemoved(position);
+                    new DeleteWorkExpRequest(context, id, isDeleted -> {
+                        if (!isDeleted) {
+                            list.add(position, tempList.get(position));
+                            notifyItemInserted(position);
+                        }
+                    });
+                })
+                .setNegativeButton(context.getString(R.string.no), (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                });
+        alertDialog.create().show();
     }
 
     @Override

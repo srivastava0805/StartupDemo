@@ -39,10 +39,12 @@ import in.startupjobs.model.editProfile.SearchCitiesResponse;
 import in.startupjobs.model.editProfile.ToSendEditProfileData;
 import in.startupjobs.model.editProfile.ToSendProfessionalDetails;
 import in.startupjobs.model.editProfile.ToSendWorkExpData;
+import in.startupjobs.model.workExperience.WorkExperienceResponse;
 import in.startupjobs.services.GetAllCitiesServiceService;
 import in.startupjobs.services.PostAddWorkExpService;
 import in.startupjobs.services.PostEditPersonalDetailsService;
 import in.startupjobs.services.PostEditProfessionalDetailsService;
+import in.startupjobs.services.PutEditWorkExpService;
 import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.GlobalVariablesNMethods;
 
@@ -91,6 +93,8 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
     private AppCompatEditText mEditpdEdittextNoticeperiod;
     private List<SearchCitiesResponse> listOfCities;
     private CheckBox mEditwexpCheckBoxCurrentlyWorking;
+    private WorkExperienceResponse workExpResponse;
+    private boolean isWorkExpEdit = false;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -202,6 +206,11 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
                     setAndHideViews(mEditdetailsLayoutWorkexperience);
                     setInActivePage();
                     workExp = true;
+                    workExpResponse = (WorkExperienceResponse) getIntent().getSerializableExtra(AppConstants.ALLDATA);
+                    if (workExpResponse != null) {
+                        isWorkExpEdit = true;
+                        setDataWorkExp(workExpResponse);
+                    }
                 } else if (getIntent().getStringExtra(AppConstants.PROFILE_HEADER)
                         .equalsIgnoreCase(AppConstants.PROFESSIONAL_DETAILS)) {
                     basicDetailsResponse = (BasicDetailsReponse) getIntent().getSerializableExtra(AppConstants.ALLDATA);
@@ -218,6 +227,22 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void setDataWorkExp(WorkExperienceResponse workExpResponse) {
+        mEditwexpEdittextDesignation.setText(workExpResponse.getDesignation());
+        mEditwexpEdittextCompanyname.setText(workExpResponse.getCompanyName());
+        if (workExpResponse.getCurrentCtcLakhs() != null)
+            mEditwexpEdittextSalaryInLakhs.setText(workExpResponse.getCurrentCtcLakhs().toString());
+        mEditwexpEdittextYourRole.setText(workExpResponse.getRoleDescription());
+        if (workExpResponse.getStartDate() != null && !workExpResponse.getStartDate().isEmpty())
+            mEditwexpEdittextFromdate.setText(GlobalVariablesNMethods.convertDate(this, workExpResponse.getStartDate(), "yyyy-MM", "MMM yyyy"));
+        if (workExpResponse.getCurrentlyWorking()) {
+            mEditwexpCheckBoxCurrentlyWorking.setChecked(true);
+            mEditwexpEdittextTodate.setVisibility(View.INVISIBLE);
+        } else if (workExpResponse.getEndDate() != null && !((String) workExpResponse.getEndDate()).isEmpty())
+            mEditwexpEdittextTodate.setText(GlobalVariablesNMethods.convertDate(this, (String) workExpResponse.getEndDate(), "yyyy-MM", "MMM yyyy"));
+
     }
 
     private void setDataProfessional(BasicDetailsReponse basicDetailsResponse) {
@@ -341,31 +366,49 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
 
     private void collectDataChangesToWorkExperience() {
         String endDate = null;
+        String startDate;
         ToSendWorkExpData toSendWorkExpData = new ToSendWorkExpData();
         String designation = mEditwexpEdittextDesignation.getText().toString().trim();
         String companyName = mEditwexpEdittextCompanyname.getText().toString().trim();
         String annualSalary = mEditwexpEdittextSalaryInLakhs.getText().toString().replaceAll("[^0-9]", "").trim();
         String yourRole = mEditwexpEdittextYourRole.getText().toString().trim();
-        String startDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextFromdate.getText().toString().trim()
-                , "dd MMM yyyy", "yyyy-MM");
-        if (!mEditwexpCheckBoxCurrentlyWorking.isChecked()) {
-            endDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextTodate.getText().toString().trim()
+        if (isWorkExpEdit)
+            startDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextFromdate.getText().toString().trim()
+                    , "MMM yyyy", "yyyy-MM");
+        else
+            startDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextFromdate.getText().toString().trim()
                     , "dd MMM yyyy", "yyyy-MM");
+        if (!mEditwexpCheckBoxCurrentlyWorking.isChecked()) {
+            if (isWorkExpEdit)
+                endDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextTodate.getText().toString().trim()
+                        , "MMM yyyy", "yyyy-MM");
+            else
+                endDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextTodate.getText().toString().trim()
+                        , "dd MMM yyyy", "yyyy-MM");
             toSendWorkExpData.setEndDate(endDate);
         } else toSendWorkExpData.setCurrentlyEmployed(true);
+
+
         toSendWorkExpData.setDesignation(designation);
         toSendWorkExpData.setCompanyName(companyName);
         toSendWorkExpData.setCurrentCtcLakhs(Integer.valueOf(annualSalary));
         toSendWorkExpData.setCurrentCtcThousands(Integer.valueOf(annualSalary));
         toSendWorkExpData.setDescription(yourRole);
         toSendWorkExpData.setStartDate(startDate);
-
-        new PostAddWorkExpService(this,
-                toSendWorkExpData, profileResponseData -> {
-            Intent _result = new Intent();
-            setResult(Activity.RESULT_OK, _result);
-            finish();
-        });
+        if (isWorkExpEdit)
+            new PutEditWorkExpService(this,
+                    toSendWorkExpData, workExpResponse.getId(), profileResponseData -> {
+                Intent _result = new Intent();
+                setResult(Activity.RESULT_OK, _result);
+                finish();
+            });
+        else
+            new PostAddWorkExpService(this,
+                    toSendWorkExpData, profileResponseData -> {
+                Intent _result = new Intent();
+                setResult(Activity.RESULT_OK, _result);
+                finish();
+            });
     }
 
     private void collectDataChangesToProfessionalDetails() {
