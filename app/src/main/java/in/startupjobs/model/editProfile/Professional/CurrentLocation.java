@@ -1,5 +1,5 @@
 
-package in.startupjobs.model.basicDetails;
+package in.startupjobs.model.editProfile.Professional;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -14,6 +14,7 @@ public class CurrentLocation implements Serializable {
     @SerializedName("districtName")
     @Expose
     private String districtName;
+    private final static long serialVersionUID = -7881228681113017483L;
 
     public Integer getId() {
         return id;

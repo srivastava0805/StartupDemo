@@ -4,7 +4,9 @@ package in.startupjobs.model.basicDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PreferredLocationsInfo {
+import java.io.Serializable;
+
+public class PreferredLocationsInfo implements Serializable {
 
     @SerializedName("id")
     @Expose

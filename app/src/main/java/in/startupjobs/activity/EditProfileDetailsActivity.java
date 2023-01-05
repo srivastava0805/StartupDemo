@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,12 +32,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.startupjobs.R;
+import in.startupjobs.model.basicDetails.BasicDetailsReponse;
 import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
-import in.startupjobs.model.editProfile.CitiesDatum;
 import in.startupjobs.model.editProfile.EditProfileResponseData;
+import in.startupjobs.model.editProfile.SearchCitiesResponse;
 import in.startupjobs.model.editProfile.ToSendEditProfileData;
+import in.startupjobs.model.editProfile.ToSendProfessionalDetails;
+import in.startupjobs.model.editProfile.ToSendWorkExpData;
 import in.startupjobs.services.GetAllCitiesServiceService;
+import in.startupjobs.services.PostAddWorkExpService;
 import in.startupjobs.services.PostEditPersonalDetailsService;
+import in.startupjobs.services.PostEditProfessionalDetailsService;
 import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.GlobalVariablesNMethods;
 
@@ -59,11 +66,11 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
     private AppCompatEditText mEditpdEdittextAnualsalry;
     private AppCompatEditText mEditpdEdittextTotalexp;
     private AppCompatEditText mEditpdEdittextTeamhandled;
-    private AppCompatEditText mEditpdEdittextNoticeperiod;
-    private AppCompatEditText mEditwexpEdittextJobtitle;
+    private AppCompatEditText mEditpdEdittextProfessionalSummary;
+    private AppCompatEditText mEditwexpEdittextDesignation;
     private AppCompatEditText mEditwexpEdittextCompanyname;
-    private AppCompatEditText mEditwexpEdittextJobindustry;
-    private AppCompatEditText mEditwexpEdittextAreaofexpertise;
+    private AppCompatEditText mEditwexpEdittextYourRole;
+    private AppCompatEditText mEditwexpEdittextSalaryInLakhs;
     private AppCompatTextView mEditwexpEdittextExpplaceholder;
     private AppCompatTextView mEditwexpEdittextFromdate;
     private AppCompatTextView mEditwexpEdittextTodate;
@@ -77,8 +84,13 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
     private boolean professionalDetails;
     private AppCompatButton mBtnSaveChanges;
     private PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse;
-    private List<String> fruits = new ArrayList<>();
+    private BasicDetailsReponse basicDetailsResponse;
+    private List<String> citiesList = new ArrayList<>();
     private String selectedGender;
+    private AppCompatEditText mEditwexpEdittextCurrentCompany;
+    private AppCompatEditText mEditpdEdittextNoticeperiod;
+    private List<SearchCitiesResponse> listOfCities;
+    private CheckBox mEditwexpCheckBoxCurrentlyWorking;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -86,7 +98,7 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_details);
         initView();
-        setAdapterForLocation();
+        setSearchLogicOnLocationAutoComplete();
         setDatePicker();
 
     }
@@ -124,22 +136,23 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    private void setAdapterForLocation() {
-        new GetAllCitiesServiceService(this, new GetAllCitiesServiceService.onResponseFromGetCities() {
-            @Override
-            public void sendGetCitiesResponse(List<CitiesDatum> listCities) {
-                for (int i = 0; i < listCities.size(); i++) {
-                    fruits.add(listCities.get(i).getName());
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                        (EditProfileDetailsActivity.this, android.R.layout.select_dialog_item, fruits);
-                AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.editpd_autocompletetv_location);
-                actv.setThreshold(1);//will start working from first character
-                actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-                actv.setTextColor(Color.BLACK);
-            }
+    private void setSearchLogicOnLocationAutoComplete() {
+        new GetAllCitiesServiceService(EditProfileDetailsActivity.this, " ", listCities -> {
+            listOfCities = listCities;
+            setAdapterForLocation(listCities);
         });
-//
+    }
+
+    private void setAdapterForLocation(List<SearchCitiesResponse> listCities) {
+        citiesList.clear();
+        for (int i = 0; i < listCities.size(); i++) {
+            citiesList.add(listCities.get(i).getDistrictName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (EditProfileDetailsActivity.this, android.R.layout.select_dialog_item, citiesList);
+        mEditpdAutocompletetvLocation.setThreshold(1);//will start working from first character
+        mEditpdAutocompletetvLocation.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+        mEditpdAutocompletetvLocation.setTextColor(Color.BLACK);
     }
 
     private void initView() {
@@ -159,15 +172,19 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
         mEditpdEdittextJobtitle = findViewById(R.id.editpd_edittext_jobtitle);
         mEditpdEdittextAnualsalry = findViewById(R.id.editpd_edittext_anualsalry);
         mEditpdEdittextTotalexp = findViewById(R.id.editpd_edittext_totalexp);
-        mEditpdEdittextTeamhandled = findViewById(R.id.editpd_edittext_teamhandled);
-        mEditpdEdittextNoticeperiod = findViewById(R.id.editpd_edittext_noticeperiod);
-        mEditwexpEdittextJobtitle = findViewById(R.id.editwexp_edittext_jobtitle);
+        mEditpdEdittextProfessionalSummary = findViewById(R.id.editpd_edittext_professionalsummarry);
+        mEditpdEdittextNoticeperiod = findViewById(R.id.editpd_edittext_professionalsummarry);
+
+        mEditwexpEdittextDesignation = findViewById(R.id.editwexp_edittext_designation);
+        mEditwexpEdittextCurrentCompany = findViewById(R.id.editpd_edittext_currentcompany);
         mEditwexpEdittextCompanyname = findViewById(R.id.editwexp_edittext_companyname);
-        mEditwexpEdittextJobindustry = findViewById(R.id.editwexp_edittext_jobindustry);
-        mEditwexpEdittextAreaofexpertise = findViewById(R.id.editwexp_edittext_areaofexpertise);
+        mEditwexpEdittextYourRole = findViewById(R.id.editwexp_edittext_yourrole);
+        mEditwexpEdittextSalaryInLakhs = findViewById(R.id.editwexp_edittext_salaryinlakhs);
         mEditwexpEdittextExpplaceholder = findViewById(R.id.editwexp_edittext_expplaceholder);
         mEditwexpEdittextFromdate = findViewById(R.id.editwexp_edittext_fromdate);
         mEditwexpEdittextTodate = findViewById(R.id.editwexp_edittext_todate);
+        mEditwexpCheckBoxCurrentlyWorking = findViewById(R.id.editwexp_checkbox_iworkhere);
+
         mEditdetailsLayoutPersonaldetails = findViewById(R.id.editdetails_layout_personaldetails);
         mEditdetailsLayoutProfessionaldetails = findViewById(R.id.editdetails_layout_professionaldetails);
         mEditdetailsLayoutWorkexperience = findViewById(R.id.editdetails_layout_workexperience);
@@ -185,10 +202,13 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
                     setAndHideViews(mEditdetailsLayoutWorkexperience);
                     setInActivePage();
                     workExp = true;
-                } else if (getIntent().getStringExtra(AppConstants.PROFILE_HEADER).equalsIgnoreCase(AppConstants.PROFESSIONAL_DETAILS)) {
+                } else if (getIntent().getStringExtra(AppConstants.PROFILE_HEADER)
+                        .equalsIgnoreCase(AppConstants.PROFESSIONAL_DETAILS)) {
+                    basicDetailsResponse = (BasicDetailsReponse) getIntent().getSerializableExtra(AppConstants.ALLDATA);
                     setAndHideViews(mEditdetailsLayoutProfessionaldetails);
                     setInActivePage();
                     professionalDetails = true;
+                    setDataProfessional(basicDetailsResponse);
                 } else {
                     publicProfileDetailsByIDResponse = (PublicProfileDetailsByIDResponse) getIntent().getSerializableExtra(AppConstants.ALLDATA);
                     setAndHideViews(mEditdetailsLayoutPersonaldetails);
@@ -197,6 +217,19 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
                     setDataPersonal(publicProfileDetailsByIDResponse);
                 }
             }
+        }
+    }
+
+    private void setDataProfessional(BasicDetailsReponse basicDetailsResponse) {
+        if (basicDetailsResponse != null) {
+            mEditpdEdittextJobtitle.setText(basicDetailsResponse.getCurrentDesignation());
+            mEditwexpEdittextCurrentCompany.setText(basicDetailsResponse.getCurrentCompanyName());
+            mEditpdEdittextAnualsalry.setText(basicDetailsResponse.getCurrentCTC());
+            mEditpdEdittextTotalexp.setText(basicDetailsResponse.getTotalExperienceYears() + " Years");
+            mEditpdEdittextNoticeperiod.setText(basicDetailsResponse.getNoticePeriod());
+            if (basicDetailsResponse.getCurrentLocation() != null)
+                mEditpdAutocompletetvLocation.setText(basicDetailsResponse.getCurrentLocation().getDistrictName());
+            mEditpdEdittextProfessionalSummary.setText(basicDetailsResponse.getProfessionalSummary());
         }
     }
 
@@ -223,6 +256,12 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
     }
 
     private void setClicks() {
+        mEditdetailsTextviewDiscard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         mRdGroup.setOnCheckedChangeListener((radioGroup, i) -> {
             ColorStateList colorStateList = new ColorStateList(
                     new int[][]{
@@ -284,7 +323,76 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (personalDetails)
                     collectDataChangesToPersonalDetails();
+                else if (professionalDetails) {
+                    collectDataChangesToProfessionalDetails();
+                } else collectDataChangesToWorkExperience();
             }
+        });
+
+        mEditwexpCheckBoxCurrentlyWorking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b)
+                    mEditwexpEdittextTodate.setVisibility(View.INVISIBLE);
+                else mEditwexpEdittextTodate.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void collectDataChangesToWorkExperience() {
+        String endDate = null;
+        ToSendWorkExpData toSendWorkExpData = new ToSendWorkExpData();
+        String designation = mEditwexpEdittextDesignation.getText().toString().trim();
+        String companyName = mEditwexpEdittextCompanyname.getText().toString().trim();
+        String annualSalary = mEditwexpEdittextSalaryInLakhs.getText().toString().replaceAll("[^0-9]", "").trim();
+        String yourRole = mEditwexpEdittextYourRole.getText().toString().trim();
+        String startDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextFromdate.getText().toString().trim()
+                , "dd MMM yyyy", "yyyy-MM");
+        if (!mEditwexpCheckBoxCurrentlyWorking.isChecked()) {
+            endDate = GlobalVariablesNMethods.convertDate(this, mEditwexpEdittextTodate.getText().toString().trim()
+                    , "dd MMM yyyy", "yyyy-MM");
+            toSendWorkExpData.setEndDate(endDate);
+        } else toSendWorkExpData.setCurrentlyEmployed(true);
+        toSendWorkExpData.setDesignation(designation);
+        toSendWorkExpData.setCompanyName(companyName);
+        toSendWorkExpData.setCurrentCtcLakhs(Integer.valueOf(annualSalary));
+        toSendWorkExpData.setCurrentCtcThousands(Integer.valueOf(annualSalary));
+        toSendWorkExpData.setDescription(yourRole);
+        toSendWorkExpData.setStartDate(startDate);
+
+        new PostAddWorkExpService(this,
+                toSendWorkExpData, profileResponseData -> {
+            Intent _result = new Intent();
+            setResult(Activity.RESULT_OK, _result);
+            finish();
+        });
+    }
+
+    private void collectDataChangesToProfessionalDetails() {
+        ToSendProfessionalDetails toSendProfessionalDetails = new ToSendProfessionalDetails();
+        String currentDesignation = mEditpdEdittextJobtitle.getText().toString().trim();
+        String currentCompany = mEditwexpEdittextCurrentCompany.getText().toString().trim();
+        String annualSalary = mEditpdEdittextAnualsalry.getText().toString().trim();
+        String totalExp = mEditpdEdittextTotalexp.getText().toString().replaceAll("[^0-9]", "").trim();
+        String currentLocation = mEditpdAutocompletetvLocation.getText().toString().trim();
+        String professionalSummary = mEditpdEdittextProfessionalSummary.getText().toString().trim();
+        String noticePeriod = mEditpdEdittextNoticeperiod.getText().toString().trim();
+
+        toSendProfessionalDetails.setCurrentDesignation(currentDesignation);
+        toSendProfessionalDetails.setCompanyId(5);
+        toSendProfessionalDetails.setCurrentCTC(annualSalary);
+        toSendProfessionalDetails.setTotalExperienceYears(Integer.valueOf(totalExp));
+        toSendProfessionalDetails.setProfessionalSummary(professionalSummary);
+        if (!currentLocation.isEmpty() && listOfCities != null)
+            for (int i = 0; i < listOfCities.size(); i++) {
+                if (currentLocation.equalsIgnoreCase(listOfCities.get(i).getDistrictName()))
+                    toSendProfessionalDetails.setCurrentLocation(listOfCities.get(i).getId());
+            }
+        new PostEditProfessionalDetailsService(this,
+                toSendProfessionalDetails, profileResponseData -> {
+            Intent _result = new Intent();
+            setResult(Activity.RESULT_OK, _result);
+            finish();
         });
     }
 
@@ -298,7 +406,6 @@ public class EditProfileDetailsActivity extends AppCompatActivity {
             dob = GlobalVariablesNMethods.convertDate(this, mEditpdSpinnerDob.getText().toString().trim(), "dd MMM yyyy", "yyyy-MM-dd");
             toSendEditProfileData.setBirthday(dob);
         }
-        String location = mEditpdAutocompletetvLocation.getText().toString().trim();
         toSendEditProfileData.setName(name);
         toSendEditProfileData.setEmail(email);
 

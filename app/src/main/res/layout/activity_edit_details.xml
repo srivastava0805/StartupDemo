@@ -40,11 +40,11 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editpd_layout_editlayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin_25dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin_25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editdetails_cardview_toolbarheader">
 
         <include
@@ -76,20 +76,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/editdetails_btn_savechanges"
-            android:layout_width="150dp"
-            android:layout_height="@dimen/margin_45dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/string_save"
-            android:textAllCaps="false"
-            android:background="@drawable/background"
-            android:paddingStart="@dimen/activity_horizontal_margin_25dp"
-            android:paddingEnd="@dimen/activity_horizontal_margin_25dp"
-            app:layout_constraintTop_toBottomOf="@+id/editdetails_layout_personaldetails" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editdetails_btn_savechanges"
+        android:layout_width="150dp"
+        android:layout_height="@dimen/margin_45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/string_save"
+        android:textAllCaps="false"
+        android:background="@drawable/background"
+        android:paddingStart="@dimen/activity_horizontal_margin_25dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin_25dp"
+        app:layout_constraintTop_toBottomOf="@+id/editpd_layout_editlayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

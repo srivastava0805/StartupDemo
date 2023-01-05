@@ -1,12 +1,10 @@
 
-package in.startupjobs.model.basicDetails;
+package in.startupjobs.model.editProfile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class CurrentLocation implements Serializable {
+public class SearchCitiesResponse {
 
     @SerializedName("id")
     @Expose

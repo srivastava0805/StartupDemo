@@ -1,5 +1,5 @@
 
-package in.startupjobs.model.basicDetails;
+package in.startupjobs.model.editProfile.Professional;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class BasicDetailsReponse implements Serializable {
+public class EditProfessionalDetailsResponse implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -35,7 +35,7 @@ public class BasicDetailsReponse implements Serializable {
     private String achievements;
     @SerializedName("resumeFiles")
     @Expose
-    private List<String> resumeFiles = null;
+    private List<Object> resumeFiles = null;
     @SerializedName("videoLink")
     @Expose
     private Object videoLink;
@@ -75,12 +75,10 @@ public class BasicDetailsReponse implements Serializable {
     @SerializedName("currentCompanyDetails")
     @Expose
     private CurrentCompanyDetails currentCompanyDetails;
-    @SerializedName("preferredLocationsInfo")
+    @SerializedName("currentCompany")
     @Expose
-    private List<PreferredLocationsInfo> preferredLocationsInfo = null;
-    @SerializedName("skillsInfo")
-    @Expose
-    private List<SkillsInfo> skillsInfo = null;
+    private CurrentCompany currentCompany;
+    private final static long serialVersionUID = 7536546358597616929L;
 
     public Integer getId() {
         return id;
@@ -146,11 +144,11 @@ public class BasicDetailsReponse implements Serializable {
         this.achievements = achievements;
     }
 
-    public List<String> getResumeFiles() {
+    public List<Object> getResumeFiles() {
         return resumeFiles;
     }
 
-    public void setResumeFiles(List<String> resumeFiles) {
+    public void setResumeFiles(List<Object> resumeFiles) {
         this.resumeFiles = resumeFiles;
     }
 
@@ -258,20 +256,12 @@ public class BasicDetailsReponse implements Serializable {
         this.currentCompanyDetails = currentCompanyDetails;
     }
 
-    public List<PreferredLocationsInfo> getPreferredLocationsInfo() {
-        return preferredLocationsInfo;
+    public CurrentCompany getCurrentCompany() {
+        return currentCompany;
     }
 
-    public void setPreferredLocationsInfo(List<PreferredLocationsInfo> preferredLocationsInfo) {
-        this.preferredLocationsInfo = preferredLocationsInfo;
-    }
-
-    public List<SkillsInfo> getSkillsInfo() {
-        return skillsInfo;
-    }
-
-    public void setSkillsInfo(List<SkillsInfo> skillsInfo) {
-        this.skillsInfo = skillsInfo;
+    public void setCurrentCompany(CurrentCompany currentCompany) {
+        this.currentCompany = currentCompany;
     }
 
 }

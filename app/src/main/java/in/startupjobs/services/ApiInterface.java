@@ -13,7 +13,12 @@ import in.startupjobs.model.companies.GetCompaniesResponse;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
 import in.startupjobs.model.editProfile.CitiesDatum;
 import in.startupjobs.model.editProfile.EditProfileResponseData;
+import in.startupjobs.model.editProfile.Professional.EditProfessionalDetailsResponse;
+import in.startupjobs.model.editProfile.SearchCitiesResponse;
 import in.startupjobs.model.editProfile.ToSendEditProfileData;
+import in.startupjobs.model.editProfile.ToSendProfessionalDetails;
+import in.startupjobs.model.editProfile.ToSendWorkExpData;
+import in.startupjobs.model.editProfile.workExp.AddWorkExpReponse;
 import in.startupjobs.model.forgotPassword.ChangePasswordModel;
 import in.startupjobs.model.login.LoginDataForMobile;
 import in.startupjobs.model.login.LoginResponseModel;
@@ -90,6 +95,11 @@ public interface ApiInterface {
     Call<SearchedJobsResponse>
     getSearchedJobsByKeyword(@Query("keyword") String tag);
 
+    @GET("global/districts")
+    Call<List<SearchCitiesResponse>>
+    getSearchedCitiesByKeyword();
+
+
     @GET("companies/search?")
     Call<GetCompaniesResponse>
     getSearchedCompaniesByKeyword(@Query("limit") int count, @Query("keyword") String tag);
@@ -99,8 +109,12 @@ public interface ApiInterface {
     applyJob(@Path("id") String userId, @Body ApplyJobResponseModel.ApplyJobDataToSend jobDataToSend);
 
     @PUT("auth/profile/edit")
-    Call<EditProfileResponseData> editPersonalDetails( @Body ToSendEditProfileData jobDataToSend);
+    Call<EditProfileResponseData> editPersonalDetails(@Body ToSendEditProfileData jobDataToSend);
+    @PUT("resume/update/professional_details")
+    Call<EditProfessionalDetailsResponse> editProfessionalDetails(@Body ToSendProfessionalDetails jobDataToSend);
 
+    @POST("resume/work_experience")
+    Call<AddWorkExpReponse> addWorkExperience(@Body ToSendWorkExpData toSendWorkExpData);
     @GET("IN/cities")
-    Call<List<CitiesDatum>>  getCities();
+    Call<List<CitiesDatum>> getCities();
 }

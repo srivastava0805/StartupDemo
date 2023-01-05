@@ -1,5 +1,5 @@
 
-package in.startupjobs.model.basicDetails;
+package in.startupjobs.model.editProfile.Professional;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -14,6 +14,7 @@ public class PreferredFunctionalArea implements Serializable {
     @SerializedName("areaName")
     @Expose
     private String areaName;
+    private final static long serialVersionUID = 4407365429305031073L;
 
     public Integer getId() {
         return id;

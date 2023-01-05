@@ -1,12 +1,12 @@
 
-package in.startupjobs.model.basicDetails;
+package in.startupjobs.model.editProfile.Professional;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class CurrentCompanyDetails  implements Serializable {
+public class CurrentCompanyDetails implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -14,6 +14,7 @@ public class CurrentCompanyDetails  implements Serializable {
     @SerializedName("name")
     @Expose
     private String name;
+    private final static long serialVersionUID = -2930700088293434863L;
 
     public Integer getId() {
         return id;

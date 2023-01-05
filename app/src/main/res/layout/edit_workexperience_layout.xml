@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/editdetails_layout_workexperience">
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editwexp_edittext_jobtitle"
+        android:id="@+id/editwexp_edittext_designation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin_15dp"
-        android:hint="@string/job_title"
+        android:hint="@string/designation"
         android:inputType="textPersonName"
         android:paddingStart="@dimen/activity_vertical_margin_15dp"
         android:paddingEnd="@dimen/activity_vertical_margin_15dp"
@@ -23,33 +24,32 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin_15dp"
         android:hint="@string/company_name"
-        android:inputType="number"
         android:paddingStart="@dimen/activity_vertical_margin_15dp"
         android:paddingEnd="@dimen/activity_vertical_margin_15dp"
-        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_jobtitle" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editwexp_edittext_jobindustry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin_15dp"
-        android:hint="@string/job_industry"
-        android:inputType="number"
-        android:paddingStart="@dimen/activity_vertical_margin_15dp"
-        android:paddingEnd="@dimen/activity_vertical_margin_15dp"
-        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_companyname" />
+        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_designation" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editwexp_edittext_areaofexpertise"
+        android:id="@+id/editwexp_edittext_yourrole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/describe_your_role"
+        android:paddingStart="@dimen/activity_vertical_margin_15dp"
+        android:paddingEnd="@dimen/activity_vertical_margin_15dp"
+        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_companyname"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editwexp_edittext_salaryinlakhs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin_15dp"
-        android:hint="@string/area_of_expertise"
+        android:hint="@string/annual_salary_in_lakhs"
         android:inputType="number"
         android:paddingStart="@dimen/activity_vertical_margin_15dp"
         android:paddingEnd="@dimen/activity_vertical_margin_15dp"
-        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_jobindustry" />
+        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_yourrole" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/editwexp_edittext_expplaceholder"
@@ -61,7 +61,7 @@
         android:paddingStart="@dimen/activity_vertical_margin_15dp"
         android:paddingEnd="@dimen/activity_vertical_margin_15dp"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_areaofexpertise" />
+        app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_salaryinlakhs" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/editwexp_edittext_fromdate"
@@ -94,6 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_expplaceholder" />
 
     <CheckBox
+        android:id="@+id/editwexp_checkbox_iworkhere"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/editwexp_edittext_fromdate"

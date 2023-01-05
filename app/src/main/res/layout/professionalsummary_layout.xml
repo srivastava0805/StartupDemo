@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/professionalsummary_textview_professionalsummaryplaceholder"
@@ -101,21 +101,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
-        android:text="@string/team_handled"
+        android:text="@string/professional_summary"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_totalexpplaceholder" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/professionalsummary_textview_teamhvalue"
+        android:id="@+id/professionalsummary_textview_professionaldescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
         android:textColor="@color/cardview_dark_background"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_totalexpplaceholder" />
+        app:layout_constraintTop_toBottomOf="@+id/professionalsummary_textview_totalexpvalue" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/professionalsummary_textview_noticeperiodplaceholder"

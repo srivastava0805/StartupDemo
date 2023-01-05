@@ -62,12 +62,13 @@ public class ProfileFragment extends Fragment {
     private AppCompatTextView mProfessionalsummaryTvProfiletitlevalue;
     private AppCompatTextView mProfessionalsummaryTvAnnualsalaryvalue;
     private AppCompatTextView mProfessionalsummaryTvTotalexpvalue;
-    private AppCompatTextView mProfessionalsummaryTvTeamhvalue;
+    private AppCompatTextView mProfessionalsummaryDescription;
     private AppCompatTextView mProfessionalsummaryTvNoticeperiodvalue;
     private MaterialCardView mProfileCardviewWorkexplayout;
     private TextView mWorkexpIvEdit;
     private RecyclerView mWorkexpRecylerviewWorkexp;
     private PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse;
+    private BasicDetailsReponse basicDetailsResponse;
 
     @Nullable
     @Override
@@ -88,9 +89,11 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setWorkRelatedData(BasicDetailsReponse basicDetailsResponse) {
+        this.basicDetailsResponse = basicDetailsResponse;
         mProfessionalsummaryTvAnnualsalaryvalue.setText(basicDetailsResponse.getCurrentCTC());
         mProfessionalsummaryTvTotalexpvalue.setText(basicDetailsResponse.getTotalExperienceYears() + " Years");
         mProfessionalsummaryTvNoticeperiodvalue.setText(basicDetailsResponse.getNoticePeriod());
+        mProfessionalsummaryDescription.setText(basicDetailsResponse.getProfessionalSummary());
     }
 
     private void setProfessionalDetailsFromResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
@@ -147,7 +150,7 @@ public class ProfileFragment extends Fragment {
         mProfessionalsummaryTvProfiletitlevalue = root.findViewById(R.id.professionalsummary_textview_profiletitlevalue);
         mProfessionalsummaryTvAnnualsalaryvalue = root.findViewById(R.id.professionalsummary_textview_annualsalaryvalue);
         mProfessionalsummaryTvTotalexpvalue = root.findViewById(R.id.professionalsummary_textview_totalexpvalue);
-        mProfessionalsummaryTvTeamhvalue = root.findViewById(R.id.professionalsummary_textview_teamhvalue);
+        mProfessionalsummaryDescription = root.findViewById(R.id.professionalsummary_textview_professionaldescription);
         mProfessionalsummaryTvNoticeperiodvalue = root.findViewById(R.id.professionalsummary_textview_noticeperiodvalue);
         mProfileCardviewWorkexplayout = root.findViewById(R.id.profile_cardview_workexplayout);
         mWorkexpIvEdit = root.findViewById(R.id.workexp_textview_edit);
@@ -165,6 +168,7 @@ public class ProfileFragment extends Fragment {
         mProfessionalsummaryIvEdit.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), EditProfileDetailsActivity.class);
             intent.putExtra(AppConstants.PROFILE_HEADER, AppConstants.PROFESSIONAL_DETAILS);
+            intent.putExtra(AppConstants.ALLDATA, basicDetailsResponse);
             someActivityResultLauncher.launch(intent);
         });
 

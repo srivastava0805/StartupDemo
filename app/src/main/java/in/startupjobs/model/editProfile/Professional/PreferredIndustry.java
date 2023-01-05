@@ -1,5 +1,5 @@
 
-package in.startupjobs.model.basicDetails;
+package in.startupjobs.model.editProfile.Professional;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -14,6 +14,7 @@ public class PreferredIndustry implements Serializable {
     @SerializedName("industryName")
     @Expose
     private String industryName;
+    private final static long serialVersionUID = -6127354219670518703L;
 
     public Integer getId() {
         return id;
