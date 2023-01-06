@@ -29,7 +29,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import in.startupjobs.R;
 import in.startupjobs.activity.MainActivity;
-import in.startupjobs.adapter.SearchedCompaniesResultsViewAdapter;
 import in.startupjobs.adapter.SearchedJobsResultsViewAdapter;
 import in.startupjobs.adapter.TopCompaniesDashboardAdapter;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
@@ -78,6 +77,7 @@ public class DashboardFragment extends Fragment implements GetSearchedJobs.onRes
     public onJobsViewAllClick onJobsViewAllClick;
     private AppCompatTextView mRecommendedjobsTextviewViewall;
     private RecyclerView mRecommendedjobsRecyclerviewRecommendedjobs;
+    private ConstraintLayout mJobsViewDashboard;
 
     public interface onCompaniesViewAllClick {
         void performCompaniesViewAllClick();
@@ -133,6 +133,7 @@ public class DashboardFragment extends Fragment implements GetSearchedJobs.onRes
         mCompaniesRecyclerviewCompanies = root.findViewById(R.id.companies_recyclerview_companies);
         mRecommendedjobsTextviewViewall = root.findViewById(R.id.recommendedjobs_textview_viewall);
         mRecommendedjobsRecyclerviewRecommendedjobs = root.findViewById(R.id.recommendedjobs__recyclerview_recommendedjobs_);
+        mJobsViewDashboard = root.findViewById(R.id.jobs_dashboard_layout);
         setNameAndProfileDetails();
         setClicks();
 
