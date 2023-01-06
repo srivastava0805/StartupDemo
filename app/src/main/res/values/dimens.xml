@@ -27,6 +27,7 @@
     <dimen name="fab_bottom_margin">72dp</dimen>
     <dimen name="activity_vertical_margin_12dp">12dp</dimen>
     <dimen name="margin_65dp">65dp</dimen>
+    <dimen name="margin_80dp">80dp</dimen>
 
 
 </resources>

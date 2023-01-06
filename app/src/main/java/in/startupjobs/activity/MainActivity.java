@@ -2,11 +2,9 @@ package in.startupjobs.activity;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -28,9 +26,10 @@ import com.google.android.material.navigation.NavigationView;
 import in.startupjobs.R;
 import in.startupjobs.model.basicPublicProfileDetails.PublicProfileDetailsByIDResponse;
 import in.startupjobs.services.GetProfileDetailsByIdService;
+import in.startupjobs.ui.dashboard.DashboardFragment;
 import in.startupjobs.utils.AppConstants;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DashboardFragment.onCompaniesViewAllClick, DashboardFragment.onJobsViewAllClick {
 
     private static final float END_SCALE = 0.85f;
     private AppBarConfiguration mAppBarConfiguration;
@@ -169,5 +168,17 @@ public class MainActivity extends AppCompatActivity {
                 setUserImage();
             }
         });
+    }
+
+    @Override
+    public void performCompaniesViewAllClick() {
+        View view = bottomNavView.findViewById(R.id.bottom_companies);
+        view.performClick();
+    }
+
+    @Override
+    public void performJobsViewAllClick() {
+        View view = bottomNavView.findViewById(R.id.bottom_jobs);
+        view.performClick();
     }
 }

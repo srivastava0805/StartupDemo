@@ -40,7 +40,7 @@ public class CompaniesFragment extends Fragment {
             if (getCompaniesResponse != null) {
                 mCompanyRecyclerViewCompanies.setHasFixedSize(true);
                 mCompanyRecyclerViewCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-                searchedCompanyAdapter = new SearchedCompaniesResultsViewAdapter(getActivity(), getCompaniesResponse);
+                searchedCompanyAdapter = new SearchedCompaniesResultsViewAdapter(getActivity(), getCompaniesResponse, false);
                 mCompanyRecyclerViewCompanies.setAdapter(searchedCompanyAdapter);
             }
         });

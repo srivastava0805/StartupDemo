@@ -206,5 +206,8 @@
     <string name="describe_your_role">Describe your role</string>
     <string name="delete">Delete</string>
     <string name="error">An error occurred</string>
+    <string name="top_startups_hiring_right_now">Top startups hiring right now</string>
+    <string name="view_all">View all</string>
+    <string name="top_jobs_for_you">Top Jobs For you</string>
 
 </resources>

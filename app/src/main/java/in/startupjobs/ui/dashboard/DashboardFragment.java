@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
@@ -27,10 +28,15 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 
 import in.startupjobs.R;
+import in.startupjobs.activity.MainActivity;
+import in.startupjobs.adapter.SearchedCompaniesResultsViewAdapter;
 import in.startupjobs.adapter.SearchedJobsResultsViewAdapter;
+import in.startupjobs.adapter.TopCompaniesDashboardAdapter;
 import in.startupjobs.model.dashBoardData.DashBoardJobsData;
 import in.startupjobs.model.serachedJobs.SearchedJobsResponse;
 import in.startupjobs.services.GetDashBoardJobsRelatedData;
+import in.startupjobs.services.GetRecommendedJobs;
+import in.startupjobs.services.GetSearchedCompanies;
 import in.startupjobs.services.GetSearchedJobs;
 import in.startupjobs.utils.GlobalVariablesNMethods;
 import in.startupjobs.utils.Preferences;
@@ -65,7 +71,21 @@ public class DashboardFragment extends Fragment implements GetSearchedJobs.onRes
     ConstraintLayout mCardOfferLetter;
     ConstraintLayout mCardWithdrawn;
     private SearchedJobsResultsViewAdapter jobsFragmentViewAdapter;
+    private AppCompatTextView mCompaniesTextviewViewall;
+    private RecyclerView mCompaniesRecyclerviewCompanies;
+    private TopCompaniesDashboardAdapter searchedCompanyAdapter;
+    public onCompaniesViewAllClick onCompaniesViewAllClick;
+    public onJobsViewAllClick onJobsViewAllClick;
+    private AppCompatTextView mRecommendedjobsTextviewViewall;
+    private RecyclerView mRecommendedjobsRecyclerviewRecommendedjobs;
 
+    public interface onCompaniesViewAllClick {
+        void performCompaniesViewAllClick();
+    }
+
+    public interface onJobsViewAllClick {
+        void performJobsViewAllClick();
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +94,11 @@ public class DashboardFragment extends Fragment implements GetSearchedJobs.onRes
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         initView(root);
         getDashBoardRelatedData();
+
+        onCompaniesViewAllClick = (MainActivity) getActivity();
+        onJobsViewAllClick = (MainActivity) getActivity();
+        getCompaniesDataRequest();
+        getRecommendedJobsDataRequest();
         return root;
     }
 
@@ -104,8 +129,44 @@ public class DashboardFragment extends Fragment implements GetSearchedJobs.onRes
         mCardInterviewed = root.findViewById(R.id.layout_df_interviewedcard);
         mCardOfferLetter = root.findViewById(R.id.layout_df_offerlettercard);
         mCardWithdrawn = root.findViewById(R.id.layout_df_withdrawncard);
+        mCompaniesTextviewViewall = root.findViewById(R.id.companies_textview_viewall);
+        mCompaniesRecyclerviewCompanies = root.findViewById(R.id.companies_recyclerview_companies);
+        mRecommendedjobsTextviewViewall = root.findViewById(R.id.recommendedjobs_textview_viewall);
+        mRecommendedjobsRecyclerviewRecommendedjobs = root.findViewById(R.id.recommendedjobs__recyclerview_recommendedjobs_);
         setNameAndProfileDetails();
         setClicks();
+
+    }
+
+    private void getCompaniesDataRequest() {
+        new GetSearchedCompanies(getActivity(), 5, "", getCompaniesResponse -> {
+            if (getCompaniesResponse != null) {
+                LinearLayoutManager HorizontalLayout
+                        = new LinearLayoutManager(
+                        getActivity(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false);
+                mCompaniesRecyclerviewCompanies.setLayoutManager(HorizontalLayout);
+                searchedCompanyAdapter = new TopCompaniesDashboardAdapter(getActivity(), getCompaniesResponse, true);
+                mCompaniesRecyclerviewCompanies.setAdapter(searchedCompanyAdapter);
+            }
+        });
+    }
+
+    private void getRecommendedJobsDataRequest() {
+        new GetRecommendedJobs(getActivity(), "3", new GetRecommendedJobs.onResponseRecommendedJobs() {
+            @Override
+            public void sendRecommendedJobsResponse(SearchedJobsResponse recommendedJobs) {
+                if (recommendedJobs.getResults().size() > 0) {
+                    GlobalVariablesNMethods.closeKeyboard(getActivity());
+                    jobsFragmentViewAdapter = new SearchedJobsResultsViewAdapter(getActivity(), recommendedJobs);
+                    mRecommendedjobsRecyclerviewRecommendedjobs.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    mRecommendedjobsRecyclerviewRecommendedjobs.setAdapter(jobsFragmentViewAdapter);
+                } else {
+                    mRecommendedjobsRecyclerviewRecommendedjobs.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void setClicks() {
@@ -147,7 +208,18 @@ public class DashboardFragment extends Fragment implements GetSearchedJobs.onRes
                     setDashBoardDataLayoutVisible();
             }
         });
-
+        mCompaniesTextviewViewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCompaniesViewAllClick.performCompaniesViewAllClick();
+            }
+        });
+        mRecommendedjobsTextviewViewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onJobsViewAllClick.performJobsViewAllClick();
+            }
+        });
     }
 
     private void getCommaSeparatedString(String searchString) {

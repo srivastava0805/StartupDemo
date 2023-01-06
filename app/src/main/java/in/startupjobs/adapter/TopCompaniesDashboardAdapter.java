@@ -19,7 +19,7 @@ import in.startupjobs.R;
 import in.startupjobs.model.companies.GetCompaniesResponse;
 import in.startupjobs.model.companies.Result;
 
-public class SearchedCompaniesResultsViewAdapter extends RecyclerView.Adapter<SearchedCompaniesResultsViewAdapter.MyViewHolder> {
+public class TopCompaniesDashboardAdapter extends RecyclerView.Adapter<TopCompaniesDashboardAdapter.MyViewHolder> {
     private final boolean hideViewsForDashboard;
     private Context context;
     private GetCompaniesResponse dataModel;
@@ -27,29 +27,20 @@ public class SearchedCompaniesResultsViewAdapter extends RecyclerView.Adapter<Se
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView mRowCompanyName;
-        private TextView mRowCompanyTotalEmployees;
         private TextView mRowJobsTextviewLoaction;
-        private TextView mRowCompanyTextViewTotalJobs;
-        private WebView mRowCompanyWebViewAbout;
-        private TextView mRowJobsTextviewSkills;
-        private ImageView mRowJobsIvSave;
-        private AppCompatButton mRowJobsBtnApply;
         View itemView;
         private ShapeableImageView mRowjobsShapeivCompanylogo;
 
         public MyViewHolder(View view) {
             super(view);
             mRowCompanyName = view.findViewById(R.id.rowcompanies_textview_name);
-            mRowCompanyTotalEmployees = view.findViewById(R.id.rowcompanies_textview_employeecount);
             mRowJobsTextviewLoaction = view.findViewById(R.id.rowcompanies_textview_loaction);
-            mRowCompanyTextViewTotalJobs = view.findViewById(R.id.rowcompanies_textview_totaljobs);
-            mRowCompanyWebViewAbout = view.findViewById(R.id.rowcompanies_webview_aboutcompany);
             mRowjobsShapeivCompanylogo = view.findViewById(R.id.rowcompanies_shapeiv_companylogo);
             this.itemView = view;
         }
     }
 
-    public SearchedCompaniesResultsViewAdapter(Context _context, GetCompaniesResponse data, boolean hideViewsForDashboard) {
+    public TopCompaniesDashboardAdapter(Context _context, GetCompaniesResponse data, boolean hideViewsForDashboard) {
         this.context = _context;
         this.dataModel = data;
         this.width = 160;
@@ -62,7 +53,7 @@ public class SearchedCompaniesResultsViewAdapter extends RecyclerView.Adapter<Se
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_companies, parent, false);
+                .inflate(R.layout.row_top_companies_dashboard, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -72,15 +63,6 @@ public class SearchedCompaniesResultsViewAdapter extends RecyclerView.Adapter<Se
         Result jobDetails = dataModel.getResults().get(position);
         try {
             holder.mRowCompanyName.setText(jobDetails.getName());
-            if (jobDetails.getEmployeeStrength() != null && !jobDetails.getEmployeeStrength().isEmpty())
-                holder.mRowCompanyTotalEmployees.setText("No. Of Employees " + jobDetails.getEmployeeStrength());
-            else holder.mRowCompanyTotalEmployees.setText("No. Of Employees N/A");
-
-            if (jobDetails.getTotalJobs() > 1)
-                holder.mRowCompanyTextViewTotalJobs.setText(jobDetails.getTotalJobs() + " Jobs");
-            else
-                holder.mRowCompanyTextViewTotalJobs.setText(jobDetails.getTotalJobs() + " Job ");
-            setTextForJobDescription(holder.mRowCompanyWebViewAbout, jobDetails.getDescription());
 
             if (jobDetails.getLocationNames() != null
                     && jobDetails.getLocationNames().size() > 0)
@@ -91,27 +73,13 @@ public class SearchedCompaniesResultsViewAdapter extends RecyclerView.Adapter<Se
                 Glide.with(context)
                         .load(jobDetails.getLogo())
                         .into(holder.mRowjobsShapeivCompanylogo);
-            if(hideViewsForDashboard){
-                holder.mRowCompanyTotalEmployees.setVisibility(View.GONE);
-                holder.mRowCompanyTextViewTotalJobs.setVisibility(View.GONE);
-                holder.mRowCompanyWebViewAbout.setVisibility(View.GONE);
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    private void setTextForJobDescription(WebView textview, String description) {
-        String res = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            res = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT).toString();
-        } else {
-            res = Html.fromHtml(description).toString();
-        }
-
-        textview.loadDataWithBaseURL(null, res, "text/html", "utf-8", null);
-    }
 
     @Override
     public int getItemCount() {
