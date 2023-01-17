@@ -3,13 +3,16 @@ package in.startupjobs.activity;
 import static android.content.ContentValues.TAG;
 import static in.startupjobs.utils.GlobalVariablesNMethods.isNetworkAvailable;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -18,11 +21,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,12 +50,15 @@ import in.startupjobs.services.CompleteRegistrationService;
 import in.startupjobs.services.PutUploadResumeRequest;
 import in.startupjobs.services.SendOtpPressedService;
 import in.startupjobs.services.VerifyOtpPressedService;
+import in.startupjobs.utils.AlertDialogFragment;
 import in.startupjobs.utils.AppConstants;
 import in.startupjobs.utils.CredentialsValidation;
 import in.startupjobs.utils.GetFilePathUtil;
+import in.startupjobs.utils.GlobalVariablesNMethods;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_REQUEST_CODE = 001;
     Toolbar toolbar;
     CredentialsValidation validator;
     private ProgressDialog progressDialog;
@@ -210,12 +219,56 @@ public class SignUpActivity extends AppCompatActivity {
         mActivitySignupTextviewUploadresumeactionbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
-                chooseFile.setType("*/*");
-                Intent intent = Intent.createChooser(chooseFile, "Choose a file");
-                startActivityForResult(intent, PICKFILE_RESULT_CODE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (!GlobalVariablesNMethods.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, SignUpActivity.this))
+                        requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 001);
+                    else selectFileChooser();
+                } else selectFileChooser();
+
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 001) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                selectFileChooser();
+                // if user checked Don't ask again on permission dialog, this block will be called.
+                if (!shouldShowRequestPermissionRationale(permissions[0])) {
+                    showErrorDialog();
+
+                } else {
+                    Toast.makeText(SignUpActivity.this, "Permission Denied, Permission is needed to proceed.", Toast.LENGTH_SHORT).show();
+                }
+
+            } else {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                showErrorDialog();
+            }
+        }
+    }
+
+    private void showErrorDialog() {
+        DialogFragment fragment = AlertDialogFragment.newInstance(R.string.Perm_Needed, getString(R.string.Goto_settings_page), false
+                , (dialog, which) -> {
+                    // Take user to app settings page
+                    dialog.dismiss();
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                }, null);
+        fragment.show(getSupportFragmentManager(), "error");
+    }
+
+    private void selectFileChooser() {
+        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFile.setType("*/*");
+        Intent intent = Intent.createChooser(chooseFile, "Choose a file");
+        startActivityForResult(intent, PICKFILE_RESULT_CODE);
     }
 
     private void uploadResumeRequest() {
@@ -355,22 +408,34 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICKFILE_RESULT_CODE && resultCode == Activity.RESULT_OK) {
-            try {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-                    Uri myUri = data.getData();
-                    openPath(myUri);
-                } else {
-                    assert data != null;
-                    realUri = Uri.parse(GetFilePathUtil.getPath(this, data.getData()));
-                }
+            if (data != null && data.getData() != null && checkIfPdfOrWord(data.getData()))
+                try {
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+                        Uri myUri = data.getData();
+                        openPath(myUri);
+                    } else {
+                        assert data != null;
+                        realUri = Uri.parse(GetFilePathUtil.getPath(this, data.getData()));
+                    }
 
-                if (GetFilePathUtil.getFileName() != null && !GetFilePathUtil.getFileName().isEmpty()) {
-                    mActivitySignupTextviewUploadresumeactionbox.setText(GetFilePathUtil.getFileName());
-                    btnSignUp.setEnabled(true);
+                    if (GetFilePathUtil.getFileName() != null && !GetFilePathUtil.getFileName().isEmpty()) {
+                        mActivitySignupTextviewUploadresumeactionbox.setText(GetFilePathUtil.getFileName());
+                        btnSignUp.setEnabled(true);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
                 }
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
-            }
+        }
+    }
+
+    private boolean checkIfPdfOrWord(Uri data) {
+        String filenameArray[] = data.toString().split("\\.");
+        String extension = filenameArray[filenameArray.length - 1];
+        if (extension.equalsIgnoreCase("pdf") || extension.equalsIgnoreCase("doc") || extension.equalsIgnoreCase("docx"))
+            return true;
+        else {
+            Toast.makeText(this, getString(R.string.upload_a_doc_or_pdf_file), Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 

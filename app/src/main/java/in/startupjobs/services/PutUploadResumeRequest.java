@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 
+import in.startupjobs.R;
 import in.startupjobs.model.RegistrationResponseModel;
 import in.startupjobs.model.uploadResume.UploadResumeResponse;
 import in.startupjobs.utils.APIError;
@@ -45,7 +46,7 @@ public class PutUploadResumeRequest {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     if (response.body() != null) {
-                        Snackbar.make(context.findViewById(android.R.id.content), "" + response.body().getResumeFiles().get(0), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(context.findViewById(android.R.id.content), context.getString(R.string.success), Snackbar.LENGTH_SHORT).show();
                         onResponseResumeUploadCallback.sendUploadResumeStatusResponse(null);
                     }
                 } else {
