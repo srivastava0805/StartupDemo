@@ -182,7 +182,6 @@ public class SignUpActivity extends AppCompatActivity {
         mActivitySignupAlldataUploadresumelayout.setVisibility(View.GONE);
 
         setOnClicks();
-        makeUploadResumePageVisible();
     }
 
 
@@ -194,7 +193,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String btnTextVerify = getResources().getString(R.string.verify_and_continue);
                 String btnTextComplete = getResources().getString(R.string.complete_registration);
                 if (btnText.equals(btnTextSave))
-                    doSendOtpProcess();
+                    doSendOtpProcess(true);
                 else if (btnText.equals(btnTextVerify))
                     doVerifyOtpProcess();
                 else if (btnText.equals(btnTextComplete)) {
@@ -206,14 +205,11 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         resendMobileOtp.setOnClickListener(v -> {
-            Snackbar.make(findViewById(android.R.id.content),
-                    "Internet not available.Please check your internet connection!",
-                    Snackbar.LENGTH_SHORT).show();
+            sendOtpRequestForMobile(false);
+
         });
         resendEmailOtp.setOnClickListener(v -> {
-            Snackbar.make(findViewById(android.R.id.content),
-                    "Internet not available.Please check your internet connection!",
-                    Snackbar.LENGTH_SHORT).show();
+            doSendOtpProcess(false);
         });
 
         mActivitySignupTextviewUploadresumeactionbox.setOnClickListener(new View.OnClickListener() {
@@ -329,25 +325,27 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void doSendOtpProcess() {
+    private void doSendOtpProcess(boolean sendBothOtp) {
         new SendOtpPressedService(this, "email",
                 edtEmail.getText().toString().trim(),
                 new SendOtpPressedService.onResponseSendEmailOtp() {
                     @Override
                     public void sendEmailOtpResponse(OtpResponseModel otpResponseModel) {
-                        sendOtpRequestForMobile();
+                        if (sendBothOtp)
+                            sendOtpRequestForMobile(true);
                     }
                 }, null);
 
     }
 
-    private void sendOtpRequestForMobile() {
+    private void sendOtpRequestForMobile(boolean showFillOtpPage) {
         new SendOtpPressedService(this, "mobile",
                 edtMobile.getText().toString().trim(),
                 null, new SendOtpPressedService.onResponseSendMobileOtp() {
             @Override
             public void sendMobileOtpResponse(OtpResponseModel otpResponseModel) {
-                makeFillOtpPageVisible();
+                if (showFillOtpPage)
+                    makeFillOtpPageVisible();
             }
         });
     }

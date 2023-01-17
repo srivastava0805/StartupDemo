@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -35,6 +36,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private String textFromEmailField;
     private String textFromMobileField;
     private CredentialsValidation validator;
+    private TextView mResendOtp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         mActivityForgotpasswordOrlinelayout = findViewById(R.id.activity_forgotpassword_orlinelayout);
         mActivityForgotpasswordEdtMobileno = findViewById(R.id.activity_forgotpassword_edt_mobileno);
         mActivityForgotpasswordBtnSubmit = findViewById(R.id.activity_forgotpassword_btn_submit);
+        mResendOtp = findViewById(R.id.activity_forgotpassword_textview_resendemailotp);
         validator = new CredentialsValidation();
 
         mActivityForgotpasswordEdtEmail.addTextChangedListener(new ValidationTextWatcher(mActivityForgotpasswordEdtEmail));
@@ -62,6 +65,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             if (mActivityForgotpasswordEdtMobileno.getVisibility() == View.VISIBLE)
                 doGetDesiredOtpProcess();
             else doGetChangePasswordProcess();
+        });
+
+        mResendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doGetDesiredOtpProcess();
+            }
         });
     }
 

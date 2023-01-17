@@ -25,6 +25,7 @@ import com.kevinschildhorn.otpview.OTPView;
 import java.util.Objects;
 
 import in.startupjobs.R;
+import in.startupjobs.model.OtpResponseModel;
 import in.startupjobs.model.login.LoginResponseModel;
 import in.startupjobs.services.FacebookLogin;
 import in.startupjobs.services.LoginViaEmailService;
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private CredentialsValidation validator;
+    private TextView mResendOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         mActivityLoginAlldataLayout = findViewById(R.id.activity_login_alldata_layout);
         mActivityLoginAlldataLayoutotp = findViewById(R.id.activity_login_alldata_layoutotp);
         mActivityLoginOtpviewEntermobileotp = findViewById(R.id.activity_login_otpview_entermobileotp);
+        mResendOtp = findViewById(R.id.activity_login_textview_resendmobileotp);
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
@@ -107,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             if (btnText.equalsIgnoreCase(btnTextLogin))
                 onLoginPressed();
             else if (btnText.equalsIgnoreCase(btnTextSendOtp))
-                onSendOtpPressed();
+                onSendOtpPressed(true);
             else if (btnText.equalsIgnoreCase(btnTextVerifyAndContinue))
                 onOtpVerifyPressed();
         });
@@ -119,6 +122,13 @@ public class LoginActivity extends AppCompatActivity {
         mTvForgotPassword.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             startActivity(intent);
+        });
+
+        mResendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSendOtpPressed(false);
+            }
         });
         setActionOnViews();
     }
@@ -170,9 +180,13 @@ public class LoginActivity extends AppCompatActivity {
         Preferences.writeString(this, Preferences.USER_TYPE, responseModel.getUserType());
     }
 
-    private void onSendOtpPressed() {
+    private void onSendOtpPressed(boolean showFillOtpPage) {
         new SendOtpPressedService(this, "mobile", Objects.requireNonNull(mActivityLoginEdtEmail.getText()).toString()
-                , null, otpResponseModel -> makeFillOtpPageVisible());
+                , null, otpResponseModel -> {
+                    if (showFillOtpPage)
+                        makeFillOtpPageVisible();
+                });
+
     }
 
     private void makeFillOtpPageVisible() {

@@ -63,7 +63,7 @@
                 android:id="@+id/activity_signup_alldata_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/tv_createaccount"
                 tools:ignore="MissingConstraints">
 
@@ -291,7 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin_25dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/tv_createaccount"
                 tools:ignore="MissingConstraints"
                 >
