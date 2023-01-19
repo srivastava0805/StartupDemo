@@ -122,7 +122,8 @@ public class ProfileFragment extends Fragment {
     private void setProfessionalDetailsFromResponse(PublicProfileDetailsByIDResponse publicProfileDetailsByIDResponse) {
         this.publicProfileDetailsByIDResponse = publicProfileDetailsByIDResponse;
         mProfileTvName.setText(publicProfileDetailsByIDResponse.getAccount().getName());
-        mProfileTvDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
+        if (publicProfileDetailsByIDResponse.getWorkExperiences() != null && publicProfileDetailsByIDResponse.getWorkExperiences().size() > 0)
+            mProfileTvDesignation.setText(publicProfileDetailsByIDResponse.getWorkExperiences().get(0).getDesignation());
 
         mPersonaldetailsTvEmailidvalue.setText(publicProfileDetailsByIDResponse.getContactDetails().getEmail());
         mPersonaldetailsTvMobilenovalue.setText(publicProfileDetailsByIDResponse.getContactDetails().getPhone());
@@ -304,8 +305,8 @@ public class ProfileFragment extends Fragment {
 
     private boolean checkIfPdfOrWord(Uri data) {
         String filenameArray[] = data.toString().split("\\.");
-        String extension = filenameArray[filenameArray.length-1];
-        if(extension.equalsIgnoreCase("pdf") || extension.equalsIgnoreCase("doc") || extension.equalsIgnoreCase("docx"))
+        String extension = filenameArray[filenameArray.length - 1];
+        if (extension.equalsIgnoreCase("pdf") || extension.equalsIgnoreCase("doc") || extension.equalsIgnoreCase("docx"))
             return true;
         else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.upload_a_doc_or_pdf_file), Toast.LENGTH_SHORT).show();

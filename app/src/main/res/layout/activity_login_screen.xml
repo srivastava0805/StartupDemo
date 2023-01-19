@@ -142,7 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="@dimen/activity_vertical_margin_15dp"
-                android:layout_marginTop="@dimen/activity_vertical_margin_10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin_25dp"
                 android:layout_marginEnd="@dimen/activity_vertical_margin_15dp"
                 android:clickable="false"
                 android:enabled="true"

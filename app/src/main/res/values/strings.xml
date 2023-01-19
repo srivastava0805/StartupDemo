@@ -215,4 +215,5 @@
     <string name="Perm_Needed">Permission Needed</string>
     <string name="Goto_settings_page">App needs permission to continue further, please provide permission from settings page.</string>
     <string name="upload_a_doc_or_pdf_file">Upload a doc or pdf file</string>
+    <string name="enter_otp">Enter OTP</string>
 </resources>
